@@ -33,6 +33,58 @@ public class ListaPersona {
         return opt;
     }
 
+    public static int menuLog() {
+        int opt;
+        System.out.println("\tMenu");
+        System.out.println("1)Entrar");
+        System.out.println("2)Agregar personas");
+
+        System.out.println("\n\n0)Salir");
+        opt = in.nextInt();
+        in.nextLine();
+        return opt;
+    }
+
+    public static void Listas(List<Persona> personaLista) {
+        int opt, index;
+        String nom;
+        do {
+            opt = menu();
+            switch (opt) {
+                case 1:
+                    Persona p = new Persona();
+                    p.nuevaPersona();
+                    personaLista.add(p);
+                    break;
+                case 2:
+                    listarPersonas(personaLista);
+                    System.out.println("Dame el nombre de la persona a modificar");
+                    nom = in.nextLine();
+                    if (buscaPersona(personaLista, nom)) {
+                        index = returnIndex(personaLista, nom);
+                        personaLista.get(index).modificar();
+                    } else {
+                        System.out.println("La persona no existe");
+                    }
+                    break;
+                case 3:
+                    listarPersonas(personaLista);
+                    System.out.println("Dame el nombre de la persona a borrar");
+                    nom = in.nextLine();
+                    if (buscaPersona(personaLista, nom)) {
+                        index = returnIndex(personaLista, nom);
+                        personaLista.remove(index);
+                    } else {
+                        System.out.println("La persona no existe");
+                    }
+                    break;
+                case 4:
+                    listarPersonas(personaLista);
+                    break;
+            }
+        } while (opt != 0);
+    }
+
     private static void listarPersonas(List<Persona> personaLista) {
         for (int i = 0; i < personaLista.size(); i++) {
             System.out.print(personaLista.get(i).getNombre() + " ");
@@ -43,6 +95,12 @@ public class ListaPersona {
             System.out.print(personaLista.get(i).getNacimiento() + " ");
             System.out.print(personaLista.get(i).getNick() + " ");
             System.out.print(personaLista.get(i).getPasswd() + "\n");
+        }
+    }
+
+    private static void listarUsuarios(List<Persona> personaLista) {
+        for (int i = 0; i < personaLista.size(); i++) {
+            System.out.print(personaLista.get(i).getNick() + " ");
         }
     }
 
@@ -66,43 +124,48 @@ public class ListaPersona {
         return i;
     }
 
+    public static boolean auth(List<Persona> pL) {
+        boolean enter = false;
+        int ind, intentos = 3;
+        String nick;
+        String pass;
+        listarUsuarios(pL);
+        System.out.println("Dame el nick para entrar ");
+        nick = in.nextLine();
+        if (buscaPersona(pL, nick)) {
+            ind = returnIndex(pL, nick);
+            do {
+                System.out.println("Introduce la contraseña de " + pL.get(ind).getNick());
+                pass = in.nextLine();
+                if (pass.equals(pL.get(ind).getPasswd())) {
+                    enter = true;
+                } else {
+                    intentos--;
+                    System.out.println("Contraseña incorrecta tienes " + intentos + " intentos");
+                }
+            } while (intentos < 0 || !enter);
+        } else {
+            System.out.println("El nick no existe");
+        }
+        return enter;
+    }
+
     public static void main(String[] args) {
         // TODO code application logic here
         int opt, index = 0;
         String nom;
         List<Persona> personaLista = new ArrayList<>();
         do {
-            opt = menu();
+            opt = menuLog();
             switch (opt) {
                 case 1:
+                    auth(personaLista);
+                    break;
+                case 2:
+                    Listas(personaLista);
                     Persona p = new Persona();
                     p.nuevaPersona();
                     personaLista.add(p);
-                    break;
-                case 2:
-                    listarPersonas(personaLista);
-                    System.out.println("Dame el nombre de la persona a modificar");
-                    nom = in.nextLine();
-                    if (buscaPersona(personaLista, nom)) {
-                        index=returnIndex(personaLista, nom);
-                        personaLista.get(index).modificar();
-                    } else {
-                        System.out.println("La persona no existe");
-                    }
-                    break;
-                case 3:
-                    listarPersonas(personaLista);
-                    System.out.println("Dame el nombre de la persona a borrar");
-                    nom = in.nextLine();
-                    if (buscaPersona(personaLista, nom)) {
-                        index=returnIndex(personaLista, nom);
-                        personaLista.remove(index);
-                    } else {
-                        System.out.println("La persona no existe");
-                    }
-                    break;
-                case 4:
-                    listarPersonas(personaLista);
                     break;
             }
         } while (opt != 0);
