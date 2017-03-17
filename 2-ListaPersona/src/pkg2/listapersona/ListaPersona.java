@@ -56,31 +56,19 @@ public class ListaPersona {
         return flag;
     }
 
-    public static int menuModificar() {
-        int opt;
-        System.out.println("1)Nick");
-        System.out.println("2)Contraseña");
-        System.out.println("3)Nombre");
-        System.out.println("4)Apellido");
-        System.out.println("5)Calle");
-        System.out.println("6)Ciudad");
-        System.out.println("7)Codigo postal");
-        System.out.println("8)Nacimiento");
-
-        System.out.println("\n\n0)Salir");
-        opt = in.nextInt();
-        in.nextLine();
-        return opt;
-    }
-    public static void modificar(int o){
-        switch(o){
-            
+    private static int returnIndex(List<Persona> personaLista, String n) {
+        int i;
+        for (i = 0; i < personaLista.size(); i++) {
+            if (personaLista.get(i).getNombre().equals(n)) {
+                return i;
+            }
         }
+        return i;
     }
 
     public static void main(String[] args) {
         // TODO code application logic here
-        int opt, optModificar;
+        int opt, index = 0;
         String nom;
         List<Persona> personaLista = new ArrayList<>();
         do {
@@ -96,13 +84,22 @@ public class ListaPersona {
                     System.out.println("Dame el nombre de la persona a modificar");
                     nom = in.nextLine();
                     if (buscaPersona(personaLista, nom)) {
-                        optModificar=menuModificar();
-                        modificar(opt);
-                    }else{
+                        index=returnIndex(personaLista, nom);
+                        personaLista.get(index).modificar();
+                    } else {
                         System.out.println("La persona no existe");
                     }
                     break;
                 case 3:
+                    listarPersonas(personaLista);
+                    System.out.println("Dame el nombre de la persona a borrar");
+                    nom = in.nextLine();
+                    if (buscaPersona(personaLista, nom)) {
+                        index=returnIndex(personaLista, nom);
+                        personaLista.remove(index);
+                    } else {
+                        System.out.println("La persona no existe");
+                    }
                     break;
                 case 4:
                     listarPersonas(personaLista);
