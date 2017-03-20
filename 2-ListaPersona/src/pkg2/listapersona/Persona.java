@@ -5,6 +5,12 @@
  */
 package pkg2.listapersona;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.regex.Pattern;
 import static pkg2.listapersona.ListaPersona.in;
 
@@ -106,6 +112,43 @@ public class Persona {
         } while (o != 0);
     }
 
+    private static boolean ComprovaDirectori(String dir) {
+
+        // Comprova la existència d'un directori
+        Path path = Paths.get(dir);
+
+        boolean ok = Files.exists(path);
+
+        return ok;
+    }
+
+    public void guardarPersona(String path) throws IOException {
+        if (ComprovaDirectori(path) == true) // Escrivim l'objecte l[] dintre del fitxer
+        {
+            try ( // BLOC DE TRY .. CATCH
+
+                    // Per afegir posem true després el nom del fitxer
+
+                    // PER AFEGIR LA RESTA D'OBJECTES
+                    // Per afegir TAMBÉ posem true després el nom del fitxer
+                    MeuObjecteOutputStream afegir = new MeuObjecteOutputStream(new FileOutputStream(path, true))) {
+                afegir.writeObject(this);    // afegir -> per afegir dades a l'arxiu
+            }
+        } else // Escrivim l'objecte l[] dintre del fitxer
+        {
+            try ( // BLOC DE TRY .. CATCH
+
+                    // Per afegir posem true després el nom del fitxer
+                    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path)); // PER AFEGIR LA RESTA D'OBJECTES
+                    // Per afegir TAMBÉ posem true després el nom del fitxer
+                    ) {
+                out.writeObject(this);       // out -> per crear nou arxiu
+            }
+
+        }
+    }
+
+// <editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public String getNacimiento() {
         return nacimiento;
     }
@@ -149,4 +192,5 @@ public class Persona {
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
+    // </editor-fold>
 }

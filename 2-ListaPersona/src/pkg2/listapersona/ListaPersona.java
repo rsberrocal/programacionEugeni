@@ -5,6 +5,7 @@
  */
 package pkg2.listapersona;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class ListaPersona {
      * @param args the command line arguments
      */
     public static Scanner in = new Scanner(System.in);
-
+    public static String pathPersonas = "../fitxers/personas";
     public static int menu() {
         int opt;
         System.out.println("\tMenu");
@@ -150,7 +151,7 @@ public class ListaPersona {
         return enter;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
         int opt, index = 0;
         String nom;
@@ -165,6 +166,7 @@ public class ListaPersona {
                     Listas(personaLista);
                     Persona p = new Persona();
                     p.nuevaPersona();
+                    p.guardarPersona(pathPersonas);
                     personaLista.add(p);
                     break;
             }
