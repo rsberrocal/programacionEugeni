@@ -5,13 +5,14 @@
  */
 package pkg2.listapersona;
 
+import java.io.Serializable;
 import static pkg2.listapersona.ListaPersona.in;
 
 /**
  *
  * @author infot
  */
-public class Direccion {
+public class Direccion implements Serializable {
 
     private String calle;
     private String ciudad;

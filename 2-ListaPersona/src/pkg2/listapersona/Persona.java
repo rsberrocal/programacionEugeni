@@ -5,9 +5,12 @@
  */
 package pkg2.listapersona;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +21,7 @@ import static pkg2.listapersona.ListaPersona.in;
  *
  * @author infot
  */
-public class Persona {
+public class Persona implements Serializable {
 
     private String nombre;
     private String apellido;
@@ -145,6 +148,49 @@ public class Persona {
                 out.writeObject(this);       // out -> per crear nou arxiu
             }
 
+        }
+    }
+
+    public void leerPersonas(String path) throws IOException, ClassNotFoundException {
+
+        try ( // BLOC DE TRY .. CATCH
+                ObjectInputStream in = new ObjectInputStream(new FileInputStream(path));) {
+
+            System.out.println("\n\n\tPersonas");
+            System.out.println("\t--\n");
+
+            do {
+                Persona p = (Persona) in.readObject();
+                System.out.print(p.getNombre() + " ");
+                System.out.print(p.getApellido() + " ");
+                System.out.print(p.getDireccion().getCalle() + " ");
+                System.out.print(p.getDireccion().getCiudad() + " ");
+                System.out.print(p.getDireccion().getCodigoPostal() + " ");
+                System.out.print(p.getNacimiento() + " ");
+                System.out.print(p.getNick() + " ");
+                System.out.print(p.getPasswd() + "\n");
+            } while (in != null);   // Si en el vector tenim 3 objectes, hem d'anar fins a 3, sinò dona error
+
+        } catch (java.io.EOFException e) {
+            System.out.println(" ");
+        }
+    }
+
+    public void leerNicks(String path) throws IOException, ClassNotFoundException {
+
+        try ( // BLOC DE TRY .. CATCH
+                ObjectInputStream in = new ObjectInputStream(new FileInputStream(path));) {
+
+            System.out.println("\n\n\tNicks");
+            System.out.println("\t--\n");
+
+            do {
+                Persona p = (Persona) in.readObject();                
+                System.out.print(p.getNick() + " ");                
+            } while (in != null);   // Si en el vector tenim 3 objectes, hem d'anar fins a 3, sinò dona error
+
+        } catch (java.io.EOFException e) {
+            System.out.println(" ");
         }
     }
 

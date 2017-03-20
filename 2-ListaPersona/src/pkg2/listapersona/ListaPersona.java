@@ -6,21 +6,23 @@
 package pkg2.listapersona;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import sun.security.tools.KeyStoreUtil;
 
 /**
  *
  * @author infot
  */
-public class ListaPersona {
+public class ListaPersona implements Serializable {
 
     /**
      * @param args the command line arguments
      */
     public static Scanner in = new Scanner(System.in);
-    public static String pathPersonas = "../fitxers/personas";
+    public static String pathPersonas = "fitxers/personas";
     public static int menu() {
         int opt;
         System.out.println("\tMenu");
@@ -38,7 +40,7 @@ public class ListaPersona {
         int opt;
         System.out.println("\tMenu");
         System.out.println("1)Entrar");
-        System.out.println("2)Agregar personas");
+        System.out.println("2)Regristar");
 
         System.out.println("\n\n0)Salir");
         opt = in.nextInt();
@@ -98,6 +100,10 @@ public class ListaPersona {
             System.out.print(personaLista.get(i).getPasswd() + "\n");
         }
     }
+    private static void listarNicks() throws IOException, ClassNotFoundException {
+        Persona p = new Persona();
+        p.leerNicks(pathPersonas);
+    }
 
     private static void listarUsuarios(List<Persona> personaLista) {
         for (int i = 0; i < personaLista.size(); i++) {
@@ -125,12 +131,13 @@ public class ListaPersona {
         return i;
     }
 
-    public static boolean auth(List<Persona> pL) {
+    public static boolean auth(List<Persona> pL) throws IOException, ClassNotFoundException {
         boolean enter = false;
         int ind, intentos = 3;
+        Persona list=new Persona();        
         String nick;
         String pass;
-        listarUsuarios(pL);
+        listarNicks();
         System.out.println("Dame el nick para entrar ");
         nick = in.nextLine();
         if (buscaPersona(pL, nick)) {
@@ -163,7 +170,7 @@ public class ListaPersona {
                     auth(personaLista);
                     break;
                 case 2:
-                    Listas(personaLista);
+//                    Listas(personaLista);
                     Persona p = new Persona();
                     p.nuevaPersona();
                     p.guardarPersona(pathPersonas);
