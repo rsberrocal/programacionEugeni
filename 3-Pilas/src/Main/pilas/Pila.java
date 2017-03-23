@@ -32,8 +32,7 @@ public class Pila {
 
     public void add(int n) {
         Node node;
-        node = new Node(n, this.top);
-        node.next = top;
+        node = new Node(n, this.top);        
         top = node;
     }
 
