@@ -19,8 +19,4 @@ public class Node {
         this.next = null;
     }
 
-    Node(int num, Node N) {
-        this.num = num;
-        this.next = N;
-    }
 }
