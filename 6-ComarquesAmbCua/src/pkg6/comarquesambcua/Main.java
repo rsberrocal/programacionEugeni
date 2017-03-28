@@ -74,6 +74,7 @@ public class Main {
         pil.printMaxSuperficie();
         pil.printMaxDensitat();
         pil.printAvg();
+        System.out.println("\n");
     }
 
 }
