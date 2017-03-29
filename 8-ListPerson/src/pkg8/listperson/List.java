@@ -22,15 +22,15 @@ public class List {
         return this.Start == null;
     }
 
-    public void inserirPrimer(int t) {
-        NodeList nou = new NodeList(t);
+    public void setFirst(Person t) {
+        NodeList nL = new NodeList(t);
         if (isEmpty()) {
-            nou.Next = this.Start;
+            nL.Next = this.Start;
         }
-        this.Start = nou;
+        this.Start = nL;
     }
 
-    public void eliminarPrimer() {
+    public void removeFirst() {
         NodeList aux;
         if (!isEmpty()) {
             aux = this.Start;
@@ -40,15 +40,15 @@ public class List {
         }
     }
 
-    public int mostrarPrimer() {
-        return this.Start.num;
+    public Person printFirst() {
+        return this.Start.p;
     }
 
-    public void inserirUltim(int t) {
+    public void setLast(Person t) {
         NodeList aux = new NodeList(t);
         NodeList aux_tmp;
         if (isEmpty()) {
-            inserirPrimer(t);
+            setFirst(t);
         } else {
             aux_tmp = Start;
             //busquem l'últim node
@@ -60,7 +60,7 @@ public class List {
         }
     }
 
-    public void eliminarUltim() {
+    public void removeLast() {
         NodeList aux = this.Start;
         if (aux.getNext() == null) {
             isEmpty();
@@ -76,8 +76,8 @@ public class List {
         aux.setNext(null);
     }
 
-    public int mostrarUltim() {
-        int t = 0;
+    public Person printLast() {
+        Person t = new Person();
         NodeList aux;
         if (!isEmpty()) {
             aux = this.Start;
@@ -85,7 +85,7 @@ public class List {
             while (aux.getNext() != null) {
                 aux = aux.getNext();
             }
-            t = aux.getNum();
+            t = aux.getP();
         }
         return t;
     }
@@ -102,18 +102,18 @@ public class List {
         return numElements;
     }
 
-    public int mostrarDada(int pos) {
+    public Person mostrarDada(int pos) {
 // retorna la dada indicada en la posició pos
         NodeList aux = this.Start;
         int cont = 0;
-        int dada = 0;
+        Person dada = new Person();
         if (pos < 0 || pos >= comptaElements()) {
             System.out.println("Posició incorrecta");
         } else {
             //recorrem
             while (aux != null) {
                 if (pos == cont) {
-                    dada = aux.getNum();
+                    dada = aux.getP();
                 }
                 aux = aux.getNext();
                 cont++;
@@ -143,7 +143,7 @@ public class List {
         return aux;
     }
 
-    public void introduirDada(int pos, int dada) {
+    public void addWithPos(int pos, Person dada) {
         NodeList aux = this.Start;
         // Creem un node per inserir la dada i el punter
         NodeList auxDada = null;
@@ -152,9 +152,9 @@ public class List {
         if (pos < 0 || pos > comptaElements()) {
             System.out.println("Posició incorrecta");
         } else if (pos == 0) {
-            inserirPrimer(dada);
+            setFirst(dada);
         } else if (pos == comptaElements()) {
-            inserirUltim(dada);
+            setLast(dada);
         } else {
             // Recorrem
             while (aux != null) {
@@ -172,7 +172,7 @@ public class List {
         }
     }
 
-    public void modificarDada(int pos, int dada) {
+    public void modifyWithPos(int pos, Person dada) {
         NodeList aux = this.Start;
         int cont = 0;
         if (pos < 0 || pos >= comptaElements()) {
@@ -182,7 +182,7 @@ public class List {
             while (aux != null) {
                 if (pos == cont) {
                     // Modifiquem la dada directament
-                    aux.setNum(dada);
+                    aux.setP(dada);
                 }
                 cont++;
                 aux = aux.getNext();
@@ -190,7 +190,7 @@ public class List {
         }
     }
 
-    public void eliminaPosicio(int pos) {
+    public void removeWithPos(int pos) {
         NodeList aux = this.Start;
         NodeList anterior = null;
         int cont = 0;

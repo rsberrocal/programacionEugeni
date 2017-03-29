@@ -10,34 +10,25 @@ package pkg8.listperson;
  * @author infot
  */
 public class NodeList {
-
-    String Nom;
-    char Sexe;
-    double Salari;
+    Person p;
     NodeList Next;
 
-    public String getNom() {
-        return Nom;
+    public NodeList(Person p) {
+        this.p = p;
+        this.Next = null;
     }
 
-    public void setNom(String Nom) {
-        this.Nom = Nom;
+    public NodeList(Person p, NodeList Next) {
+        this.p = p;
+        this.Next = Next;
     }
 
-    public char getSexe() {
-        return Sexe;
+    public Person getP() {
+        return p;
     }
 
-    public void setSexe(char Sexe) {
-        this.Sexe = Sexe;
-    }
-
-    public double getSalari() {
-        return Salari;
-    }
-
-    public void setSalari(double Salari) {
-        this.Salari = Salari;
+    public void setP(Person p) {
+        this.p = p;
     }
 
     public NodeList getNext() {
@@ -48,17 +39,4 @@ public class NodeList {
         this.Next = Next;
     }
 
-    public NodeList(String nom, char sexe, double salari) {
-        this.Nom = nom;
-        this.Sexe = sexe;
-        this.Salari = salari;
-        this.Next = null;
-    }
-
-    public NodeList(String nom, char sexe, double salari, NodeList Next) {
-        this.Nom = nom;
-        this.Sexe = sexe;
-        this.Salari = salari;
-        this.Next = Next;
-    }
 }
