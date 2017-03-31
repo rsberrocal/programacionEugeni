@@ -1,0 +1,4 @@
+comarca, població, superfície(km2), densitat(km2)
+
+dades tretes de:
+http://www.idescat.cat/pub/?id=aec&n=249
