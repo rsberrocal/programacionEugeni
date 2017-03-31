@@ -16,7 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+
         Tree t = new Tree();
         Node n1 = new Node(5);
         Node n2 = new Node(2);
@@ -37,5 +37,5 @@ public class Main {
         t.postOrder(t.getRoot());
         System.out.println("");
     }
-    
+
 }

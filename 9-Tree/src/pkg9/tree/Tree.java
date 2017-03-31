@@ -53,9 +53,9 @@ public class Tree {
         if (n == null) {
             return;
         }
-        System.out.print(n.getNum()+" ");
+        System.out.print(n.getNum() + " ");
         preOrder(n.getLeft());
-        preOrder(n.getRight());   
+        preOrder(n.getRight());
     }
 
     public void inOrder(Node n) {
@@ -63,7 +63,7 @@ public class Tree {
             return;
         }
         inOrder(n.getLeft());
-        System.out.print(n.getNum()+" ");
+        System.out.print(n.getNum() + " ");
         inOrder(n.getRight());
     }
 
@@ -73,7 +73,7 @@ public class Tree {
         }
         postOrder(n.getLeft());
         postOrder(n.getRight());
-        System.out.print(n.getNum()+" ");
+        System.out.print(n.getNum() + " ");
     }
 
 }
