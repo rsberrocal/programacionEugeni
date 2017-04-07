@@ -57,9 +57,17 @@ public class SQLBDGames {
         int id;
         String nick, game, sqlInsert;
         int points;
-        System.out.println("ID");
-        id = in.nextInt();
-        in.nextLine();
+        boolean existPK;
+        do {
+            System.out.println("ID");
+            id = in.nextInt();
+            existPK = true;
+            if (existID(Connect, "points ", id)) {
+                System.out.println("Primary Key already exist");
+                existPK = false;
+            }
+            in.nextLine();
+        } while (!existPK);
         System.out.println("Nickname");
         nick = in.nextLine();
         System.out.println("Name of the game");
@@ -113,13 +121,31 @@ public class SQLBDGames {
         return false;
     }
 
+    public static boolean existID(Connection Connect, String tableName, int id) {
+        String select = "SELECT ID FROM " + tableName + ";";
+
+        try (
+                Statement st = Connect.createStatement();
+                ResultSet rs = st.executeQuery(select);) {
+            while (rs.next()) {
+                if (rs.getInt(1) == id) {
+                    return true;
+                }
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        return false;
+    }
+
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         // TODO code application logic here
         String driver = "org.hsqldb.jdbcDriver";
         Class.forName(driver);
         Connection c = makeConnect();
         if (!existTable(c, "points")) {
-        createTable(c);
+            createTable(c);
         }
         addData(c);
         printData(c);
