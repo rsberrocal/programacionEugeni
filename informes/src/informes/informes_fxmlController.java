@@ -17,19 +17,24 @@ import javafx.scene.control.Label;
  * @author infot
  */
 public class informes_fxmlController implements Initializable {
-
+    
+    public static void printInforme(String inf){
+        ImprimirInforme imp = new ImprimirInforme();
+        imp.mostraInforme(inf);
+    }
+    
     @FXML
     private void personesOnAction(ActionEvent event) {
-
+        printInforme("Persones.jrxml");
     }
 
     @FXML
     private void productesOrdenatsOnAction(ActionEvent event) {
-
     }
 
     @FXML
     private void productesOnAction(ActionEvent event) {
+        printInforme("Productes.jrxml");
 
     }
 
