@@ -5,10 +5,10 @@
  */
 package informes;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -18,8 +18,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /**
  *
@@ -27,10 +25,13 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
  */
 public class ImprimirInforme extends JFrame {
 
-    public void mostraInforme(String informe) throws FileNotFoundException {
+    public void mostraInforme(String informe) {
         try {
+
+            InputStream is = getClass().getResourceAsStream("reports/" + informe);
+
             // RNB: Compilem en runtime. (fitxer.jrxml)
-            JasperReport report = JasperCompileManager.compileReport(getClass().getResourceAsStream("reports/" + informe));
+            JasperReport report = JasperCompileManager.compileReport(is);
             // RNB. Ja compilat (fitxer.jasper)
             //JasperReport informe = (JasperReport) JRLoader.loadObjectFromFile(getClass().getResource("informes/report1.jasper").toString());
             JasperPrint printer = JasperFillManager.fillReport(report, null, SQLHelper.getInstancia().getConnection());
@@ -47,6 +48,6 @@ public class ImprimirInforme extends JFrame {
         } catch (JRException ex) {
             Logger.getLogger(ImprimirInforme.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }   
 
 }
