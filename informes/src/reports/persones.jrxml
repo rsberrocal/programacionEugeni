@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be3be5de-6007-443b-8067-f6d7838515d5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     persona.`nom` AS persona_nom,
+     persona.`cognoms` AS persona_cognoms,
+     persona.`login` AS persona_login
+FROM
+     `persona` persona]]>
+	</queryString>
+	<field name="persona_nom" class="java.lang.String"/>
+	<field name="persona_cognoms" class="java.lang.String"/>
+	<field name="persona_login" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="32" y="0" width="100" height="20" uuid="64d73ee3-8ccf-4804-bacb-0fb4a56689e2"/>
+				<text><![CDATA[persona_nom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="3" width="100" height="20" uuid="6a6e9a09-4bd6-4895-8a8b-11b60acd0b45"/>
+				<text><![CDATA[persona_cognoms]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="262" y="0" width="100" height="20" uuid="665a2332-78b6-433f-8e91-066c3ac76e87"/>
+				<text><![CDATA[persona_login]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="32" y="0" width="100" height="20" uuid="a058253a-9284-419a-be1c-38e876a54237"/>
+				<textFieldExpression><![CDATA[$F{persona_nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="0" width="100" height="20" uuid="5574fdc5-088d-4d3b-bfad-86758bd7f44a"/>
+				<textFieldExpression><![CDATA[$F{persona_cognoms}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="0" width="100" height="20" uuid="71552ccf-72cc-4ef3-98d7-da15300cd143"/>
+				<textFieldExpression><![CDATA[$F{persona_login}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
