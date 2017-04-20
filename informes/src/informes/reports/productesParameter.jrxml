@@ -1,29 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-    <background>
-        <band/>
-    </background>
-    <title>
-        <band height="79"/>
-    </title>
-    <pageHeader>
-        <band height="35"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61"/>
-    </columnHeader>
-    <detail>
-        <band height="125"/>
-    </detail>
-    <columnFooter>
-        <band height="45"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54"/>
-    </pageFooter>
-    <summary>
-        <band height="42"/>
-    </summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f319fe46-c775-48eb-9166-0e01532d232c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="stockParameters" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     productes.`codi` AS productes_codi,
+     productes.`nom` AS productes_nom,
+     productes.`preu` AS productes_preu,
+     productes.`existencies` AS productes_existencies,
+     productes.`data` AS productes_data
+FROM
+     `productes` productes
+WHERE productes.`existencies` > $P{stockParameters}
+ORDER BY productes.`data`]]>
+	</queryString>
+	<field name="productes_codi" class="java.lang.Integer"/>
+	<field name="productes_nom" class="java.lang.String"/>
+	<field name="productes_preu" class="java.lang.Float"/>
+	<field name="productes_existencies" class="java.lang.Float"/>
+	<field name="productes_data" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="24" y="20" width="310" height="36" uuid="34274ae6-0eb6-4ad9-b464-64db969e424d"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Productes amb major stock que]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="334" y="20" width="194" height="36" uuid="27abc020-97f5-46e0-a9d4-f27dc5db0106"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{stockParameters}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="eba59786-ab2e-4369-8306-989a99fcf9ef"/>
+				<text><![CDATA[Id de producte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="de545aa7-bf77-4c26-bc6c-2b2532e1eac0"/>
+				<text><![CDATA[Nom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="58e361ef-6203-44f8-b38b-5cd9e70d0e75"/>
+				<text><![CDATA[Preu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="2650224f-c3c4-4c0b-97c9-b7873c61a0b3"/>
+				<text><![CDATA[Stock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="2" width="100" height="20" uuid="3129a29b-856c-4045-bec1-b8ef5e6ee493"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="66b2a131-ce37-4ec4-8233-e50445e8772d"/>
+				<textFieldExpression><![CDATA[$F{productes_codi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="d1b89d08-fe07-40db-b807-8c563abe6a49"/>
+				<textFieldExpression><![CDATA[$F{productes_nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="e15af671-556c-4f37-a487-71092d3aa9db"/>
+				<textFieldExpression><![CDATA[$F{productes_preu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="dab0e218-1269-49d2-b205-ec019d56569e"/>
+				<textFieldExpression><![CDATA[$F{productes_existencies}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="0" width="100" height="20" uuid="0ac1d6db-1b1f-4c5d-8322-66521207d2d1"/>
+				<textFieldExpression><![CDATA[$F{productes_data}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
 </jasperReport>

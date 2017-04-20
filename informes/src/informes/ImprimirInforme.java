@@ -70,7 +70,7 @@ public class ImprimirInforme extends JFrame {
             visor.setVisible(true);
 
             this.add(visor);
-            this.setSize(640, 480);
+            this.setSize(800, 660);
             // El setLocationRelativeTo permet posar el JFrame en el centre directament
             this.setLocationRelativeTo(null);
             this.setVisible(true);
