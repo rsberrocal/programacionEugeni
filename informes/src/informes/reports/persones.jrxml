@@ -9,7 +9,8 @@
      persona.`cognoms` AS persona_cognoms,
      persona.`login` AS persona_login
 FROM
-     `persona` persona]]>
+     `persona` persona
+ORDER BY persona.`id` ]]>
 	</queryString>
 	<field name="persona_nom" class="java.lang.String"/>
 	<field name="persona_cognoms" class="java.lang.String"/>
@@ -18,7 +19,15 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="144" y="16" width="284" height="63" uuid="54db8df7-dcff-4140-86d3-edfa8f9d816a"/>
+				<textElement>
+					<font size="50"/>
+				</textElement>
+				<text><![CDATA[Persones]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
@@ -26,32 +35,32 @@ FROM
 	<columnHeader>
 		<band height="23" splitType="Stretch">
 			<staticText>
-				<reportElement x="32" y="0" width="100" height="20" uuid="64d73ee3-8ccf-4804-bacb-0fb4a56689e2"/>
-				<text><![CDATA[persona_nom]]></text>
+				<reportElement x="237" y="3" width="100" height="20" uuid="6a6e9a09-4bd6-4895-8a8b-11b60acd0b45"/>
+				<text><![CDATA[Cognoms]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="146" y="3" width="100" height="20" uuid="6a6e9a09-4bd6-4895-8a8b-11b60acd0b45"/>
-				<text><![CDATA[persona_cognoms]]></text>
+				<reportElement x="386" y="0" width="100" height="20" uuid="665a2332-78b6-433f-8e91-066c3ac76e87"/>
+				<text><![CDATA[Login d'usuari]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="262" y="0" width="100" height="20" uuid="665a2332-78b6-433f-8e91-066c3ac76e87"/>
-				<text><![CDATA[persona_login]]></text>
+				<reportElement x="114" y="3" width="100" height="20" uuid="64d73ee3-8ccf-4804-bacb-0fb4a56689e2"/>
+				<text><![CDATA[Nom]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="32" y="0" width="100" height="20" uuid="a058253a-9284-419a-be1c-38e876a54237"/>
-				<textFieldExpression><![CDATA[$F{persona_nom}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="146" y="0" width="100" height="20" uuid="5574fdc5-088d-4d3b-bfad-86758bd7f44a"/>
+				<reportElement x="237" y="0" width="100" height="20" uuid="5574fdc5-088d-4d3b-bfad-86758bd7f44a"/>
 				<textFieldExpression><![CDATA[$F{persona_cognoms}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="262" y="0" width="100" height="20" uuid="71552ccf-72cc-4ef3-98d7-da15300cd143"/>
+				<reportElement x="386" y="0" width="100" height="20" uuid="71552ccf-72cc-4ef3-98d7-da15300cd143"/>
 				<textFieldExpression><![CDATA[$F{persona_login}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="3" width="100" height="20" uuid="a058253a-9284-419a-be1c-38e876a54237"/>
+				<textFieldExpression><![CDATA[$F{persona_nom}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
