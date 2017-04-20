@@ -61,7 +61,7 @@ ORDER BY productes.`codi`]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20" uuid="ac7fe399-7b65-4f95-9bab-6bf54ba77394"/>
 				<textFieldExpression><![CDATA[$F{productes_codi}]]></textFieldExpression>

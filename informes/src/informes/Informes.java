@@ -22,8 +22,11 @@ public class Informes extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("informes_fxml.fxml"));
         
         Scene scene = new Scene(root);
-        
+        // Posem el titol
+        stage.setTitle("Informes");
         stage.setScene(scene);
+        // Indiquem que la finestra no es pugui fer gran
+        stage.setResizable(false);
         stage.show();
     }
 
