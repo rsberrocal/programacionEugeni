@@ -50,7 +50,52 @@ public class Main {
         opt = in.nextInt();
         return opt;
     }
-
+    
+    public static int dtMenu() {
+        int opt;
+        System.out.println("\n\tMenu Ciclistes");
+        System.out.println("\t---- ---------\n");
+        System.out.println("\t1) Llevar");
+        System.out.println("\t2) Equips");
+        System.out.println("\t3) Ciclistes");
+        System.out.println("\t4) Etapes");
+        System.out.println("\t5) Maillots");
+        System.out.println("\t6) Ports");
+        System.out.println("\t7) Borrar totes les taules\n");
+        System.out.println("\t0) Sortir");
+        opt = in.nextInt();
+        return opt;
+    }
+    public static void dropTables(){
+        int opt;
+        database db = new database();
+        opt = ctMenu();
+         switch (opt) {
+            case 0:
+                break;
+            case 1:
+                db.createTable(1);
+                break;
+            case 2:
+                db.createTable(2);
+                break;
+            case 3:
+                db.createTable(3);
+                break;
+            case 4:
+                db.createTable(4);
+                break;
+            case 5:
+                db.createTable(5);
+                break;
+            case 6:
+                db.createTable(6);
+                break;
+            case 7:
+                db.createTable(7);
+                break;
+        }
+    }
     public static void createTables() throws SQLException {
         int opt;
         database db = new database();

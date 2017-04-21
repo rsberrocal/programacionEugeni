@@ -261,6 +261,117 @@ public class database {
         return false;
     }
 
+    public void dropTables(int num) throws SQLException {
+        StringBuilder sql = new StringBuilder();
+        database c = new database();
+        c.makeConnection();
+        switch (num) {
+            case 1:
+                if (existTable(c.getConnection(), "Ciclistes") && existTable(c.getConnection(), "Etapes") && existTable(c.getConnection(), "Maillots") && !existTable(c.getConnection(), "Llevar")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Llevar(");
+                    sql.append("dorsal INTEGER(11), ");
+                    sql.append("netapa INTEGER(11) , ");
+                    sql.append("codi VARCHAR(6) , ");
+                    sql.append("PRIMARY KEY(dorsal,netapa,codi), ");
+                    sql.append("FOREIGN KEY (dorsal) REFERENCES Ciclistes (dorsal),");
+                    sql.append("FOREIGN KEY (netapa) REFERENCES Etapes (netapa),");
+                    sql.append("FOREIGN KEY (codi) REFERENCES Maillots (codi));");
+                    executeQuery(c.getConnection(), sql);
+                } else if (!existTable(c.getConnection(), "Ciclistes")) {
+                    createTable(3, c.getConnection());
+                    createTable(1, c.getConnection());
+                } else if (!existTable(c.getConnection(), "Etapes")) {
+                    createTable(4, c.getConnection());
+                    createTable(1, c.getConnection());
+                } else if (!existTable(c.getConnection(), "Maillots")) {
+                    createTable(5, c.getConnection());
+                    createTable(1, c.getConnection());
+                }
+                System.out.println("Taula Llevar creada");
+                break;
+            case 2:
+                if (!existTable(c.getConnection(), "Equips")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Equips(");
+                }
+                sql.append("nomeq VARCHAR(20) PRIMARY KEY, ");
+                sql.append("director VARCHAR(20)); ");
+                executeQuery(c.getConnection(), sql);
+                System.out.println("Taula Equips creada");
+                break;
+            case 3:
+                if (existTable(c.getConnection(), "Equips")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Ciclistes(");
+                    sql.append("dorsal INTEGER(11) PRIMARY KEY, ");
+                    sql.append("nom VARCHAR(60), ");
+                    sql.append("edad INTEGER(11), ");
+                    sql.append("nomeq VARCHAR(50), ");
+                    sql.append("FOREIGN KEY (nomeq) REFERENCES Equips (nomeq));");
+                    executeQuery(c.getConnection(), sql);
+                } else {
+                    createTable(2, c.getConnection());
+                    createTable(3, c.getConnection());
+                }
+                System.out.println("Taula Ciclistes creada");
+                break;
+            case 4:
+                if (existTable(c.getConnection(), "Ciclistes") && !existTable(c.getConnection(), "Etapes")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Etapes(");
+                    sql.append("netapa INTEGER(11) PRIMARY KEY, ");
+                    sql.append("km INTEGER(11), ");
+                    sql.append("sortida VARCHAR(70), ");
+                    sql.append("arribada VARCHAR(70), ");
+                    sql.append("dorsal INTEGER(11), ");
+                    sql.append("FOREIGN KEY (dorsal) REFERENCES Ciclistes (dorsal));");
+                    executeQuery(c.getConnection(), sql);
+                    System.out.println("Taula Etapes creada");
+                } else {
+                    createTable(3, c.getConnection());
+                    createTable(4, c.getConnection());
+                }
+                break;
+            case 5:
+                if (!existTable(c.getConnection(), "Equips")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Maillots(");
+                    sql.append("codi VARCHAR(6) PRIMARY KEY , ");
+                    sql.append("tipus VARCHAR(60), ");
+                    sql.append("color VARCHAR(40), ");
+                    sql.append("premi INTEGER(11));");
+                    executeQuery(c.getConnection(), sql);
+                    System.out.println("Taula Maillots creada");
+                }
+                break;
+            case 6:
+                if (existTable(c.getConnection(), "Etapes") && existTable(c.getConnection(), "Ciclistes") && !existTable(c.getConnection(), "Ports")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Ports(");
+                    sql.append("nomport VARCHAR(70) PRIMARY KEY, ");
+                    sql.append("alcada INTEGER(11), ");
+                    sql.append("categoria VARCHAR(2), ");
+                    sql.append("pendent FLOAT, ");
+                    sql.append("netapa INTEGER(11), ");
+                    sql.append("dorsal INTEGER(11), ");
+                    sql.append("FOREIGN KEY (netapa) REFERENCES Etapes (netapa), ");
+                    sql.append("FOREIGN KEY (dorsal) REFERENCES Ciclistes (dorsal));");
+                    executeQuery(c.getConnection(), sql);
+                    System.out.println("Taula Ports creada");
+                } else if (!existTable(c.getConnection(), "Etapes")) {
+                    createTable(4, c.getConnection());
+                    createTable(6, c.getConnection());
+                } else if (!existTable(c.getConnection(), "Ciclistes")) {
+                    createTable(3, c.getConnection());
+                    createTable(6, c.getConnection());
+                }
+                break;
+            case 7:
+                for (int i = 1; i <= 6; i++) {
+                    createTable(i, c.getConnection());
+                }
+                System.out.println("Totes les taules creades");
+                break;
+        }
+
+        c.getConnection().close();
+    }
+
     private static void executeQuery(Connection Connect, StringBuilder sql) throws SQLException {
         try (
                 Statement st = Connect.createStatement()) {
