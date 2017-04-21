@@ -5,6 +5,9 @@
  */
 package commonfunctionssql;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -39,6 +42,12 @@ public class CommonFunctionsSQL {
         String connection = connector + "://" + pc + ":" + port + "/" + bdname + "?user=" + user + "&password=" + pass;
         Connection c = DriverManager.getConnection(connection);
         return c;
+    }
+
+    public static boolean comprovaDir(String dir) {
+        boolean flag;
+        Path path = Paths.get(dir);
+        return flag = Files.exists(path);
     }
 
 }
