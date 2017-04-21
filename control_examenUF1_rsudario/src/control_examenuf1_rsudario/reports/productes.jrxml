@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d92be95b-e243-40e9-8956-57ca0e0125d3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="246"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Min" class="java.lang.Integer"/>
+	<parameter name="Max" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     productes.`codi` AS productes_codi,
+     productes.`nom` AS productes_nom,
+     productes.`preu` AS productes_preu,
+     productes.`existencies` AS productes_existencies
+FROM
+     `productes` productes
+WHERE productes.`existencies`> $P{Min}
+AND productes.`existencies`< $P{Max}]]>
+	</queryString>
+	<field name="productes_codi" class="java.lang.Integer"/>
+	<field name="productes_nom" class="java.lang.String"/>
+	<field name="productes_preu" class="java.lang.Float"/>
+	<field name="productes_existencies" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="296" height="28" uuid="d76fcc20-17ec-4267-8875-7265ea52d38c"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Informes d'existències entre]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="296" y="10" width="113" height="28" uuid="77c18c06-feb7-4476-8bd7-f6fbd0020528"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Min}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="409" y="10" width="17" height="28" uuid="d354ddfd-5a34-40a4-8288-368a11fa8abc"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[i]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="437" y="11" width="102" height="28" uuid="aaa3b1f1-8224-41de-85fa-73a1f95b982d"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Max}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="38" width="800" height="1" uuid="f42fe2ca-09d0-42f4-a125-e1d5def7f509"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="72bbd43a-0db2-48d7-98ca-865e5c2c2220"/>
+				<text><![CDATA[Codi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="0" width="100" height="20" uuid="1712a7ab-b888-4b21-9a1c-1d550ba66907"/>
+				<text><![CDATA[Nom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="2" width="100" height="20" uuid="26363ebe-3b5d-418c-bf60-f75177999224"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Preu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="2" width="100" height="20" uuid="5fd6f446-4349-4e19-8131-11160da9c152"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Existències]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="23" width="700" height="1" uuid="4a8e8238-1f5f-4081-a34d-f60f3664bc84"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="6" width="100" height="20" uuid="3c894936-9491-443f-a5b7-a5b1d9a1e04a"/>
+				<textFieldExpression><![CDATA[$F{productes_codi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="6" width="100" height="20" uuid="866746a2-6464-425e-8caa-f2b0962da42c"/>
+				<textFieldExpression><![CDATA[$F{productes_nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="6" width="100" height="20" uuid="846d7802-44bb-4808-9735-de54ec9027a0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{productes_preu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="6" width="100" height="20" uuid="ad188566-c84e-4bff-911e-1519fac3b6a4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{productes_existencies}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
