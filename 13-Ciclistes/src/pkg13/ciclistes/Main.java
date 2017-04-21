@@ -67,7 +67,7 @@ public class Main {
 
     public static void dropTables() throws SQLException {
         int opt;
-        database db = new database();
+        Database db = new Database();
         opt = dtMenu();
         switch (opt) {
             case 0:
@@ -98,7 +98,7 @@ public class Main {
 
     public static void createTables() throws SQLException {
         int opt;
-        database db = new database();
+        Database db = new Database();
         opt = ctMenu();
         switch (opt) {
             case 0:

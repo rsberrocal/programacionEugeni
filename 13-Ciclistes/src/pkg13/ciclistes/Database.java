@@ -12,16 +12,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLTransientConnectionException;
 import java.sql.Statement;
+import static commonfunctionssql.CommonFunctionsSQL.makeConnect;
 
 /**
  *
  * @author infot
  */
-public class database {
+public class Database {
 
     private Connection c;
 
-    public database() {
+    public Database() {
         this.c = null;
     }
 
@@ -136,7 +137,7 @@ public class database {
 
     public static void createTable(int num) throws SQLException {
         StringBuilder sql = new StringBuilder();
-        database c = new database();
+        Database c = new Database();
         c.makeConnection();
         switch (num) {
             case 1:
@@ -334,7 +335,7 @@ public class database {
 
     public void dropTables(int num) throws SQLException {
 
-        database c = new database();
+        Database c = new Database();
         c.makeConnection();
         switch (num) {
             case 1:
