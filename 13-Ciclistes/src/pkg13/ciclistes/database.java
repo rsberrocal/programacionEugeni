@@ -37,7 +37,7 @@ public class database {
         StringBuilder sql = new StringBuilder();
         switch (num) {
             case 1:
-                if (existTable(c, "Ciclistes") && existTable(c, "Etapes") && existTable(c, "Maillots")) {
+                if (existTable(c, "Ciclistes") && existTable(c, "Etapes") && existTable(c, "Maillots") && !existTable(c, "Llevar")) {
                     sql.append("CREATE TABLE IF NOT EXISTS Llevar(");
                     sql.append("dorsal INTEGER(11), ");
                     sql.append("netapa INTEGER(11) , ");
@@ -60,14 +60,16 @@ public class database {
                 System.out.println("Taula Llevar creada");
                 break;
             case 2:
-                sql.append("CREATE TABLE IF NOT EXISTS Equips(");
-                sql.append("nomeq VARCHAR(20) PRIMARY KEY, ");
-                sql.append("director VARCHAR(20)); ");
-                executeQuery(c, sql);
-                System.out.println("Taula Equips creada");
+                if (!existTable(c, "Equips")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Equips(");
+                    sql.append("nomeq VARCHAR(20) PRIMARY KEY, ");
+                    sql.append("director VARCHAR(20)); ");
+                    executeQuery(c, sql);
+                    System.out.println("Taula Equips creada");
+                }
                 break;
             case 3:
-                if (existTable(c, "Equips")) {
+                if (existTable(c, "Equips") && !existTable(c, "Ciclistes")) {
                     sql.append("CREATE TABLE IF NOT EXISTS Ciclistes(");
                     sql.append("dorsal INTEGER(11) PRIMARY KEY, ");
                     sql.append("nom VARCHAR(60), ");
@@ -82,7 +84,7 @@ public class database {
                 System.out.println("Taula Ciclistes creada");
                 break;
             case 4:
-                if (existTable(c, "Ciclistes")) {
+                if (existTable(c, "Ciclistes") && !existTable(c, "Etapes")) {
                     sql.append("CREATE TABLE IF NOT EXISTS Etapes(");
                     sql.append("netapa INTEGER(11) PRIMARY KEY, ");
                     sql.append("km INTEGER(11), ");
@@ -98,27 +100,36 @@ public class database {
                 }
                 break;
             case 5:
-                sql.append("CREATE TABLE IF NOT EXISTS Maillots(");
-                sql.append("codi VARCHAR(6) PRIMARY KEY , ");
-                sql.append("tipus VARCHAR(60), ");
-                sql.append("color VARCHAR(40), ");
-                sql.append("premi INTEGER(11));");
-                executeQuery(c, sql);
-                System.out.println("Taula Maillots creada");
+                if (!existTable(c, "Maillots")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Maillots(");
+                    sql.append("codi VARCHAR(6) PRIMARY KEY , ");
+                    sql.append("tipus VARCHAR(60), ");
+                    sql.append("color VARCHAR(40), ");
+                    sql.append("premi INTEGER(11));");
+                    executeQuery(c, sql);
+                    System.out.println("Taula Maillots creada");
+                }
                 break;
             case 6:
-                sql.append("CREATE TABLE IF NOT EXISTS Ports(");
-                sql.append("nomport VARCHAR(70) PRIMARY KEY, ");
-                sql.append("alcada INTEGER(11), ");
-                sql.append("categoria VARCHAR(2), ");
-                sql.append("pendent FLOAT, ");
-                sql.append("netapa INTEGER(11), ");
-                sql.append("dorsal INTEGER(11), ");
-                sql.append("FOREIGN KEY (netapa) REFERENCES Etapes (netapa), ");
-                sql.append("FOREIGN KEY (dorsal) REFERENCES Ciclistes (dorsal));");
-                executeQuery(c, sql);
-                System.out.println("Taula Ports creada");
-                break;
+                if (existTable(c, "Etapes") && existTable(c, "Ciclistes") && !existTable(c, "Ports")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Ports(");
+                    sql.append("nomport VARCHAR(70) PRIMARY KEY, ");
+                    sql.append("alcada INTEGER(11), ");
+                    sql.append("categoria VARCHAR(2), ");
+                    sql.append("pendent FLOAT, ");
+                    sql.append("netapa INTEGER(11), ");
+                    sql.append("dorsal INTEGER(11), ");
+                    sql.append("FOREIGN KEY (netapa) REFERENCES Etapes (netapa), ");
+                    sql.append("FOREIGN KEY (dorsal) REFERENCES Ciclistes (dorsal));");
+                    executeQuery(c, sql);
+                    System.out.println("Taula Ports creada");
+                } else if (!existTable(c, "Etapes")) {
+                    createTable(4, c);
+                    createTable(6, c);
+                } else if (!existTable(c, "Ciclistes")) {
+                    createTable(3, c);
+                    createTable(6, c);
+                }
         }
 
     }
@@ -129,7 +140,7 @@ public class database {
         c.makeConnection();
         switch (num) {
             case 1:
-                if (existTable(c.getConnection(), "Ciclistes") && existTable(c.getConnection(), "Etapes") && existTable(c.getConnection(), "Maillots")) {
+                if (existTable(c.getConnection(), "Ciclistes") && existTable(c.getConnection(), "Etapes") && existTable(c.getConnection(), "Maillots") && !existTable(c.getConnection(), "Llevar")) {
                     sql.append("CREATE TABLE IF NOT EXISTS Llevar(");
                     sql.append("dorsal INTEGER(11), ");
                     sql.append("netapa INTEGER(11) , ");
@@ -152,7 +163,9 @@ public class database {
                 System.out.println("Taula Llevar creada");
                 break;
             case 2:
-                sql.append("CREATE TABLE IF NOT EXISTS Equips(");
+                if (!existTable(c.getConnection(), "Equips")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Equips(");
+                }
                 sql.append("nomeq VARCHAR(20) PRIMARY KEY, ");
                 sql.append("director VARCHAR(20)); ");
                 executeQuery(c.getConnection(), sql);
@@ -174,7 +187,7 @@ public class database {
                 System.out.println("Taula Ciclistes creada");
                 break;
             case 4:
-                if (existTable(c.getConnection(), "Ciclistes")) {
+                if (existTable(c.getConnection(), "Ciclistes") && !existTable(c.getConnection(), "Etapes")) {
                     sql.append("CREATE TABLE IF NOT EXISTS Etapes(");
                     sql.append("netapa INTEGER(11) PRIMARY KEY, ");
                     sql.append("km INTEGER(11), ");
@@ -190,30 +203,40 @@ public class database {
                 }
                 break;
             case 5:
-                sql.append("CREATE TABLE IF NOT EXISTS Maillots(");
-                sql.append("codi VARCHAR(6) PRIMARY KEY , ");
-                sql.append("tipus VARCHAR(60), ");
-                sql.append("color VARCHAR(40), ");
-                sql.append("premi INTEGER(11));");
-                executeQuery(c.getConnection(), sql);
-                System.out.println("Taula Maillots creada");
+                if (!existTable(c.getConnection(), "Equips")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Maillots(");
+                    sql.append("codi VARCHAR(6) PRIMARY KEY , ");
+                    sql.append("tipus VARCHAR(60), ");
+                    sql.append("color VARCHAR(40), ");
+                    sql.append("premi INTEGER(11));");
+                    executeQuery(c.getConnection(), sql);
+                    System.out.println("Taula Maillots creada");
+                }
                 break;
             case 6:
-                sql.append("CREATE TABLE IF NOT EXISTS Ports(");
-                sql.append("nomport VARCHAR(70) PRIMARY KEY, ");
-                sql.append("alcada INTEGER(11), ");
-                sql.append("categoria VARCHAR(2), ");
-                sql.append("pendent FLOAT, ");
-                sql.append("netapa INTEGER(11), ");
-                sql.append("dorsal INTEGER(11), ");
-                sql.append("FOREIGN KEY (netapa) REFERENCES Etapes (netapa), ");
-                sql.append("FOREIGN KEY (dorsal) REFERENCES Ciclistes (dorsal));");
-                System.out.println("Taula Ports creada");
-                executeQuery(c.getConnection(), sql);
+                if (existTable(c.getConnection(), "Etapes") && existTable(c.getConnection(), "Ciclistes") && !existTable(c.getConnection(), "Ports")) {
+                    sql.append("CREATE TABLE IF NOT EXISTS Ports(");
+                    sql.append("nomport VARCHAR(70) PRIMARY KEY, ");
+                    sql.append("alcada INTEGER(11), ");
+                    sql.append("categoria VARCHAR(2), ");
+                    sql.append("pendent FLOAT, ");
+                    sql.append("netapa INTEGER(11), ");
+                    sql.append("dorsal INTEGER(11), ");
+                    sql.append("FOREIGN KEY (netapa) REFERENCES Etapes (netapa), ");
+                    sql.append("FOREIGN KEY (dorsal) REFERENCES Ciclistes (dorsal));");
+                    executeQuery(c.getConnection(), sql);
+                    System.out.println("Taula Ports creada");
+                } else if (!existTable(c.getConnection(), "Etapes")) {
+                    createTable(4, c.getConnection());
+                    createTable(6, c.getConnection());
+                } else if (!existTable(c.getConnection(), "Ciclistes")) {
+                    createTable(3, c.getConnection());
+                    createTable(6, c.getConnection());
+                }
                 break;
             case 7:
                 for (int i = 1; i <= 6; i++) {
-                    createTable(i);
+                    createTable(i, c.getConnection());
                 }
                 System.out.println("Totes les taules creades");
                 break;
