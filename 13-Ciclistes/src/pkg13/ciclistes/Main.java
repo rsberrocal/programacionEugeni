@@ -74,25 +74,25 @@ public class Main {
             case 0:
                 break;
             case 1:
-                db.createTable(1);
+               // db.createTable(1);
                 break;
             case 2:
-                db.createTable(2);
+                //db.createTable(2);
                 break;
             case 3:
-                db.createTable(3);
+              //  db.createTable(3);
                 break;
             case 4:
-                db.createTable(4);
+              //  db.createTable(4);
                 break;
             case 5:
-                db.createTable(5);
+             //   db.createTable(5);
                 break;
             case 6:
-                db.createTable(6);
+             //   db.createTable(6);
                 break;
             case 7:
-                db.createTable(7);
+              //  db.createTable(7);
                 break;
         }
     }
