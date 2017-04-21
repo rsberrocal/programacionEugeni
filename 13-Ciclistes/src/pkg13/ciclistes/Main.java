@@ -21,7 +21,7 @@ public class Main {
 
     public static int mainMenu() {
         int opt = 0;
-        System.out.println("\n\tMenu Ciclistes");
+        System.out.println("\n\tBase de dades de Ciclistes");
         System.out.println("\t---- ---------\n");
         System.out.println("\t1) Esborrar taules");
         System.out.println("\t2) Crear taules");
@@ -65,6 +65,31 @@ public class Main {
         return opt;
     }
 
+    public static int equipMenu() {
+        int opt = 0;
+        System.out.println("\n\tMenu Equips");
+        System.out.println("\t---- ---------\n");
+        System.out.println("\t1) Nou Equip");
+        System.out.println("\t\n0) Sortir");
+        opt = in.nextInt();
+        return opt;
+    }
+
+    public static void equips() {
+        int opt;
+        opt = equipMenu();
+        switch (opt) {
+            case 0:
+                break;
+            case 1:
+                Equip e = new Equip();                
+                break;
+            default:
+                System.out.println("\tOpció incorrecta");
+                break;
+        }
+    }
+
     public static void dropTables() throws SQLException {
         int opt;
         Database db = new Database();
@@ -92,6 +117,9 @@ public class Main {
                 break;
             case 7:
                 db.dropTables(7);
+                break;
+            default:
+                System.out.println("\tOpció incorrecta");
                 break;
         }
     }
@@ -124,6 +152,9 @@ public class Main {
             case 7:
                 db.createTable(7);
                 break;
+            default:
+                System.out.println("\tOpció incorrecta");
+                break;
         }
 
     }
@@ -144,6 +175,7 @@ public class Main {
                     createTables();
                     break;
                 case 3:
+                    equips();
                     break;
                 case 4:
                     break;

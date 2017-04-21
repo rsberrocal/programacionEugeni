@@ -10,5 +10,8 @@ package pkg13.ciclistes;
  * @author infot
  */
 public class Maillot {
-    
+    private String codi;//PK
+    private String tipus;
+    private String color;
+    private int premi;
 }
