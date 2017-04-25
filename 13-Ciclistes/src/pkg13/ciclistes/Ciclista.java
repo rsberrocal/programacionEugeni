@@ -5,6 +5,13 @@
  */
 package pkg13.ciclistes;
 
+import static commonfunctionssql.CommonFunctionsSQL.comprovaDir;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
 /**
  *
  * @author infot
@@ -17,7 +24,7 @@ public class Ciclista {
     private Equip nomEquip;//FK de Equip
 
     public Ciclista() {
-
+        this.nomEquip = new Equip();
     }
 
     public Ciclista(int dorsal, String nom, int edat, Equip nomEquip) {
@@ -25,6 +32,56 @@ public class Ciclista {
         this.nom = nom;
         this.edat = edat;
         this.nomEquip = nomEquip;
+    }
+
+    private void insertCiclista() throws SQLException {
+        Database db = new Database();
+        db.makeConnection();
+        String sqlInsert = "INSERT INTO Ciclistes VALUES(?,?,?,?)";
+        try (
+                PreparedStatement pst = db.getConnection().prepareStatement(sqlInsert)) {
+            pst.setInt(1, this.dorsal);
+            pst.setString(2, this.nom);
+            pst.setInt(3, this.edat);
+            pst.setString(4, this.nomEquip.getNomEquip());
+            pst.execute();
+
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        db.getConnection().close();
+    }
+
+    public void dadesCiclista() throws Exception {
+        String path = "files/ciclista";
+        if (!comprovaDir(path)) {
+            throw new Exception(path + " not found");
+        } else {
+            String p;
+            String[] l;
+
+            try (
+                    FileReader in = new FileReader(path);
+                    Scanner input = new Scanner(in);) {
+
+                while (input.hasNextLine()) {           // Mentre hi hagen línies a l'arxiu ...
+                    p = input.nextLine();     // Agafa una línia
+                    l = p.split("\t");
+                    this.dorsal = Integer.parseInt(l[0]);
+                    this.nom = l[1];
+                    this.edat = Integer.parseInt(l[2]);
+                    this.nomEquip.setNomEquip(l[3]);
+                    this.insertCiclista();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+                System.out.println("");
+            } catch (NumberFormatException number) {
+                System.out.println("");
+            }
+        }
+        System.out.println("Se han introduït tots els Equips");
     }
 
     public int getDorsal() {

@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import static commonfunctionssql.CommonFunctionsSQL.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  *
@@ -27,6 +29,22 @@ public class Equip {
         this.director = director;
     }
 
+    private void insertEquip() throws SQLException {
+        Database db = new Database();
+        db.makeConnection();
+        String sqlInsert = "INSERT INTO Equips VALUES(?,?)";
+        try (
+                PreparedStatement pst = db.getConnection().prepareStatement(sqlInsert)) {
+            pst.setString(1, this.nomEquip);
+            pst.setString(2, this.director);
+            pst.execute();
+
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        db.getConnection().close();
+    }
+
     public void dadesEquip() throws Exception {
         String path = "files/equip";
         if (!comprovaDir(path)) {
@@ -34,18 +52,25 @@ public class Equip {
         } else {
             String p;
             String[] l;
+
             try (
                     FileReader in = new FileReader(path);
                     Scanner input = new Scanner(in);) {
 
                 while (input.hasNextLine()) {           // Mentre hi hagen línies a l'arxiu ...
                     p = input.nextLine();     // Agafa una línia
-                    l = p.split("\t");                   
+                    l = p.split("&");
+                    this.nomEquip = l[0];
+                    this.director = l[1];
+                    this.insertEquip();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+                System.out.println("");
             }
         }
+        System.out.println("Se han introduït tots els Equips");
     }
 
     public String getNomEquip() {

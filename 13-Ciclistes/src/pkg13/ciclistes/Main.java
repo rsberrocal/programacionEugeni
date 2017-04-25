@@ -30,6 +30,7 @@ public class Main {
         System.out.println("\t5) Etapes");
         System.out.println("\t6) Maillots");
         System.out.println("\t7) Ports\n");
+        System.out.println("\t8) Llevar\n");
         System.out.println("\t0) Sortir");
         opt = in.nextInt();
         return opt;
@@ -65,24 +66,106 @@ public class Main {
         return opt;
     }
 
-    public static int equipMenu() {
+    public static int submenuTables(String table) {
         int opt = 0;
-        System.out.println("\n\tMenu Equips");
+        System.out.println("\n\tMenu " + table);
         System.out.println("\t---- ---------\n");
-        System.out.println("\t1) Nou Equip");
-        System.out.println("\t\n0) Sortir");
+        System.out.println("\t1) Nou " + table);
+        System.out.println("\t2) Llistar " + table);
+        System.out.println("\n\t0) Sortir");
         opt = in.nextInt();
         return opt;
     }
 
-    public static void equips() {
+    public static void equips() throws Exception {
         int opt;
-        opt = equipMenu();
+        opt = submenuTables("Equips");
         switch (opt) {
             case 0:
                 break;
             case 1:
-                Equip e = new Equip();                
+                Equip e = new Equip();
+                e.dadesEquip();
+                break;
+            default:
+                System.out.println("\tOpció incorrecta");
+                break;
+        }
+    }
+
+    public static void ciclista() throws Exception {
+        int opt;
+        opt = submenuTables("Ciclista");
+        switch (opt) {
+            case 0:
+                break;
+            case 1:
+                Ciclista e = new Ciclista();
+                e.dadesCiclista();
+                break;
+            default:
+                System.out.println("\tOpció incorrecta");
+                break;
+        }
+    }
+
+    public static void etapes() throws Exception {
+        int opt;
+        opt = submenuTables("Etapa");
+        switch (opt) {
+            case 0:
+                break;
+            case 1:
+                Etapa e = new Etapa();
+                e.dadesEtapa();
+                break;
+            default:
+                System.out.println("\tOpció incorrecta");
+                break;
+        }
+    }
+
+    public static void llevar() throws Exception {
+        int opt;
+        opt = submenuTables("Llevar");
+        switch (opt) {
+            case 0:
+                break;
+            case 1:
+                Llevar e = new Llevar();
+                e.dadesLlevar();
+                break;
+            default:
+                System.out.println("\tOpció incorrecta");
+                break;
+        }
+    }
+
+    public static void maillot() throws Exception {
+        int opt;
+        opt = submenuTables("Maillot");
+        switch (opt) {
+            case 0:
+                break;
+            case 1:
+                Maillot e = new Maillot();
+                e.dadesMaillot();
+                break;
+            default:
+                System.out.println("\tOpció incorrecta");
+                break;
+        }
+    }
+
+    public static void port() throws Exception {
+        int opt;
+        opt = submenuTables("Port");
+        switch (opt) {
+            case 0:
+                break;
+            case 1:
+                Port e = new Port();
+                e.dadesPort();
                 break;
             default:
                 System.out.println("\tOpció incorrecta");
@@ -159,7 +242,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, Exception {
         // TODO code application logic here
         int optMain;
 
@@ -178,12 +261,19 @@ public class Main {
                     equips();
                     break;
                 case 4:
+                    ciclista();
                     break;
                 case 5:
+                    etapes();
                     break;
                 case 6:
+                    maillot();
                     break;
                 case 7:
+                    port();
+                    break;
+                case 8:
+                    llevar();
                     break;
                 default:
                     System.out.println("\tOpció incorrecta");
