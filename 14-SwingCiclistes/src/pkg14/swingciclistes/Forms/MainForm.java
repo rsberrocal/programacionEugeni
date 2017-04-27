@@ -5,6 +5,8 @@
  */
 package pkg14.swingciclistes.Forms;
 
+import pkg14.swingciclistes.Forms.Ciclistes.AddCiclistes;
+
 /**
  *
  * @author infot
@@ -30,12 +32,30 @@ public class MainForm extends javax.swing.JFrame {
         lBackground = new javax.swing.JLabel();
         mbMain = new javax.swing.JMenuBar();
         mEquips = new javax.swing.JMenu();
+        miAddEquips = new javax.swing.JMenuItem();
+        miModifyEquips = new javax.swing.JMenuItem();
+        miDeleteEquips = new javax.swing.JMenuItem();
         mCiclistes = new javax.swing.JMenu();
+        miAddCiclistes = new javax.swing.JMenuItem();
+        miModifyCiclistes = new javax.swing.JMenuItem();
+        miDeleteCiclistes = new javax.swing.JMenuItem();
         mLlevar = new javax.swing.JMenu();
+        miAdd2Lllevar = new javax.swing.JMenuItem();
+        miModifyLllevar = new javax.swing.JMenuItem();
+        miDeleteLllevar = new javax.swing.JMenuItem();
         mMaillots = new javax.swing.JMenu();
+        miAddMaillots = new javax.swing.JMenuItem();
+        miModifyMaillots = new javax.swing.JMenuItem();
+        miDeleteMaillots = new javax.swing.JMenuItem();
         mPorts = new javax.swing.JMenu();
+        miAddPorts = new javax.swing.JMenuItem();
+        miModifyPorts = new javax.swing.JMenuItem();
+        miDeletePorts = new javax.swing.JMenuItem();
         mEtapes = new javax.swing.JMenu();
-        mEtapes1 = new javax.swing.JMenu();
+        miAddEtapes = new javax.swing.JMenuItem();
+        miModifyEtapes = new javax.swing.JMenuItem();
+        miDeleteEtapes = new javax.swing.JMenuItem();
+        mExit = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -43,25 +63,90 @@ public class MainForm extends javax.swing.JFrame {
         lBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background.jpg"))); // NOI18N
 
         mEquips.setText("Equips");
+
+        miAddEquips.setText("Add");
+        mEquips.add(miAddEquips);
+
+        miModifyEquips.setText("Modify");
+        mEquips.add(miModifyEquips);
+
+        miDeleteEquips.setText("Delete");
+        mEquips.add(miDeleteEquips);
+
         mbMain.add(mEquips);
 
         mCiclistes.setText("Ciclistes");
+
+        miAddCiclistes.setText("Add");
+        miAddCiclistes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddCiclistesActionPerformed(evt);
+            }
+        });
+        mCiclistes.add(miAddCiclistes);
+
+        miModifyCiclistes.setText("Modify");
+        mCiclistes.add(miModifyCiclistes);
+
+        miDeleteCiclistes.setText("Delete");
+        mCiclistes.add(miDeleteCiclistes);
+
         mbMain.add(mCiclistes);
 
         mLlevar.setText("Llevar");
+
+        miAdd2Lllevar.setText("Add");
+        mLlevar.add(miAdd2Lllevar);
+
+        miModifyLllevar.setText("Modify");
+        mLlevar.add(miModifyLllevar);
+
+        miDeleteLllevar.setText("Delete");
+        mLlevar.add(miDeleteLllevar);
+
         mbMain.add(mLlevar);
 
         mMaillots.setText("Maillots");
+
+        miAddMaillots.setText("Add");
+        mMaillots.add(miAddMaillots);
+
+        miModifyMaillots.setText("Modify");
+        mMaillots.add(miModifyMaillots);
+
+        miDeleteMaillots.setText("Delete");
+        mMaillots.add(miDeleteMaillots);
+
         mbMain.add(mMaillots);
 
         mPorts.setText("Ports");
+
+        miAddPorts.setText("Add");
+        mPorts.add(miAddPorts);
+
+        miModifyPorts.setText("Modify");
+        mPorts.add(miModifyPorts);
+
+        miDeletePorts.setText("Delete");
+        mPorts.add(miDeletePorts);
+
         mbMain.add(mPorts);
 
         mEtapes.setText("Etapes");
+
+        miAddEtapes.setText("Add");
+        mEtapes.add(miAddEtapes);
+
+        miModifyEtapes.setText("Modify");
+        mEtapes.add(miModifyEtapes);
+
+        miDeleteEtapes.setText("Delete");
+        mEtapes.add(miDeleteEtapes);
+
         mbMain.add(mEtapes);
 
-        mEtapes1.setText("Exit");
-        mbMain.add(mEtapes1);
+        mExit.setText("Exit");
+        mbMain.add(mExit);
 
         setJMenuBar(mbMain);
 
@@ -78,6 +163,13 @@ public class MainForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miAddCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddCiclistesActionPerformed
+        // TODO add your handling code here:
+        AddCiclistes ac = new AddCiclistes();
+        ac.setLocationRelativeTo(null);
+        ac.setVisible(true);
+    }//GEN-LAST:event_miAddCiclistesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,10 +211,28 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu mCiclistes;
     private javax.swing.JMenu mEquips;
     private javax.swing.JMenu mEtapes;
-    private javax.swing.JMenu mEtapes1;
+    private javax.swing.JMenu mExit;
     private javax.swing.JMenu mLlevar;
     private javax.swing.JMenu mMaillots;
     private javax.swing.JMenu mPorts;
     private javax.swing.JMenuBar mbMain;
+    private javax.swing.JMenuItem miAdd2Lllevar;
+    private javax.swing.JMenuItem miAddCiclistes;
+    private javax.swing.JMenuItem miAddEquips;
+    private javax.swing.JMenuItem miAddEtapes;
+    private javax.swing.JMenuItem miAddMaillots;
+    private javax.swing.JMenuItem miAddPorts;
+    private javax.swing.JMenuItem miDeleteCiclistes;
+    private javax.swing.JMenuItem miDeleteEquips;
+    private javax.swing.JMenuItem miDeleteEtapes;
+    private javax.swing.JMenuItem miDeleteLllevar;
+    private javax.swing.JMenuItem miDeleteMaillots;
+    private javax.swing.JMenuItem miDeletePorts;
+    private javax.swing.JMenuItem miModifyCiclistes;
+    private javax.swing.JMenuItem miModifyEquips;
+    private javax.swing.JMenuItem miModifyEtapes;
+    private javax.swing.JMenuItem miModifyLllevar;
+    private javax.swing.JMenuItem miModifyMaillots;
+    private javax.swing.JMenuItem miModifyPorts;
     // End of variables declaration//GEN-END:variables
 }
