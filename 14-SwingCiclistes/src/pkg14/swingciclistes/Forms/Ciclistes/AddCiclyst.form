@@ -22,7 +22,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;pkg14.swingciclistes.Forms.Ciclistes.Equips&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Entity.Equips&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.persistence.Query" name="ciclistesQuery">
@@ -40,7 +40,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;pkg14.swingciclistes.Forms.Ciclistes.Ciclistes&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Entity.Ciclistes&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.persistence.Query" name="ciclistesQuery1">
@@ -58,17 +58,20 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;pkg14.swingciclistes.Forms.Ciclistes.Ciclistes&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Entity.Ciclistes&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -110,9 +113,12 @@
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cbTeams" pref="128" max="32767" attributes="0"/>
-                                  <Component id="tfName" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btInsert" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="cbTeams" pref="128" max="32767" attributes="0"/>
+                                      <Component id="tfName" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -129,8 +135,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -152,9 +161,11 @@
                           <Component id="tfDorsal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfAge" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btInsert" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -228,5 +239,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btInsert">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insert"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btInsertActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

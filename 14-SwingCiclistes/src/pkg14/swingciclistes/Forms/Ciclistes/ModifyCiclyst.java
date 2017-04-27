@@ -9,12 +9,12 @@ package pkg14.swingciclistes.Forms.Ciclistes;
  *
  * @author infot
  */
-public class DeleteCiclistes extends javax.swing.JFrame {
+public class ModifyCiclyst extends javax.swing.JFrame {
 
     /**
      * Creates new form AddCiclistes
      */
-    public DeleteCiclistes() {
+    public ModifyCiclyst() {
         initComponents();
     }
 
@@ -60,21 +60,23 @@ public class DeleteCiclistes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclistes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclistes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclistes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclistes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeleteCiclistes().setVisible(true);
+                new ModifyCiclyst().setVisible(true);
             }
         });
     }

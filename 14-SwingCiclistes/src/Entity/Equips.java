@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pkg14.swingciclistes.Forms.Ciclistes;
+package Entity;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

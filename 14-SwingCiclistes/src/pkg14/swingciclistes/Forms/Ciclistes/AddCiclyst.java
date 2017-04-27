@@ -5,6 +5,7 @@
  */
 package pkg14.swingciclistes.Forms.Ciclistes;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,17 +17,17 @@ import pkg14.swingciclistes.Database;
  *
  * @author infot
  */
-public class AddCiclistes extends javax.swing.JFrame {
+public class AddCiclyst extends javax.swing.JFrame {
 
     /**
      * Creates new form AddCiclistes
      */
-    public AddCiclistes() {
+    public AddCiclyst() {
         initComponents();
         try {
             addItemsCombo();
         } catch (SQLException ex) {
-            Logger.getLogger(AddCiclistes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddCiclyst.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -75,8 +76,14 @@ public class AddCiclistes extends javax.swing.JFrame {
         tfAge = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCiclyst = new javax.swing.JTable();
+        btInsert = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Name");
 
@@ -108,6 +115,13 @@ public class AddCiclistes extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(tbCiclyst);
 
+        btInsert.setText("Insert");
+        btInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInsertActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,9 +147,11 @@ public class AddCiclistes extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbTeams, 0, 128, Short.MAX_VALUE)
-                                    .addComponent(tfName))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btInsert)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cbTeams, 0, 128, Short.MAX_VALUE)
+                                        .addComponent(tfName)))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -145,7 +161,9 @@ public class AddCiclistes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(27, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
@@ -163,14 +181,54 @@ public class AddCiclistes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                            .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btInsert)
+                        .addGap(86, 86, 86))))
         );
 
         bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void btInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsertActionPerformed
+        // TODO add your handling code here:
+        int dorsal = Integer.parseInt(tfDorsal.getText());
+        String name = tfName.getText();
+        int age = Integer.parseInt(tfAge.getText());
+        String nTeam = cbTeams.getSelectedItem().toString();
+
+        String sqlInsert = "INSERT INTO Ciclistes VALUES(?,?,?,?)";
+        Database db = new Database();
+        try {
+            db.makeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                PreparedStatement pst = db.getConnection().prepareStatement(sqlInsert)) {
+            pst.setInt(1, dorsal);
+            pst.setString(2, name);
+            pst.setInt(3, age);
+            pst.setString(4, nTeam);
+
+            pst.execute();
+
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        try {
+            db.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btInsertActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setVisible(false);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -189,32 +247,34 @@ public class AddCiclistes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddCiclistes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddCiclistes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddCiclistes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddCiclistes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCiclistes().setVisible(true);
+                new AddCiclyst().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btInsert;
     private javax.swing.JComboBox<String> cbTeams;
-    private java.util.List<pkg14.swingciclistes.Forms.Ciclistes.Ciclistes> ciclistesList;
-    private java.util.List<pkg14.swingciclistes.Forms.Ciclistes.Ciclistes> ciclistesList1;
+    private java.util.List<Entity.Ciclistes> ciclistesList;
+    private java.util.List<Entity.Ciclistes> ciclistesList1;
     private javax.persistence.Query ciclistesQuery;
     private javax.persistence.Query ciclistesQuery1;
     private javax.persistence.EntityManager entityManager;
-    private java.util.List<pkg14.swingciclistes.Forms.Ciclistes.Equips> equipsList;
+    private java.util.List<Entity.Equips> equipsList;
     private javax.persistence.Query equipsQuery;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

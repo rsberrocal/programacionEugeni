@@ -5,7 +5,8 @@
  */
 package pkg14.swingciclistes.Forms;
 
-import pkg14.swingciclistes.Forms.Ciclistes.AddCiclistes;
+import javax.swing.JOptionPane;
+import pkg14.swingciclistes.Forms.Ciclistes.AddCiclyst;
 
 /**
  *
@@ -57,8 +58,13 @@ public class MainForm extends javax.swing.JFrame {
         miDeleteEtapes = new javax.swing.JMenuItem();
         mExit = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         lBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background.jpg"))); // NOI18N
 
@@ -146,6 +152,11 @@ public class MainForm extends javax.swing.JFrame {
         mbMain.add(mEtapes);
 
         mExit.setText("Exit");
+        mExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mExitActionPerformed(evt);
+            }
+        });
         mbMain.add(mExit);
 
         setJMenuBar(mbMain);
@@ -166,10 +177,30 @@ public class MainForm extends javax.swing.JFrame {
 
     private void miAddCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddCiclistesActionPerformed
         // TODO add your handling code here:
-        AddCiclistes ac = new AddCiclistes();
+        AddCiclyst ac = new AddCiclyst();
         ac.setLocationRelativeTo(null);
         ac.setVisible(true);
     }//GEN-LAST:event_miAddCiclistesActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(this,
+                "Are you sure to close this window?", "Really Closing?",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void mExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mExitActionPerformed
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(this,
+                "Are you sure to close this window?", "Really Closing?",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_mExitActionPerformed
 
     /**
      * @param args the command line arguments
