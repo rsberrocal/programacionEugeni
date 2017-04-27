@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pkg14.Forms;
+package pkg14.swingciclistes.Forms;
 
 /**
  *
@@ -27,29 +27,53 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        lBackground = new javax.swing.JLabel();
+        mbMain = new javax.swing.JMenuBar();
+        mEquips = new javax.swing.JMenu();
+        mCiclistes = new javax.swing.JMenu();
+        mLlevar = new javax.swing.JMenu();
+        mMaillots = new javax.swing.JMenu();
+        mPorts = new javax.swing.JMenu();
+        mEtapes = new javax.swing.JMenu();
+        mEtapes1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        lBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background.jpg"))); // NOI18N
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        mEquips.setText("Equips");
+        mbMain.add(mEquips);
 
-        setJMenuBar(jMenuBar1);
+        mCiclistes.setText("Ciclistes");
+        mbMain.add(mCiclistes);
+
+        mLlevar.setText("Llevar");
+        mbMain.add(mLlevar);
+
+        mMaillots.setText("Maillots");
+        mbMain.add(mMaillots);
+
+        mPorts.setText("Ports");
+        mbMain.add(mPorts);
+
+        mEtapes.setText("Etapes");
+        mbMain.add(mEtapes);
+
+        mEtapes1.setText("Exit");
+        mbMain.add(mEtapes1);
+
+        setJMenuBar(mbMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(lBackground)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addComponent(lBackground)
         );
 
         pack();
@@ -91,8 +115,14 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel lBackground;
+    private javax.swing.JMenu mCiclistes;
+    private javax.swing.JMenu mEquips;
+    private javax.swing.JMenu mEtapes;
+    private javax.swing.JMenu mEtapes1;
+    private javax.swing.JMenu mLlevar;
+    private javax.swing.JMenu mMaillots;
+    private javax.swing.JMenu mPorts;
+    private javax.swing.JMenuBar mbMain;
     // End of variables declaration//GEN-END:variables
 }
