@@ -7,6 +7,7 @@ package pkg14.swingciclistes.Forms;
 
 import javax.swing.JOptionPane;
 import pkg14.swingciclistes.Forms.Ciclistes.AddCiclyst;
+import pkg14.swingciclistes.Forms.Ciclistes.DeleteCiclyst;
 
 /**
  *
@@ -95,6 +96,11 @@ public class MainForm extends javax.swing.JFrame {
         mCiclistes.add(miModifyCiclistes);
 
         miDeleteCiclistes.setText("Delete");
+        miDeleteCiclistes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miDeleteCiclistesActionPerformed(evt);
+            }
+        });
         mCiclistes.add(miDeleteCiclistes);
 
         mbMain.add(mCiclistes);
@@ -201,6 +207,12 @@ public class MainForm extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_mExitActionPerformed
+
+    private void miDeleteCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDeleteCiclistesActionPerformed
+        DeleteCiclyst dc = new DeleteCiclyst();
+        dc.setLocationRelativeTo(null);
+        dc.setVisible(true);
+    }//GEN-LAST:event_miDeleteCiclistesActionPerformed
 
     /**
      * @param args the command line arguments
