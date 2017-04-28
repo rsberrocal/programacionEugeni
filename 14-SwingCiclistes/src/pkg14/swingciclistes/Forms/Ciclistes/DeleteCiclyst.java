@@ -5,6 +5,17 @@
  */
 package pkg14.swingciclistes.Forms.Ciclistes;
 
+import Entity.Ciclistes;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pkg14.swingciclistes.Database;
+
+import static pkg14.swingciclistes.Forms.MainForm.alertsInformation;
+import static pkg14.swingciclistes.Forms.MainForm.alertsWarning;
+
 /**
  *
  * @author infot
@@ -16,6 +27,9 @@ public class DeleteCiclyst extends javax.swing.JFrame {
      */
     public DeleteCiclyst() {
         initComponents();
+        tfDorsal.setEnabled(false);
+        tfAge.setEnabled(false);
+        tfTeam.setEnabled(false);
     }
 
     /**
@@ -62,6 +76,11 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         jLabel2.setText("Name");
 
         btSearch.setText("Search");
+        btSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSearchActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Team");
 
@@ -184,6 +203,40 @@ public class DeleteCiclyst extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
+
+    private void searchCiclyst(String nom) {
+        //Query
+
+        
+        String query = "select dorsal,edad,nomeq from Ciclistes where nom like '"+nom+"';";
+
+        Database db = new Database();
+        try {
+            //Connect
+            db.makeConnection();
+
+            Statement st = db.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                tfDorsal.setText(String.valueOf(rs.getInt(1)));
+                tfAge.setText(String.valueOf(rs.getInt(2)));
+                tfTeam.setText(rs.getString(3));
+            } else {
+                alertsInformation(this, "Ciclyst not exists", "Ciclyst not exists");
+            }
+
+            //Disconnect
+            db.closeConnection();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
+        // TODO add your handling code here:
+        searchCiclyst(tfName.getText());
+    }//GEN-LAST:event_btSearchActionPerformed
 
     /**
      * @param args the command line arguments

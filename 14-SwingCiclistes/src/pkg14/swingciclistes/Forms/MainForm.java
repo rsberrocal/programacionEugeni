@@ -5,6 +5,7 @@
  */
 package pkg14.swingciclistes.Forms;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import pkg14.swingciclistes.Forms.Ciclistes.AddCiclyst;
 import pkg14.swingciclistes.Forms.Ciclistes.DeleteCiclyst;
@@ -180,6 +181,16 @@ public class MainForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    //Function for create Alerts with Warning icon
+    public static void alertsWarning(JFrame jf, String title, String message) {
+        JOptionPane.showMessageDialog(jf, message, title, JOptionPane.WARNING_MESSAGE);
+    }
+
+    //Function for create Alerts with Information icon
+    public static void alertsInformation(JFrame jf, String title, String message) {
+        JOptionPane.showMessageDialog(jf, message, title, JOptionPane.INFORMATION_MESSAGE);
+    }
 
     private void miAddCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddCiclistesActionPerformed
         // TODO add your handling code here:

@@ -46,6 +46,12 @@ public class Ciclistes implements Serializable {
     @Column(name = "nomeq")
     private String nomeq;
 
+    public Ciclistes(Integer dorsal, String nom, Integer edad, String nomeq) {
+        this.dorsal = dorsal;
+        this.nom = nom;
+        this.edad = edad;
+        this.nomeq = nomeq;
+    }
     public Ciclistes() {
     }
 
