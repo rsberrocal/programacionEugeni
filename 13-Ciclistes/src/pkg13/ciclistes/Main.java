@@ -245,7 +245,7 @@ public class Main {
     public static void main(String[] args) throws SQLException, Exception {
         // TODO code application logic here
         int optMain;
-
+        Class.forName("org.mariadb.jdbc.Driver");
         do {
             optMain = mainMenu();
             switch (optMain) {

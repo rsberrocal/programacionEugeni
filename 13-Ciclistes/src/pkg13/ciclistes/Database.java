@@ -5,14 +5,14 @@
  */
 package pkg13.ciclistes;
 
-import static commonfunctionssql.CommonFunctionsSQL.makeConnect;
 import static pkg13.ciclistes.Main.in;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLTransientConnectionException;
 import java.sql.Statement;
-import static commonfunctionssql.CommonFunctionsSQL.makeConnect;
+import static commonfunctionssql.CommonFunctionsSQL.makeConnectMariaDB;
+import static commonfunctionssql.CommonFunctionsSQL.makeConnectMySQL;
 
 /**
  *
@@ -31,7 +31,14 @@ public class Database {
     }
 
     public void makeConnection() throws SQLException {
-        this.c = makeConnect("ciclistes");
+        //MySQL
+        //this.c = makeConnectMySQL();
+        //MariaDB
+        String pc = "mestral.ddns.net";
+        String bd = "rsudario_gproductes";
+        String user = "rsudario";
+        String pass = "rsudario";
+        this.c = makeConnectMariaDB(pc, bd, user, pass);
     }
 
     private static void createTable(int num, Connection c) throws SQLException {
@@ -251,7 +258,7 @@ public class Database {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT count(*) ");
         sql.append("FROM information_schema.TABLES ");
-        sql.append("WHERE (TABLE_SCHEMA = 'ciclistes') AND (TABLE_NAME = '" + tableName + "')");
+        sql.append("WHERE (TABLE_SCHEMA = 'rsudario_gproductes') AND (TABLE_NAME = '" + tableName + "')");
         int n = 0;
         try (
                 Statement st = Connect.createStatement();

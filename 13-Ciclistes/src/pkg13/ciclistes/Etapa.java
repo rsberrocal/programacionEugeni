@@ -81,7 +81,10 @@ public class Etapa {
                 e.printStackTrace();
             } catch (ArrayIndexOutOfBoundsException aioobe) {
                 System.out.println("");
+            } catch (NumberFormatException nfe) {
+                System.out.println("");
             }
+            
         }
         System.out.println("Se han introduït totes les etapes");
     }
