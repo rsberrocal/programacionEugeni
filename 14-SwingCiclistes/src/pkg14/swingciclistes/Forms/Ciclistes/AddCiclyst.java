@@ -109,13 +109,16 @@ public class AddCiclyst extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("ciclistes?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("rsudario_gproductes?user=rsudario&password=rsudarioPU").createEntityManager();
         equipsQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT e FROM Equips e");
         equipsList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : equipsQuery.getResultList();
         ciclistesQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
         ciclistesList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery.getResultList();
         ciclistesQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
         ciclistesList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery1.getResultList();
+        entityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("rsudario_gproductes?user=rsudario&password=rsudarioPU").createEntityManager();
+        ciclistesQuery2 = java.beans.Beans.isDesignTime() ? null : entityManager0.createQuery("SELECT c FROM Ciclistes c");
+        ciclistesList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery2.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tfName = new javax.swing.JTextField();
@@ -148,19 +151,19 @@ public class AddCiclyst extends javax.swing.JFrame {
 
         cbTeams.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, ciclistesList1, tbCiclyst);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dorsal}"));
-        columnBinding.setColumnName("Dorsal");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nom}"));
-        columnBinding.setColumnName("Nom");
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, ciclistesList2, tbCiclyst);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeq}"));
+        columnBinding.setColumnName("Nomeq");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${edad}"));
         columnBinding.setColumnName("Edad");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeq}"));
-        columnBinding.setColumnName("Nomeq");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nom}"));
+        columnBinding.setColumnName("Nom");
         columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dorsal}"));
+        columnBinding.setColumnName("Dorsal");
+        columnBinding.setColumnClass(Integer.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
 
@@ -368,9 +371,12 @@ public class AddCiclyst extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbTeams;
     private java.util.List<Entity.Ciclistes> ciclistesList;
     private java.util.List<Entity.Ciclistes> ciclistesList1;
+    private java.util.List<Entity.Ciclistes> ciclistesList2;
     private javax.persistence.Query ciclistesQuery;
     private javax.persistence.Query ciclistesQuery1;
+    private javax.persistence.Query ciclistesQuery2;
     private javax.persistence.EntityManager entityManager;
+    private javax.persistence.EntityManager entityManager0;
     private java.util.List<Entity.Equips> equipsList;
     private javax.persistence.Query equipsQuery;
     private javax.swing.JLabel jLabel1;

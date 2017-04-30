@@ -5,7 +5,8 @@
  */
 package pkg14.swingciclistes;
 
-import static commonfunctionssql.CommonFunctionsSQL.makeConnect;
+import static commonfunctionssql.CommonFunctionsSQL.makeConnectMariaDB;
+import static commonfunctionssql.CommonFunctionsSQL.makeConnectMySQL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,7 +45,7 @@ public class Database {
         this.closeConnection();
         return false;
     }
-    
+
     public boolean searchID(String search, String table, String id) throws SQLException {
         String query = "select " + search + " from " + table + ";";
         this.makeConnection();
@@ -64,7 +65,14 @@ public class Database {
     }
 
     public void makeConnection() throws SQLException {
-        this.c = makeConnect("ciclistes");
+        //MySQL
+        //this.c = makeConnectMySQL();        
+        //MariaDB
+        String pc = "mestral.ddns.net";
+        String bd = "rsudario_gproductes";
+        String user = "rsudario";
+        String pass = "rsudario";
+        this.c = makeConnectMariaDB(pc, bd, user, pass);
     }
 
     public void closeConnection() throws SQLException {
