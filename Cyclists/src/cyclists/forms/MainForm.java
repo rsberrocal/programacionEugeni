@@ -22,6 +22,7 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../images/icon.png")));
     }
 
     /**
@@ -71,6 +72,7 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setIconImages(null);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -208,7 +210,7 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         AddCiclyst ac = new AddCiclyst();
         ac.setLocationRelativeTo(null);
-        ac.setVisible(true);        
+        ac.setVisible(true);
     }//GEN-LAST:event_miAddCiclistesActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -222,7 +224,7 @@ public class MainForm extends javax.swing.JFrame {
         dc.setVisible(true);
     }//GEN-LAST:event_miDeleteCiclistesActionPerformed
 
-    public void exitDialog() {        
+    public void exitDialog() {
         if (JOptionPane.showConfirmDialog(this,
                 "Are you sure to close this window?", "Really Closing?",
                 JOptionPane.YES_NO_OPTION,

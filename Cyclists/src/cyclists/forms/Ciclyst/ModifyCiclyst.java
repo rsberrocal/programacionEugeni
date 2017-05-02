@@ -5,6 +5,8 @@
  */
 package cyclists.forms.Ciclyst;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author Richard
@@ -16,6 +18,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
      */
     public ModifyCiclyst() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../../images/icon.png")));
     }
 
     /**

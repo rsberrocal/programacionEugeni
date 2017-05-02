@@ -6,11 +6,15 @@
 package cyclists.forms.Ciclyst;
 
 import cyclists.Database;
+import cyclists.Entity.Ciclistes;
 import cyclists.forms.MainForm;
+import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,7 +33,19 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         tfDorsal.setEnabled(false);
         tfAge.setEnabled(false);
         tfTeam.setEnabled(false);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../../images/icon.png")));
+        btTotalLeft.setEnabled(false);
+        btLeft.setEnabled(false);
+        try {
+            cyclistData = cyclist();
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    public int index;
+    public List<Ciclistes> cyclistData;
+    public boolean btRightPressed = false;
+    public boolean btLeftPressed = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,12 +87,32 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         });
 
         btRight.setText(">");
+        btRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRightActionPerformed(evt);
+            }
+        });
 
         btTotalRight.setText(">>");
+        btTotalRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTotalRightActionPerformed(evt);
+            }
+        });
 
         btLeft.setText("<");
+        btLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLeftActionPerformed(evt);
+            }
+        });
 
         btTotalLeft.setText("<<");
+        btTotalLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTotalLeftActionPerformed(evt);
+            }
+        });
 
         btDelete.setText("Delete");
         btDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +242,26 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public List cyclist() throws SQLException {
+        List<Ciclistes> l = new ArrayList<Ciclistes>();
+        String query = "select dorsal,nom,edad,nomeq from Ciclistes;";
+        Database db = new Database();
+
+        db.makeConnection();
+
+        Statement st = db.getConnection().createStatement();
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()) {
+            Ciclistes c = new Ciclistes();
+            c.setDorsal(rs.getInt(1));
+            c.setNom(rs.getString(2));
+            c.setEdad(rs.getInt(3));
+            c.setNomeq(rs.getString(2));
+            l.add(c);
+        }
+        return l;
+    }
+
     private void searchCiclyst(String name) {
         name = name + "%";
         //Querys        
@@ -286,24 +342,111 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         Database db = new Database();
         if (tfName.getText().isEmpty()) {
             MainForm.alertsWarning(this, "Name missing", "Name missing");
-        } else {
-            if (JOptionPane.showConfirmDialog(this,
-                    "Are you sure to delete "+tfName.getText()+"?", "Delete",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                try {
-                    db.makeConnection();
-                    PreparedStatement pst = db.getConnection().prepareStatement(sqlInsert);
-                    pst.execute();
-
-                    db.closeConnection();
-                    this.setVisible(false);
-                } catch (SQLException ex) {
-                    Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        } else if (JOptionPane.showConfirmDialog(this,
+                "Are you sure to delete " + tfName.getText() + "?", "Delete",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            try {
+                db.makeConnection();
+                PreparedStatement pst = db.getConnection().prepareStatement(sqlInsert);
+                pst.execute();
+                db.closeConnection();
+                //Information Message
+                MainForm.alertsInformation(this, "Row deleted", "Row deleted");
+                //The actual frame close
+                this.setVisible(false);
+                db.closeConnection();
+                this.setVisible(false);
+            } catch (SQLException ex) {
+                Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }        
+        }
     }//GEN-LAST:event_btDeleteActionPerformed
+
+    private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
+        // TODO add your handling code here:
+        if (btLeftPressed) {
+            index++;
+            btLeftPressed = false;
+        }
+        if (index < 0) {
+            index = 0;
+        }
+        tfName.setText(cyclistData.get(index).getNom());
+        tfDorsal.setText(String.valueOf(cyclistData.get(index).getDorsal()));
+        tfAge.setText(String.valueOf(cyclistData.get(index).getEdad()));
+        tfTeam.setText(cyclistData.get(index).getNomeq());
+        index++;
+        if (!btRightPressed) {
+            btRightPressed = true;
+        }
+        if (!btTotalLeft.isEnabled() && !btLeft.isEnabled()) {
+            btTotalLeft.setEnabled(true);
+            btLeft.setEnabled(true);
+        }
+        if (index == cyclistData.size() ) {
+            btTotalRight.setEnabled(false);
+            btRight.setEnabled(false);
+        }
+    }//GEN-LAST:event_btRightActionPerformed
+
+    private void btTotalRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalRightActionPerformed
+        // TODO add your handling code here:
+        tfName.setText(cyclistData.get(cyclistData.size() - 1).getNom());
+        tfDorsal.setText(String.valueOf(cyclistData.get(cyclistData.size() - 1).getDorsal()));
+        tfAge.setText(String.valueOf(cyclistData.get(cyclistData.size() - 1).getEdad()));
+        tfTeam.setText(cyclistData.get(cyclistData.size() - 1).getNomeq());
+        index = cyclistData.size() - 1;
+        btTotalRight.setEnabled(false);
+        btRight.setEnabled(false);
+        if (!btTotalLeft.isEnabled() && !btLeft.isEnabled()) {
+            btTotalLeft.setEnabled(true);
+            btLeft.setEnabled(true);
+        }
+    }//GEN-LAST:event_btTotalRightActionPerformed
+
+    private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
+        // TODO add your handling code here:
+        if (btRightPressed && index != 1 && index != cyclistData.size() - 1) {
+            index--;
+            btRightPressed = false;
+        }
+        if (!btLeftPressed) {
+            btLeftPressed = true;
+        }
+        if (index < 0) {
+            index = 0;
+        } else {
+            index--;
+        }
+        tfName.setText(cyclistData.get(index).getNom());
+        tfDorsal.setText(String.valueOf(cyclistData.get(index).getDorsal()));
+        tfAge.setText(String.valueOf(cyclistData.get(index).getEdad()));
+        tfTeam.setText(cyclistData.get(index).getNomeq());
+        if (!btTotalRight.isEnabled() && !btRight.isEnabled()) {
+            btTotalRight.setEnabled(true);
+            btRight.setEnabled(true);
+        }
+        if (index == 0) {
+            btTotalLeft.setEnabled(false);
+            btLeft.setEnabled(false);
+        }
+    }//GEN-LAST:event_btLeftActionPerformed
+
+    private void btTotalLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalLeftActionPerformed
+        // TODO add your handling code here:
+        tfName.setText(cyclistData.get(0).getNom());
+        tfDorsal.setText(String.valueOf(cyclistData.get(0).getDorsal()));
+        tfAge.setText(String.valueOf(cyclistData.get(0).getEdad()));
+        tfTeam.setText(cyclistData.get(0).getNomeq());
+        index = 0;
+        btTotalLeft.setEnabled(false);
+        btLeft.setEnabled(false);
+        if (!btTotalRight.isEnabled() && !btRight.isEnabled()) {
+            btTotalRight.setEnabled(true);
+            btRight.setEnabled(true);
+        }
+    }//GEN-LAST:event_btTotalLeftActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,7 +499,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
     private javax.swing.JButton btSearch;
     private javax.swing.JButton btTotalLeft;
     private javax.swing.JButton btTotalRight;
-    private java.util.List<cyclists.forms.Ciclyst.Ciclistes> ciclistesList;
+    private java.util.List<cyclists.Entity.Ciclistes> ciclistesList;
     private javax.persistence.Query ciclistesQuery;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;

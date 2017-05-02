@@ -22,7 +22,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;cyclists.forms.Ciclyst.Ciclistes&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;cyclists.Entity.Ciclistes&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -158,21 +158,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRightActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btTotalRight">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTotalRightActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btLeft">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLeftActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btTotalLeft">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTotalLeftActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btDelete">
       <Properties>

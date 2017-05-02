@@ -7,13 +7,16 @@ package cyclists.forms.Ciclyst;
 
 import cyclists.Database;
 import cyclists.forms.MainForm;
+import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -32,6 +35,9 @@ public class AddCiclyst extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(AddCiclyst.class.getName()).log(Level.SEVERE, null, ex);
         }
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../../images/icon.png")));
+        cellWidth();
+        alignCells();
     }
 
     /**
@@ -47,6 +53,10 @@ public class AddCiclyst extends javax.swing.JFrame {
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("rsudario_gproductes?user=rsudario&password=rsudarioPU").createEntityManager();
         ciclistesQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
         ciclistesList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery.getResultList();
+        ciclistesQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
+        ciclistesList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery1.getResultList();
+        ciclistesQuery2 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
+        ciclistesList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery2.getResultList();
         tfAge = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btInsert = new javax.swing.JButton();
@@ -87,22 +97,32 @@ public class AddCiclyst extends javax.swing.JFrame {
 
         cbTeams.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, ciclistesList, tbCiclyst);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, ciclistesList2, tbCiclyst);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dorsal}"));
         columnBinding.setColumnName("Dorsal");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nom}"));
         columnBinding.setColumnName("Name");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${edad}"));
         columnBinding.setColumnName("Age");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeq}"));
-        columnBinding.setColumnName("Nomeq");
+        columnBinding.setColumnName("Team");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(tbCiclyst);
+        if (tbCiclyst.getColumnModel().getColumnCount() > 0) {
+            tbCiclyst.getColumnModel().getColumn(0).setResizable(false);
+            tbCiclyst.getColumnModel().getColumn(1).setResizable(false);
+            tbCiclyst.getColumnModel().getColumn(2).setResizable(false);
+            tbCiclyst.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,14 +150,13 @@ public class AddCiclyst extends javax.swing.JFrame {
                                     .addComponent(btInsert)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(cbTeams, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(60, 60, 60)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,6 +192,19 @@ public class AddCiclyst extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void cellWidth() {
+        tbCiclyst.getColumnModel().getColumn(0).setPreferredWidth(15);
+        tbCiclyst.getColumnModel().getColumn(1).setPreferredWidth(90);
+        tbCiclyst.getColumnModel().getColumn(2).setPreferredWidth(10);
+        tbCiclyst.getColumnModel().getColumn(3).setPreferredWidth(60);
+    }
+
+    public void alignCells() {
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        tbCiclyst.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tbCiclyst.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+    }
 
     //Function for set items on ComboBox
     public void addItemsCombo() throws SQLException {
@@ -223,7 +255,7 @@ public class AddCiclyst extends javax.swing.JFrame {
             tfDorsal.requestFocus();
         } else if (tfAge.getText().isEmpty()) {
             MainForm.alertsWarning(this, "", "Age missing");
-            
+
             // putting focus on tfAge
             tfAge.requestFocus();
             // End of tfAlerts
@@ -264,8 +296,8 @@ public class AddCiclyst extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btInsertActionPerformed
-       
-    
+
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         this.setVisible(false);
@@ -309,8 +341,12 @@ public class AddCiclyst extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btInsert;
     private javax.swing.JComboBox<String> cbTeams;
-    private java.util.List<cyclists.forms.Ciclyst.Ciclistes> ciclistesList;
+    private java.util.List<cyclists.Entity.Ciclistes> ciclistesList;
+    private java.util.List<cyclists.Entity.Ciclistes> ciclistesList1;
+    private java.util.List<cyclists.Entity.Ciclistes> ciclistesList2;
     private javax.persistence.Query ciclistesQuery;
+    private javax.persistence.Query ciclistesQuery1;
+    private javax.persistence.Query ciclistesQuery2;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
