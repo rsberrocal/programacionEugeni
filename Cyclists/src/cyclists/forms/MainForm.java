@@ -209,6 +209,7 @@ public class MainForm extends javax.swing.JFrame {
     private void miAddCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddCiclistesActionPerformed
         // TODO add your handling code here:
         AddCiclyst ac = new AddCiclyst();
+        ac.setTitle("Add Cyclist");
         ac.setLocationRelativeTo(null);
         ac.setVisible(true);
     }//GEN-LAST:event_miAddCiclistesActionPerformed
@@ -220,6 +221,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void miDeleteCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDeleteCiclistesActionPerformed
         DeleteCiclyst dc = new DeleteCiclyst();
+        dc.setTitle("Delete Cyclist");
         dc.setLocationRelativeTo(null);
         dc.setVisible(true);
     }//GEN-LAST:event_miDeleteCiclistesActionPerformed
