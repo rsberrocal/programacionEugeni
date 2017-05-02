@@ -9,6 +9,8 @@ import cyclists.Database;
 import cyclists.Entity.Ciclistes;
 import cyclists.forms.MainForm;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -30,6 +34,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
      */
     public DeleteCiclyst() {
         initComponents();
+        index = 0;
         tfDorsal.setEnabled(false);
         tfAge.setEnabled(false);
         tfTeam.setEnabled(false);
@@ -46,6 +51,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
     public List<Ciclistes> cyclistData;
     public boolean btRightPressed = false;
     public boolean btLeftPressed = false;
+    public boolean btSearchPressed = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -256,7 +262,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
             c.setDorsal(rs.getInt(1));
             c.setNom(rs.getString(2));
             c.setEdad(rs.getInt(3));
-            c.setNomeq(rs.getString(2));
+            c.setNomeq(rs.getString(4));
             l.add(c);
         }
         return l;
@@ -290,8 +296,8 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                             names[i] = rsName.getString(1);
                             i++;
                         }
-                        String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
-                                "The Choice of a Lifetime", JOptionPane.QUESTION_MESSAGE, null, // Use
+                        String input = (String) JOptionPane.showInputDialog(null, "Choose Cyclist Team",
+                                "Select a Team", JOptionPane.INFORMATION_MESSAGE, null, // Use
                                 // default
                                 // icon
                                 names, // Array of choices
@@ -306,6 +312,16 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                             tfTeam.setText(rsFinal.getString(3));
                         }
                         tfName.setText(input);
+                        index = 0;
+                        for (int j = 0; j < cyclistData.size(); j++) {
+                            if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
+                                if (j == cyclistData.size()) {
+                                    index = j - 1;
+                                } else {
+                                    index = j;
+                                }
+                            }
+                        }
                     } else if (rsCount.getInt(1) == 0) {
                         MainForm.alertsInformation(this, "Cyclist dont exists", "Cyclist dont exists");
                     } else {
@@ -318,12 +334,42 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                             tfTeam.setText(rsFinal.getString(3));
                             tfName.setText(rsFinal.getString(4));
                         }
+                        index = 0;
+                        for (int j = 0; j < cyclistData.size(); j++) {
+                            if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
+                                if (j == cyclistData.size()) {
+                                    index = j - 1;
+                                } else {
+                                    index = j;
+                                }
+                            }
+                        }
+
                     }
                 }
                 db.closeConnection();
             } catch (SQLException ex) {
                 Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
             }
+            if (index == 0) {
+                btTotalLeft.setEnabled(false);
+                btLeft.setEnabled(false);
+                btTotalRight.setEnabled(true);
+                btRight.setEnabled(true);
+            } else if (index == cyclistData.size() - 1) {
+                btTotalLeft.setEnabled(true);
+                btLeft.setEnabled(true);
+                btTotalRight.setEnabled(false);
+                btRight.setEnabled(false);
+            } else {
+                btTotalLeft.setEnabled(true);
+                btLeft.setEnabled(true);
+                btTotalRight.setEnabled(true);
+                btRight.setEnabled(true);
+            }
+
+            btSearchPressed = true;
+
         }
     }
 
@@ -333,6 +379,8 @@ public class DeleteCiclyst extends javax.swing.JFrame {
     }//GEN-LAST:event_btSearchActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        //JFrame topFrame = (JFrame) SwingUtilities.getRoot(this);
+        //topFrame.setEnabled(true);
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
 
@@ -365,7 +413,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
 
     private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
         // TODO add your handling code here:
-        if (btLeftPressed) {
+        if (btLeftPressed && btSearchPressed) {
             index++;
             btLeftPressed = false;
         }
@@ -384,7 +432,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
             btTotalLeft.setEnabled(true);
             btLeft.setEnabled(true);
         }
-        if (index == cyclistData.size() ) {
+        if (index == cyclistData.size()) {
             btTotalRight.setEnabled(false);
             btRight.setEnabled(false);
         }
@@ -407,7 +455,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
 
     private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
         // TODO add your handling code here:
-        if (btRightPressed && index != 1 && index != cyclistData.size() - 1) {
+        if (btRightPressed && btSearchPressed && index != 1 && index != cyclistData.size() - 1) {
             index--;
             btRightPressed = false;
         }

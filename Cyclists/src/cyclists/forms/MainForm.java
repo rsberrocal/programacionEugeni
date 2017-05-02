@@ -224,6 +224,7 @@ public class MainForm extends javax.swing.JFrame {
         dc.setTitle("Delete Cyclist");
         dc.setLocationRelativeTo(null);
         dc.setVisible(true);
+        //this.setEnabled(false);
     }//GEN-LAST:event_miDeleteCiclistesActionPerformed
 
     public void exitDialog() {
