@@ -9,8 +9,6 @@ import cyclists.Database;
 import cyclists.Entity.Ciclistes;
 import cyclists.forms.MainForm;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -34,11 +32,15 @@ public class DeleteCiclyst extends javax.swing.JFrame {
      */
     public DeleteCiclyst() {
         initComponents();
+        //Setting the global index for movement buttons
         index = 0;
+        //Setting TextField not enable so the user can't edit the cyclist
         tfDorsal.setEnabled(false);
         tfAge.setEnabled(false);
         tfTeam.setEnabled(false);
+        //Putting up the icon image
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../../images/icon.png")));
+        //Setting the Left buttons because we start with index ==0
         btTotalLeft.setEnabled(false);
         btLeft.setEnabled(false);
         try {
@@ -46,11 +48,14 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
         }
+        cellWidth();
+        alignCells();
     }
     public int index;
     public List<Ciclistes> cyclistData;
     public boolean btRightPressed = false;
     public boolean btLeftPressed = false;
+    public boolean btTotalLeftPressed = false;
     public boolean btSearchPressed = false;
 
     /**
@@ -248,6 +253,20 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void cellWidth() {
+        tbCiclyst.getColumnModel().getColumn(0).setWidth(15);
+        tbCiclyst.getColumnModel().getColumn(1).setWidth(90);
+        tbCiclyst.getColumnModel().getColumn(2).setWidth(15);
+        tbCiclyst.getColumnModel().getColumn(3).setWidth(60);
+    }
+
+    public void alignCells() {
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        tbCiclyst.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tbCiclyst.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+    }
+
     public List cyclist() throws SQLException {
         List<Ciclistes> l = new ArrayList<Ciclistes>();
         String query = "select dorsal,nom,edad,nomeq from Ciclistes;";
@@ -313,6 +332,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                         }
                         tfName.setText(input);
                         index = 0;
+                        //index = cyclistData.indexOf(tfDorsal.getText());
                         for (int j = 0; j < cyclistData.size(); j++) {
                             if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
                                 if (j == cyclistData.size()) {
@@ -322,6 +342,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                                 }
                             }
                         }
+
                     } else if (rsCount.getInt(1) == 0) {
                         MainForm.alertsInformation(this, "Cyclist dont exists", "Cyclist dont exists");
                     } else {
@@ -334,7 +355,9 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                             tfTeam.setText(rsFinal.getString(3));
                             tfName.setText(rsFinal.getString(4));
                         }
+                        //index = cyclistData.indexOf(Integer.parseInt(tfDorsal.getText()));
                         index = 0;
+
                         for (int j = 0; j < cyclistData.size(); j++) {
                             if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
                                 if (j == cyclistData.size()) {
@@ -344,7 +367,6 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                                 }
                             }
                         }
-
                     }
                 }
                 db.closeConnection();
@@ -369,7 +391,9 @@ public class DeleteCiclyst extends javax.swing.JFrame {
             }
 
             btSearchPressed = true;
-
+            btLeftPressed = false;
+            btRightPressed = false;
+            btTotalLeftPressed = false;
         }
     }
 
@@ -413,9 +437,11 @@ public class DeleteCiclyst extends javax.swing.JFrame {
 
     private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
         // TODO add your handling code here:
-        if (btLeftPressed && btSearchPressed) {
+        if (btLeftPressed || btSearchPressed || btTotalLeftPressed) {
             index++;
             btLeftPressed = false;
+            btTotalLeftPressed = false;
+            btSearchPressed = false;
         }
         if (index < 0) {
             index = 0;
@@ -455,7 +481,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
 
     private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
         // TODO add your handling code here:
-        if (btRightPressed && btSearchPressed && index != 1 && index != cyclistData.size() - 1) {
+        if ((btRightPressed) && index != 1 && index != cyclistData.size() - 1) {
             index--;
             btRightPressed = false;
         }
@@ -483,6 +509,9 @@ public class DeleteCiclyst extends javax.swing.JFrame {
 
     private void btTotalLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalLeftActionPerformed
         // TODO add your handling code here:
+        if (!btTotalLeftPressed) {
+            btTotalLeftPressed = true;
+        }
         tfName.setText(cyclistData.get(0).getNom());
         tfDorsal.setText(String.valueOf(cyclistData.get(0).getDorsal()));
         tfAge.setText(String.valueOf(cyclistData.get(0).getEdad()));

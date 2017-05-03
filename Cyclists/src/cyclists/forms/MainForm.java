@@ -212,6 +212,8 @@ public class MainForm extends javax.swing.JFrame {
         ac.setTitle("Add Cyclist");
         ac.setLocationRelativeTo(null);
         ac.setVisible(true);
+        
+        //this.setEnabled(false);
     }//GEN-LAST:event_miAddCiclistesActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
