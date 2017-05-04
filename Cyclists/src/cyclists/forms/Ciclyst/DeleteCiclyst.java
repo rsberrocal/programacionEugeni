@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Richard
  */
-public class DeleteCiclyst extends javax.swing.JFrame {
+public final class DeleteCiclyst extends javax.swing.JFrame {
 
     /**
      * Creates new form AddCiclyst
@@ -62,7 +62,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
     public boolean btRightPressed = false;
     public boolean btLeftPressed = false;
     public boolean btTotalLeftPressed = false;
-    public boolean btSearchPressed = false;
+    public boolean btSearchPressed = false;    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -180,43 +180,51 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(tfTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addGap(63, 63, 63)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btSearch))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btTotalLeft)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btLeft)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btRight))
-                            .addComponent(btDelete))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btTotalRight)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tfTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btTotalLeft)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btLeft)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btRight))
+                                            .addComponent(btDelete))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btTotalRight)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4))
+                                        .addGap(13, 126, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                        .addGap(12, 12, 12)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btSearch)
+                                    .addComponent(jLabel5)
+                                    .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,15 +266,15 @@ public class DeleteCiclyst extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     //Function to set the width of cells
     public void cellWidth() {
-        tbCiclyst.getColumnModel().getColumn(0).setWidth(15);
-        tbCiclyst.getColumnModel().getColumn(1).setWidth(90);
-        tbCiclyst.getColumnModel().getColumn(2).setWidth(15);
-        tbCiclyst.getColumnModel().getColumn(3).setWidth(60);
+        tbCiclyst.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tbCiclyst.getColumnModel().getColumn(1).setPreferredWidth(90);
+        tbCiclyst.getColumnModel().getColumn(2).setPreferredWidth(5);
+        tbCiclyst.getColumnModel().getColumn(3).setPreferredWidth(60);
     }
-    
+
     //Function to align cells
     public void alignCells() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -274,7 +282,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         tbCiclyst.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tbCiclyst.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
     }
-    
+
     //Functions to fill the list of cyclist
     public List cyclist() throws SQLException {
         List<Ciclistes> l = new ArrayList<Ciclistes>();
@@ -286,7 +294,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
 
         Statement st = db.getConnection().createStatement();
         ResultSet rs = st.executeQuery(query);
-        while (rs.next()) {//loop rs         
+        while (rs.next()) {//loop rs
             Ciclistes c = new Ciclistes();
             c.setDorsal(rs.getInt(1));
             c.setNom(rs.getString(2));
@@ -298,16 +306,17 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         db.closeConnection();
         return l;
     }
+
     //Function to search a cyclist
     private void searchCyclist(String name) {
         //Adding % to search any cyclist with this text
         name = name + "%";
-        //Querys        
+        //Querys
         //Query to know how many cyclist we got with the same name
         String queryCount = "select count(*) from Ciclistes where nom like '" + name + "';";
         //Query to know these names if we got more than 1 cyclist with the same name
         String queryNames = "select nom from Ciclistes where nom like '" + name + "';";
-        
+
         Database db = new Database();
         //If the TextField name is empty, it opens a dialog that inform the user
         if (tfName.getText().isEmpty()) {
@@ -336,7 +345,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                         }//End loop names
                         //Create a new dialog to make the user chose one of the names below
                         String input = (String) JOptionPane.showInputDialog(null, "Choose Cyclist Team",
-                                "Select a Team", JOptionPane.INFORMATION_MESSAGE, null,                                
+                                "Select a Team", JOptionPane.INFORMATION_MESSAGE, null,
                                 names, // Array with names
                                 names[0]); // Default choise
                         ;//End dialog
@@ -352,12 +361,12 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                             tfTeam.setText(rsFinal.getString(3));
                         }//End loop
                         //Finally set the name of this cyclist
-                        tfName.setText(input);                        
-                    //If this cyclist doesn't exists
+                        tfName.setText(input);
+                        //If this cyclist doesn't exists
                     } else if (rsCount.getInt(1) == 0) {
                         //Create a new dialog informing the use that this Cyclist doesnt exist
                         MainForm.alertsInformation(this, "Cyclist doesn't exists", "Cyclist doesn't exists");
-                    //If there is only 1 cyclist with this name
+                        //If there is only 1 cyclist with this name
                     } else {
                         //Query to know all the data about this cyclist
                         String queryFinal = "select dorsal,edad,nomeq,nom from Ciclistes where nom like '" + name + "';";
@@ -370,24 +379,24 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                             tfAge.setText(String.valueOf(rsFinal.getInt(2)));
                             tfTeam.setText(rsFinal.getString(3));
                             tfName.setText(rsFinal.getString(4));
-                        }                                               
+                        }
                     }
                 }
                 //Set the index == 0 to search exactly the index of this cyclist
-                        index = 0;
-                        //index = cyclistData.indexOf(tfDorsal.getText());
-                        for (int j = 0; j < cyclistData.size(); j++) {//Loop index
-                            //If dorsal of cyclist(j) is equals to the text of dorsal TextField
-                            if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
-                                //If is the last position, set index to the last position 
-                                if (j == cyclistData.size()) {
-                                    index = j - 1;
-                                } else {
-                                    //else set index to j
-                                    index = j;
-                                }
-                            }
-                        }//End loop
+                index = 0;
+                //index = cyclistData.indexOf(tfDorsal.getText());
+                for (int j = 0; j < cyclistData.size(); j++) {//Loop index
+                    //If dorsal of cyclist(j) is equals to the text of dorsal TextField
+                    if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
+                        //If is the last position, set index to the last position
+                        if (j == cyclistData.size()) {
+                            index = j - 1;
+                        } else {
+                            //else set index to j
+                            index = j;
+                        }
+                    }
+                }//End loop
                 //Disconnect
                 db.closeConnection();
             } catch (SQLException ex) {
@@ -399,13 +408,13 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                 btLeft.setEnabled(false);
                 btTotalRight.setEnabled(true);
                 btRight.setEnabled(true);
-            //If index == 0 disable the right buttons and enable the left buttons
+                //If index == 0 disable the right buttons and enable the left buttons
             } else if (index == cyclistData.size() - 1) {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
                 btTotalRight.setEnabled(false);
                 btRight.setEnabled(false);
-            //If index is between 0 and cyclistData.size enable all the buttons               
+                //If index is between 0 and cyclistData.size enable all the buttons
             } else {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
@@ -420,13 +429,13 @@ public class DeleteCiclyst extends javax.swing.JFrame {
             btTotalLeftPressed = false;
         }
     }//End function
-    
+
     //Button search action
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         //Calling the function search to search the cyclist that the user put on the TextField name
         searchCyclist(tfName.getText());
     }//GEN-LAST:event_btSearchActionPerformed
-    
+
     //Closing window action
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //JFrame topFrame = (JFrame) SwingUtilities.getRoot(this);
@@ -434,132 +443,167 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         //Closing the actual frame
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
-    
+
     //Button delete action
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         //Statement to delete the cyclist
         String sqlDelete = "delete from Ciclistes where nom like '" + tfName.getText() + "';";
         Database db = new Database();
+        int i = 0;
         //If TextField name is empty
         if (tfName.getText().isEmpty()) {
             //Create a dialog informing the user that this field is empty
             MainForm.alertsWarning(this, "Name missing", "Name missing");
-        //If not is empty create a dialog to know if the user really wants to delete this cyclist
-        } else if (JOptionPane.showConfirmDialog(this,
-                "Are you sure to delete " + tfName.getText() + "?", "Delete",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-            //IF the result is yes delete this cyclist
+        } else {
+            //If not is empty create a dialog to know if the user really wants to delete this cyclist
             try {
-                //Connect
-                db.makeConnection();
-                //Start the Statement
-                PreparedStatement pst = db.getConnection().prepareStatement(sqlDelete);
-                pst.execute();
-                //Disconnect
-                db.closeConnection();
-                //Information Message
-                MainForm.alertsInformation(this, "Row deleted", "Row deleted");
-                //The actual frame close
-                this.setVisible(false);                
+                if (db.searchID("dorsal", "Llevar", Integer.parseInt(tfDorsal.getText())) || db.searchID("dorsal", "Ports", Integer.parseInt(tfDorsal.getText())) || db.searchID("dorsal", "Etapes", Integer.parseInt(tfDorsal.getText()))) {
+                    MainForm.alertsWarning(this, "Error", "Error you cant delete this cyclist because depends with other table");
+                } else if (JOptionPane.showConfirmDialog(this,
+                        "Are you sure to delete " + tfName.getText() + "?", "Delete",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    //If the result is yes delete this cyclist
+
+                    //Connect
+                    db.makeConnection();
+                    //Start the Statement
+                    PreparedStatement pst = db.getConnection().prepareStatement(sqlDelete);
+                    pst.execute();
+                    //Disconnect
+                    db.closeConnection();
+                    //Information Message
+                    MainForm.alertsInformation(this, "Row deleted", "Row deleted");
+                    //The actual frame close
+                    this.setVisible(false);
+
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
     }//GEN-LAST:event_btDeleteActionPerformed
     //End action
-    
-    //Button right action
+
+    //Button right action >
     private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
         // TODO add your handling code here:
+        //If any other button was pressed before set index++
         if (btLeftPressed || btSearchPressed || btTotalLeftPressed) {
             index++;
             btLeftPressed = false;
             btTotalLeftPressed = false;
             btSearchPressed = false;
         }
+        //If index is less than 0 set index == 0
         if (index < 0) {
             index = 0;
         }
+        //Set the TextField with the data of cyclist(index)
         tfName.setText(cyclistData.get(index).getNom());
         tfDorsal.setText(String.valueOf(cyclistData.get(index).getDorsal()));
         tfAge.setText(String.valueOf(cyclistData.get(index).getEdad()));
         tfTeam.setText(cyclistData.get(index).getNomeq());
+        //Index increase
         index++;
+        //If this button boolean wasn't pressed
         if (!btRightPressed) {
             btRightPressed = true;
         }
+        //Enable left buttons if they are disabled
         if (!btTotalLeft.isEnabled() && !btLeft.isEnabled()) {
             btTotalLeft.setEnabled(true);
             btLeft.setEnabled(true);
         }
+        //Disable right buttons if index is equals to last position from the list
         if (index == cyclistData.size()) {
             btTotalRight.setEnabled(false);
             btRight.setEnabled(false);
         }
     }//GEN-LAST:event_btRightActionPerformed
+    //End action
 
+    //Button right action >>
     private void btTotalRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalRightActionPerformed
-        // TODO add your handling code here:
+        //Set the TextFields with all the data from the last cyclist
         tfName.setText(cyclistData.get(cyclistData.size() - 1).getNom());
         tfDorsal.setText(String.valueOf(cyclistData.get(cyclistData.size() - 1).getDorsal()));
         tfAge.setText(String.valueOf(cyclistData.get(cyclistData.size() - 1).getEdad()));
         tfTeam.setText(cyclistData.get(cyclistData.size() - 1).getNomeq());
+        //Set index to last position from the list
         index = cyclistData.size() - 1;
+        //Disable right buttons because is the last cyclist
         btTotalRight.setEnabled(false);
         btRight.setEnabled(false);
+        //Enable left buttons if they are disable
         if (!btTotalLeft.isEnabled() && !btLeft.isEnabled()) {
             btTotalLeft.setEnabled(true);
             btLeft.setEnabled(true);
         }
     }//GEN-LAST:event_btTotalRightActionPerformed
+    //End action
 
+    //Button left action <
     private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
-        // TODO add your handling code here:
+        //If any other button was pressed before set index--
         if ((btRightPressed) && index != 1 && index != cyclistData.size() - 1) {
             index--;
             btRightPressed = false;
         }
+        //Set boolean true if this button wasn't pressed before
         if (!btLeftPressed) {
             btLeftPressed = true;
         }
+        //Set index ==0 if this index is less than 0
         if (index < 0) {
             index = 0;
         } else {
+            //Else reduce index
             index--;
         }
+        //Set the TextField with the data of cyclist(index)
         tfName.setText(cyclistData.get(index).getNom());
         tfDorsal.setText(String.valueOf(cyclistData.get(index).getDorsal()));
         tfAge.setText(String.valueOf(cyclistData.get(index).getEdad()));
         tfTeam.setText(cyclistData.get(index).getNomeq());
+
+        //Enable right buttons if they are disabled
         if (!btTotalRight.isEnabled() && !btRight.isEnabled()) {
             btTotalRight.setEnabled(true);
             btRight.setEnabled(true);
         }
+        //Disable left buttons if index is the first cyclist
         if (index == 0) {
             btTotalLeft.setEnabled(false);
             btLeft.setEnabled(false);
         }
     }//GEN-LAST:event_btLeftActionPerformed
+    //End action
 
+    //Button left action <<
     private void btTotalLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalLeftActionPerformed
-        // TODO add your handling code here:
+        //Set boolean true if this button wasn't pressed before
         if (!btTotalLeftPressed) {
             btTotalLeftPressed = true;
         }
+        //Set the TextFields with all the data from the first cyclist
         tfName.setText(cyclistData.get(0).getNom());
         tfDorsal.setText(String.valueOf(cyclistData.get(0).getDorsal()));
         tfAge.setText(String.valueOf(cyclistData.get(0).getEdad()));
         tfTeam.setText(cyclistData.get(0).getNomeq());
+        //Set index to 0 because is the first cyclist
         index = 0;
+        //Disable left buttons because is the first cyclist
         btTotalLeft.setEnabled(false);
         btLeft.setEnabled(false);
+        //Enable left buttons if they are disable
         if (!btTotalRight.isEnabled() && !btRight.isEnabled()) {
             btTotalRight.setEnabled(true);
             btRight.setEnabled(true);
         }
     }//GEN-LAST:event_btTotalLeftActionPerformed
-
+    //End action
     /**
      * @param args the command line arguments
      */
@@ -567,7 +611,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
