@@ -54,8 +54,11 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         alignCells();
     }
     //Own variables
+    //Index to move the buttons
     public int index;
+    //list with all the data from cyclist
     public List<Ciclistes> cyclistData;
+    //Booleans for movement buttons
     public boolean btRightPressed = false;
     public boolean btLeftPressed = false;
     public boolean btTotalLeftPressed = false;
@@ -255,31 +258,35 @@ public class DeleteCiclyst extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Function to set the width of cells
     public void cellWidth() {
         tbCiclyst.getColumnModel().getColumn(0).setWidth(15);
         tbCiclyst.getColumnModel().getColumn(1).setWidth(90);
         tbCiclyst.getColumnModel().getColumn(2).setWidth(15);
         tbCiclyst.getColumnModel().getColumn(3).setWidth(60);
     }
-
+    
+    //Function to align cells
     public void alignCells() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         tbCiclyst.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tbCiclyst.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
     }
-
+    
+    //Functions to fill the list of cyclist
     public List cyclist() throws SQLException {
         List<Ciclistes> l = new ArrayList<Ciclistes>();
+        //Query
         String query = "select dorsal,nom,edad,nomeq from Ciclistes;";
         Database db = new Database();
-
+        //Connect
         db.makeConnection();
 
         Statement st = db.getConnection().createStatement();
         ResultSet rs = st.executeQuery(query);
-        while (rs.next()) {
+        while (rs.next()) {            
             Ciclistes c = new Ciclistes();
             c.setDorsal(rs.getInt(1));
             c.setNom(rs.getString(2));
@@ -287,6 +294,8 @@ public class DeleteCiclyst extends javax.swing.JFrame {
             c.setNomeq(rs.getString(4));
             l.add(c);
         }
+        //Disconnect
+        db.closeConnection();
         return l;
     }
 
@@ -372,6 +381,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                         }
                     }
                 }
+                //Disconnect
                 db.closeConnection();
             } catch (SQLException ex) {
                 Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
