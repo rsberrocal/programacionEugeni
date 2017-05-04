@@ -342,6 +342,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                         ;//End dialog
                         //Query to get the data of cyclist choosed
                         String queryFinal = "select dorsal,edad,nomeq from Ciclistes where nom like '" + input + "';";
+                        //Start the query
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
                         //Setting up the TextFields with all the data of this cyclist
@@ -360,6 +361,7 @@ public class DeleteCiclyst extends javax.swing.JFrame {
                     } else {
                         //Query to know all the data about this cyclist
                         String queryFinal = "select dorsal,edad,nomeq,nom from Ciclistes where nom like '" + name + "';";
+                        //Start the query
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
                         //Setting up the TextFields with all the data of this cyclist
@@ -418,45 +420,56 @@ public class DeleteCiclyst extends javax.swing.JFrame {
             btTotalLeftPressed = false;
         }
     }//End function
+    
     //Button search action
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         //Calling the function search to search the cyclist that the user put on the TextField name
         searchCyclist(tfName.getText());
     }//GEN-LAST:event_btSearchActionPerformed
-
+    
+    //Closing window action
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //JFrame topFrame = (JFrame) SwingUtilities.getRoot(this);
         //topFrame.setEnabled(true);
+        //Closing the actual frame
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
-
+    
+    //Button delete action
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
-        // TODO add your handling code here:        
-        String sqlInsert = "delete from Ciclistes where nom like '" + tfName.getText() + "';";
+        //Statement to delete the cyclist
+        String sqlDelete = "delete from Ciclistes where nom like '" + tfName.getText() + "';";
         Database db = new Database();
+        //If TextField name is empty
         if (tfName.getText().isEmpty()) {
+            //Create a dialog informing the user that this field is empty
             MainForm.alertsWarning(this, "Name missing", "Name missing");
+        //If not is empty create a dialog to know if the user really wants to delete this cyclist
         } else if (JOptionPane.showConfirmDialog(this,
                 "Are you sure to delete " + tfName.getText() + "?", "Delete",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            //IF the result is yes delete this cyclist
             try {
+                //Connect
                 db.makeConnection();
-                PreparedStatement pst = db.getConnection().prepareStatement(sqlInsert);
+                //Start the Statement
+                PreparedStatement pst = db.getConnection().prepareStatement(sqlDelete);
                 pst.execute();
+                //Disconnect
                 db.closeConnection();
                 //Information Message
                 MainForm.alertsInformation(this, "Row deleted", "Row deleted");
                 //The actual frame close
-                this.setVisible(false);
-                db.closeConnection();
-                this.setVisible(false);
+                this.setVisible(false);                
             } catch (SQLException ex) {
                 Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btDeleteActionPerformed
-
+    //End action
+    
+    //Button right action
     private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
         // TODO add your handling code here:
         if (btLeftPressed || btSearchPressed || btTotalLeftPressed) {
