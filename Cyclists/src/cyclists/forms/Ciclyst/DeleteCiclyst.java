@@ -286,133 +286,142 @@ public class DeleteCiclyst extends javax.swing.JFrame {
 
         Statement st = db.getConnection().createStatement();
         ResultSet rs = st.executeQuery(query);
-        while (rs.next()) {            
+        while (rs.next()) {//loop rs         
             Ciclistes c = new Ciclistes();
             c.setDorsal(rs.getInt(1));
             c.setNom(rs.getString(2));
             c.setEdad(rs.getInt(3));
             c.setNomeq(rs.getString(4));
             l.add(c);
-        }
+        }//end loop rs
         //Disconnect
         db.closeConnection();
         return l;
     }
-
-    private void searchCiclyst(String name) {
+    //Function to search a cyclist
+    private void searchCyclist(String name) {
+        //Adding % to search any cyclist with this text
         name = name + "%";
         //Querys        
+        //Query to know how many cyclist we got with the same name
         String queryCount = "select count(*) from Ciclistes where nom like '" + name + "';";
+        //Query to know these names if we got more than 1 cyclist with the same name
         String queryNames = "select nom from Ciclistes where nom like '" + name + "';";
-
+        
         Database db = new Database();
-
+        //If the TextField name is empty, it opens a dialog that inform the user
         if (tfName.getText().isEmpty()) {
             MainForm.alertsWarning(this, "Name Missing", "Name Missing");
         } else {
             try {
                 //Connect
                 db.makeConnection();
-
+                //Start the query
                 Statement stCount = db.getConnection().createStatement();
                 ResultSet rsCount = stCount.executeQuery(queryCount);
-
-                while (rsCount.next()) {
+                //See if we can put IF and not WHILE
+                while (rsCount.next()) {//Loop Count
+                    //If we got more than 1 cyclist with the same name
                     if (rsCount.getInt(1) > 1) {
+                        //Start the query to get these names
                         Statement stName = db.getConnection().createStatement();
                         ResultSet rsName = stName.executeQuery(queryNames);
+                        //Array to save the names
                         String[] names = new String[rsCount.getInt(1)];
+                        //index to navigate this array
                         int i = 0;
-                        while (rsName.next()) {
+                        while (rsName.next()) {//Loop names to save the names on the array
                             names[i] = rsName.getString(1);
                             i++;
-                        }
+                        }//End loop names
+                        //Create a new dialog to make the user chose one of the names below
                         String input = (String) JOptionPane.showInputDialog(null, "Choose Cyclist Team",
-                                "Select a Team", JOptionPane.INFORMATION_MESSAGE, null, // Use
-                                // default
-                                // icon
-                                names, // Array of choices
-                                names[0]); // Initial choice
-                        ;
+                                "Select a Team", JOptionPane.INFORMATION_MESSAGE, null,                                
+                                names, // Array with names
+                                names[0]); // Default choise
+                        ;//End dialog
+                        //Query to get the data of cyclist choosed
                         String queryFinal = "select dorsal,edad,nomeq from Ciclistes where nom like '" + input + "';";
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
-                        while (rsFinal.next()) {
+                        //Setting up the TextFields with all the data of this cyclist
+                        while (rsFinal.next()) {//Loop
                             tfDorsal.setText(String.valueOf(rsFinal.getInt(1)));
                             tfAge.setText(String.valueOf(rsFinal.getInt(2)));
                             tfTeam.setText(rsFinal.getString(3));
-                        }
-                        tfName.setText(input);
-                        index = 0;
-                        //index = cyclistData.indexOf(tfDorsal.getText());
-                        for (int j = 0; j < cyclistData.size(); j++) {
-                            if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
-                                if (j == cyclistData.size()) {
-                                    index = j - 1;
-                                } else {
-                                    index = j;
-                                }
-                            }
-                        }
-
+                        }//End loop
+                        //Finally set the name of this cyclist
+                        tfName.setText(input);                        
+                    //If this cyclist doesn't exists
                     } else if (rsCount.getInt(1) == 0) {
-                        MainForm.alertsInformation(this, "Cyclist dont exists", "Cyclist dont exists");
+                        //Create a new dialog informing the use that this Cyclist doesnt exist
+                        MainForm.alertsInformation(this, "Cyclist doesn't exists", "Cyclist doesn't exists");
+                    //If there is only 1 cyclist with this name
                     } else {
+                        //Query to know all the data about this cyclist
                         String queryFinal = "select dorsal,edad,nomeq,nom from Ciclistes where nom like '" + name + "';";
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
+                        //Setting up the TextFields with all the data of this cyclist
                         while (rsFinal.next()) {
                             tfDorsal.setText(String.valueOf(rsFinal.getInt(1)));
                             tfAge.setText(String.valueOf(rsFinal.getInt(2)));
                             tfTeam.setText(rsFinal.getString(3));
                             tfName.setText(rsFinal.getString(4));
-                        }
-                        //index = cyclistData.indexOf(Integer.parseInt(tfDorsal.getText()));
+                        }                                               
+                    }
+                }
+                //Set the index == 0 to search exactly the index of this cyclist
                         index = 0;
-
-                        for (int j = 0; j < cyclistData.size(); j++) {
+                        //index = cyclistData.indexOf(tfDorsal.getText());
+                        for (int j = 0; j < cyclistData.size(); j++) {//Loop index
+                            //If dorsal of cyclist(j) is equals to the text of dorsal TextField
                             if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
+                                //If is the last position, set index to the last position 
                                 if (j == cyclistData.size()) {
                                     index = j - 1;
                                 } else {
+                                    //else set index to j
                                     index = j;
                                 }
                             }
-                        }
-                    }
-                }
+                        }//End loop
                 //Disconnect
                 db.closeConnection();
             } catch (SQLException ex) {
                 Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
             }
+            //If index == 0 disable the left buttons and enable the right buttons
             if (index == 0) {
                 btTotalLeft.setEnabled(false);
                 btLeft.setEnabled(false);
                 btTotalRight.setEnabled(true);
                 btRight.setEnabled(true);
+            //If index == 0 disable the right buttons and enable the left buttons
             } else if (index == cyclistData.size() - 1) {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
                 btTotalRight.setEnabled(false);
                 btRight.setEnabled(false);
+            //If index is between 0 and cyclistData.size enable all the buttons               
             } else {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
                 btTotalRight.setEnabled(true);
                 btRight.setEnabled(true);
             }
-
+            //Finally set true the boolean btSearchPressed to know that this buttons has been pressed
             btSearchPressed = true;
+            //And set false the rest of booleans
             btLeftPressed = false;
             btRightPressed = false;
             btTotalLeftPressed = false;
         }
-    }
-
+    }//End function
+    //Button search action
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
-        // TODO add your handling code here:
-        searchCiclyst(tfName.getText());
+        //Calling the function search to search the cyclist that the user put on the TextField name
+        searchCyclist(tfName.getText());
     }//GEN-LAST:event_btSearchActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
