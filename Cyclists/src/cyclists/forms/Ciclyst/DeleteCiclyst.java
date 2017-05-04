@@ -43,14 +43,17 @@ public class DeleteCiclyst extends javax.swing.JFrame {
         //Setting the Left buttons because we start with index ==0
         btTotalLeft.setEnabled(false);
         btLeft.setEnabled(false);
+        //Filling up the list with all the data from cyclist
         try {
             cyclistData = cyclist();
         } catch (SQLException ex) {
             Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Setting up the width and aligning the cell of the table
         cellWidth();
         alignCells();
     }
+    //Own variables
     public int index;
     public List<Ciclistes> cyclistData;
     public boolean btRightPressed = false;
