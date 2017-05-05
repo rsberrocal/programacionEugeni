@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cyclists.forms.Ciclyst;
+package cyclists.forms.Team;
 
+import cyclists.forms.Ciclyst.*;
 import cyclists.Database;
 import cyclists.Entity.Cyclist;
 import cyclists.forms.MainForm;
@@ -609,6 +610,8 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DeleteCiclyst.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

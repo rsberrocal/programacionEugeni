@@ -6,7 +6,7 @@
 package cyclists.forms.Ciclyst;
 
 import cyclists.Database;
-import cyclists.Entity.Ciclistes;
+import cyclists.Entity.Cyclist;
 import cyclists.forms.MainForm;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
@@ -40,7 +40,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
         try {
             cyclistData = cyclist();
             addItemsCombo();
-            Ciclistes c = new Ciclistes();
+            Cyclist c = new Cyclist();
             c.loadTable(pTableCyclist);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,7 +53,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
     //Index to move the buttons
     public int index;
     //list with all the data from cyclist
-    public List<Ciclistes> cyclistData;
+    public List<Cyclist> cyclistData;
     //Booleans for movement buttons
     public boolean btRightPressed = false;
     public boolean btLeftPressed = false;
@@ -255,7 +255,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
 
     //Functions to fill the list of cyclist
     public List cyclist() throws SQLException {
-        List<Ciclistes> l = new ArrayList<Ciclistes>();
+        List<Cyclist> l = new ArrayList<Cyclist>();
         //Query
         String query = "select dorsal,nom,edad,nomeq from Ciclistes;";
         Database db = new Database();
@@ -265,7 +265,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
         Statement st = db.getConnection().createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {//loop rs
-            Ciclistes c = new Ciclistes();
+            Cyclist c = new Cyclist();
             c.setDorsal(rs.getInt(1));
             c.setNom(rs.getString(2));
             c.setEdad(rs.getInt(3));
@@ -665,7 +665,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
     private javax.swing.JButton btTotalLeft;
     private javax.swing.JButton btTotalRight;
     private javax.swing.JComboBox<String> cbTeams;
-    private java.util.List<cyclists.Entity.Ciclistes> ciclistesList;
+    private java.util.List<cyclists.Entity.Cyclist> ciclistesList;
     private javax.persistence.Query ciclistesQuery;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;

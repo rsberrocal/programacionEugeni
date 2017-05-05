@@ -41,7 +41,7 @@ import javax.swing.table.DefaultTableCellRenderer;
     @NamedQuery(name = "Ciclistes.findByNom", query = "SELECT c FROM Ciclistes c WHERE c.nom = :nom"),
     @NamedQuery(name = "Ciclistes.findByEdad", query = "SELECT c FROM Ciclistes c WHERE c.edad = :edad"),
     @NamedQuery(name = "Ciclistes.findByNomeq", query = "SELECT c FROM Ciclistes c WHERE c.nomeq = :nomeq")})
-public class Ciclistes implements Serializable {
+public class Cyclist implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -58,10 +58,10 @@ public class Ciclistes implements Serializable {
     @Column(name = "nomeq")
     private String nomeq;
 
-    public Ciclistes() {
+    public Cyclist() {
     }
 
-    public Ciclistes(Integer dorsal) {
+    public Cyclist(Integer dorsal) {
         this.dorsal = dorsal;
     }
 
@@ -115,10 +115,10 @@ public class Ciclistes implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ciclistes)) {
+        if (!(object instanceof Cyclist)) {
             return false;
         }
-        Ciclistes other = (Ciclistes) object;
+        Cyclist other = (Cyclist) object;
         if ((this.dorsal == null && other.dorsal != null) || (this.dorsal != null && !this.dorsal.equals(other.dorsal))) {
             return false;
         }

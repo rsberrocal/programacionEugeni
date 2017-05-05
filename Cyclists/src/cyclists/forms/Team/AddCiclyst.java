@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cyclists.forms.Ciclyst;
+package cyclists.forms.Team;
 
+import cyclists.forms.Ciclyst.*;
 import cyclists.Database;
 import cyclists.Entity.Cyclist;
 import cyclists.forms.MainForm;
@@ -346,6 +347,7 @@ public class AddCiclyst extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AddCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
