@@ -8,6 +8,7 @@ package cyclists.forms;
 import cyclists.forms.Ciclyst.AddCiclyst;
 import cyclists.forms.Ciclyst.DeleteCiclyst;
 import cyclists.forms.Ciclyst.ModifyCiclyst;
+import cyclists.forms.Team.AddTeam;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -86,6 +87,11 @@ public class MainForm extends javax.swing.JFrame {
         mEquips.setText("Equips");
 
         miAddEquips.setText("Add");
+        miAddEquips.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddEquipsActionPerformed(evt);
+            }
+        });
         mEquips.add(miAddEquips);
 
         miModifyEquips.setText("Modify");
@@ -255,6 +261,14 @@ public class MainForm extends javax.swing.JFrame {
         mc.setLocationRelativeTo(null);
         mc.setVisible(true);
     }//GEN-LAST:event_miModifyCiclistesActionPerformed
+
+    private void miAddEquipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddEquipsActionPerformed
+        // TODO add your handling code here:
+        AddTeam at = new AddTeam();
+        at.setTitle("Add Team");
+        at.setLocationRelativeTo(null);
+        at.setVisible(true);
+    }//GEN-LAST:event_miAddEquipsActionPerformed
 
     /**
      * @param args the command line arguments

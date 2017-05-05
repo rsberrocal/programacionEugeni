@@ -5,7 +5,6 @@
  */
 package cyclists.forms.Team;
 
-import cyclists.forms.Ciclyst.*;
 import cyclists.Database;
 import cyclists.Entity.Cyclist;
 import cyclists.forms.MainForm;
@@ -24,12 +23,12 @@ import javax.swing.JOptionPane;
  *
  * @author Richard
  */
-public class ModifyCiclyst extends javax.swing.JFrame {
+public class ModifyTeam extends javax.swing.JFrame {
 
     /**
      * Creates new form AddCiclyst
      */
-    public ModifyCiclyst() {
+    public ModifyTeam() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../../images/icon.png")));
         //Setting the global index for movement buttons
@@ -44,7 +43,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
             Cyclist c = new Cyclist();
             c.loadTable(pTableCyclist);
         } catch (SQLException ex) {
-            Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
         //Setting up the width and aligning the cell of the table
 //        cellWidth();
@@ -482,7 +481,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
                 db.closeConnection();
                 MainForm.alertsInformation(this, "Row Modified", "Row Modified");
             } catch (SQLException ex) {
-                Logger.getLogger(ModifyCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ModifyTeam.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.setVisible(false);
         }
@@ -582,7 +581,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
                 //Disconnect
                 db.closeConnection();
             } catch (SQLException ex) {
-                Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
             }
             //If index == 0 disable the left buttons and enable the right buttons
             if (index == 0) {
@@ -639,14 +638,18 @@ public class ModifyCiclyst extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModifyCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyTeam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModifyCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyTeam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModifyCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyTeam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModifyCiclyst.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyTeam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -655,7 +658,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModifyCiclyst().setVisible(true);
+                new ModifyTeam().setVisible(true);
             }
         });
     }

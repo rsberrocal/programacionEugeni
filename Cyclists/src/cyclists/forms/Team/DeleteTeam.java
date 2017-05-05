@@ -5,7 +5,6 @@
  */
 package cyclists.forms.Team;
 
-import cyclists.forms.Ciclyst.*;
 import cyclists.Database;
 import cyclists.Entity.Cyclist;
 import cyclists.forms.MainForm;
@@ -18,20 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
  * @author Richard
  */
-public final class DeleteCiclyst extends javax.swing.JFrame {
+public final class DeleteTeam extends javax.swing.JFrame {
 
     /**
      * Creates new form AddCiclyst
      */
-    public DeleteCiclyst() {
+    public DeleteTeam() {
         initComponents();
         //Setting the global index for movement buttons
         index = 0;
@@ -50,7 +47,7 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
             Cyclist c = new Cyclist();
             c.loadTable(pTableCyclist);
         } catch (SQLException ex) {
-            Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     //Own variables
@@ -373,7 +370,7 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
                 //Disconnect
                 db.closeConnection();
             } catch (SQLException ex) {
-                Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
             }
             //If index == 0 disable the left buttons and enable the right buttons
             if (index == 0) {
@@ -452,7 +449,7 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -595,21 +592,25 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclyst.class
+            java.util.logging.Logger.getLogger(DeleteTeam.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclyst.class
+            java.util.logging.Logger.getLogger(DeleteTeam.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclyst.class
+            java.util.logging.Logger.getLogger(DeleteTeam.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclyst.class
+            java.util.logging.Logger.getLogger(DeleteTeam.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -618,7 +619,7 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeleteCiclyst().setVisible(true);
+                new DeleteTeam().setVisible(true);
             }
         });
     }

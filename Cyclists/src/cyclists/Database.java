@@ -51,8 +51,8 @@ public class Database {
         try (
                 Statement st = this.getConnection().createStatement();
                 ResultSet rs = st.executeQuery(query);) {
-            while (rs.next()) {
-                if (rs.getString(1) == id) {
+            while (rs.next()) {                
+                if (rs.getString(1).equals(id)) {
                     return true;
                 }
             }
