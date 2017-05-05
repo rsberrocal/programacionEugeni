@@ -46,12 +46,11 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
         //Filling up the list with all the data from cyclist
         try {
             cyclistData = cyclist();
+            Ciclistes c = new Ciclistes();
+            c.loadTable(pTableCyclist);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //Setting up the width and aligning the cell of the table
-        cellWidth();
-        alignCells();
     }
     //Own variables
     //Index to move the buttons
@@ -62,7 +61,7 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
     public boolean btRightPressed = false;
     public boolean btLeftPressed = false;
     public boolean btTotalLeftPressed = false;
-    public boolean btSearchPressed = false;    
+    public boolean btSearchPressed = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,7 +71,6 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("rsudario_gproductes?user=rsudario&password=rsudarioPU").createEntityManager();
         ciclistesQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
@@ -92,8 +90,7 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
         tfTeam = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbCiclyst = new javax.swing.JTable();
+        pTableCyclist = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -155,25 +152,18 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
 
         jLabel5.setText("Age");
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, ciclistesList, tbCiclyst);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dorsal}"));
-        columnBinding.setColumnName("Dorsal");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nom}"));
-        columnBinding.setColumnName("Name");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${edad}"));
-        columnBinding.setColumnName("Age");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeq}"));
-        columnBinding.setColumnName("Team");
-        columnBinding.setColumnClass(String.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane1.setViewportView(tbCiclyst);
-        if (tbCiclyst.getColumnModel().getColumnCount() > 0) {
-            tbCiclyst.getColumnModel().getColumn(2).setResizable(false);
-        }
+        pTableCyclist.setMaximumSize(new java.awt.Dimension(32767, 234));
+
+        javax.swing.GroupLayout pTableCyclistLayout = new javax.swing.GroupLayout(pTableCyclist);
+        pTableCyclist.setLayout(pTableCyclistLayout);
+        pTableCyclistLayout.setHorizontalGroup(
+            pTableCyclistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 459, Short.MAX_VALUE)
+        );
+        pTableCyclistLayout.setVerticalGroup(
+            pTableCyclistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,30 +198,29 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel4))
-                                        .addGap(13, 126, Short.MAX_VALUE))
+                                        .addGap(13, 154, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                        .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                                         .addGap(12, 12, 12)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btSearch)
                                     .addComponent(jLabel5)
-                                    .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18))
+                                    .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(pTableCyclist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pTableCyclist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -258,30 +247,13 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
                             .addComponent(btTotalRight)
                             .addComponent(btTotalLeft))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btDelete)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                        .addComponent(btDelete)
+                        .addGap(0, 44, Short.MAX_VALUE)))
+                .addContainerGap())
         );
-
-        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //Function to set the width of cells
-    public void cellWidth() {
-        tbCiclyst.getColumnModel().getColumn(0).setPreferredWidth(5);
-        tbCiclyst.getColumnModel().getColumn(1).setPreferredWidth(90);
-        tbCiclyst.getColumnModel().getColumn(2).setPreferredWidth(5);
-        tbCiclyst.getColumnModel().getColumn(3).setPreferredWidth(60);
-    }
-
-    //Function to align cells
-    public void alignCells() {
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        tbCiclyst.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tbCiclyst.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-    }
 
     //Functions to fill the list of cyclist
     public List cyclist() throws SQLException {
@@ -663,12 +635,10 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbCiclyst;
+    private javax.swing.JPanel pTableCyclist;
     private javax.swing.JTextField tfAge;
     private javax.swing.JTextField tfDorsal;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfTeam;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

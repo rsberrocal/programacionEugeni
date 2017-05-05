@@ -6,8 +6,10 @@
 package cyclists.forms.Ciclyst;
 
 import cyclists.Database;
+import cyclists.Entity.Ciclistes;
 import cyclists.forms.MainForm;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
@@ -32,12 +35,12 @@ public class AddCiclyst extends javax.swing.JFrame {
         try {
             //Filling the ComboBox
             addItemsCombo();
+            Ciclistes c = new Ciclistes();
+            c.loadTable(pTableCyclist);
         } catch (SQLException ex) {
             Logger.getLogger(AddCiclyst.class.getName()).log(Level.SEVERE, null, ex);
         }
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../../images/icon.png")));
-        cellWidth();
-        alignCells();
     }
 
     /**
@@ -48,7 +51,6 @@ public class AddCiclyst extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("rsudario_gproductes?user=rsudario&password=rsudarioPU").createEntityManager();
         ciclistesQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
@@ -67,14 +69,19 @@ public class AddCiclyst extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cbTeams = new javax.swing.JComboBox<>();
         tfDorsal = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbCiclyst = new javax.swing.JTable();
+        pTableCyclist = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+        });
+
+        tfAge.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfAgeKeyTyped(evt);
             }
         });
 
@@ -96,66 +103,66 @@ public class AddCiclyst extends javax.swing.JFrame {
         jLabel5.setText("Age");
 
         cbTeams.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        cbTeams.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTeamsActionPerformed(evt);
+            }
+        });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, ciclistesList2, tbCiclyst);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dorsal}"));
-        columnBinding.setColumnName("Dorsal");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nom}"));
-        columnBinding.setColumnName("Name");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${edad}"));
-        columnBinding.setColumnName("Age");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeq}"));
-        columnBinding.setColumnName("Team");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane1.setViewportView(tbCiclyst);
-        if (tbCiclyst.getColumnModel().getColumnCount() > 0) {
-            tbCiclyst.getColumnModel().getColumn(0).setResizable(false);
-            tbCiclyst.getColumnModel().getColumn(1).setResizable(false);
-            tbCiclyst.getColumnModel().getColumn(2).setResizable(false);
-            tbCiclyst.getColumnModel().getColumn(3).setResizable(false);
-        }
+        tfDorsal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfDorsalKeyTyped(evt);
+            }
+        });
+
+        pTableCyclist.setMaximumSize(new java.awt.Dimension(32767, 234));
+
+        javax.swing.GroupLayout pTableCyclistLayout = new javax.swing.GroupLayout(pTableCyclist);
+        pTableCyclist.setLayout(pTableCyclistLayout);
+        pTableCyclistLayout.setHorizontalGroup(
+            pTableCyclistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 436, Short.MAX_VALUE)
+        );
+        pTableCyclistLayout.setVerticalGroup(
+            pTableCyclistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(89, 89, 89)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)))
+                                    .addComponent(jLabel2)
+                                    .addComponent(btInsert))
+                                .addGap(0, 88, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btInsert)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cbTeams, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfName, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbTeams, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(89, 89, 89)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(41, 41, 41)))
+                .addComponent(pTableCyclist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -179,32 +186,17 @@ public class AddCiclyst extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(btInsert)
                 .addGap(57, 57, 57))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(pTableCyclist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-
-        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void cellWidth() {
-        tbCiclyst.getColumnModel().getColumn(0).setPreferredWidth(15);
-        tbCiclyst.getColumnModel().getColumn(1).setPreferredWidth(90);
-        tbCiclyst.getColumnModel().getColumn(2).setPreferredWidth(10);
-        tbCiclyst.getColumnModel().getColumn(3).setPreferredWidth(60);
-    }
-
-    public void alignCells() {
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        tbCiclyst.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tbCiclyst.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-    }
 
     //Function for set items on ComboBox
     public void addItemsCombo() throws SQLException {
@@ -300,10 +292,34 @@ public class AddCiclyst extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        this.setVisible(false);       
+        this.setVisible(false);
 //        this.rootPane.setEnabled(true);
 //        this.rootPane.requestFocus();
     }//GEN-LAST:event_formWindowClosing
+
+    private void cbTeamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTeamsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTeamsActionPerformed
+
+    private void consumeEvente(KeyEvent evt,JTextField tf){
+        char c = evt.getKeyChar();        
+        if(tf.getText().length()> 2){
+            evt.consume();
+        }
+        if (((c < '0') || (c > '9')) && (c != '\b')) {
+            evt.consume();
+        }
+    }
+    
+    private void tfAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAgeKeyTyped
+        // TODO add your handling code here:
+        consumeEvente(evt,tfAge);
+    }//GEN-LAST:event_tfAgeKeyTyped
+
+    private void tfDorsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDorsalKeyTyped
+        // TODO add your handling code here:
+        consumeEvente(evt,tfDorsal);
+    }//GEN-LAST:event_tfDorsalKeyTyped
 
     /**
      * @param args the command line arguments
@@ -355,11 +371,9 @@ public class AddCiclyst extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbCiclyst;
+    private javax.swing.JPanel pTableCyclist;
     private javax.swing.JTextField tfAge;
     private javax.swing.JTextField tfDorsal;
     private javax.swing.JTextField tfName;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

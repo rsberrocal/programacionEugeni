@@ -7,6 +7,7 @@ package cyclists.forms;
 
 import cyclists.forms.Ciclyst.AddCiclyst;
 import cyclists.forms.Ciclyst.DeleteCiclyst;
+import cyclists.forms.Ciclyst.ModifyCiclyst;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -106,6 +107,11 @@ public class MainForm extends javax.swing.JFrame {
         mCiclistes.add(miAddCiclistes);
 
         miModifyCiclistes.setText("Modify");
+        miModifyCiclistes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miModifyCiclistesActionPerformed(evt);
+            }
+        });
         mCiclistes.add(miModifyCiclistes);
 
         miDeleteCiclistes.setText("Delete");
@@ -212,7 +218,7 @@ public class MainForm extends javax.swing.JFrame {
         ac.setTitle("Add Cyclist");
         ac.setLocationRelativeTo(null);
         ac.setVisible(true);
-        
+
         //this.setEnabled(false);
     }//GEN-LAST:event_miAddCiclistesActionPerformed
 
@@ -242,6 +248,13 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         exitDialog();
     }//GEN-LAST:event_mExitMousePressed
+
+    private void miModifyCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miModifyCiclistesActionPerformed
+        ModifyCiclyst mc = new ModifyCiclyst();
+        mc.setTitle("Modify Cyclist");
+        mc.setLocationRelativeTo(null);
+        mc.setVisible(true);
+    }//GEN-LAST:event_miModifyCiclistesActionPerformed
 
     /**
      * @param args the command line arguments
