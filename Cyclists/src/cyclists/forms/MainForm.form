@@ -21,7 +21,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="mEquips">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Equips"/>
+            <Property name="text" type="java.lang.String" value="Teams"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAddEquips">
@@ -46,7 +46,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mCiclistes">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ciclistes"/>
+            <Property name="text" type="java.lang.String" value="Cyclist"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAddCiclistes">
@@ -99,7 +99,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mMaillots">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Maillots"/>
+            <Property name="text" type="java.lang.String" value="Shirt"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAddMaillots">
@@ -143,7 +143,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mEtapes">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Etapes"/>
+            <Property name="text" type="java.lang.String" value="Stage"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAddEtapes">

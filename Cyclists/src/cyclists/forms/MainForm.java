@@ -84,7 +84,7 @@ public class MainForm extends javax.swing.JFrame {
 
         lBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background.jpg"))); // NOI18N
 
-        mEquips.setText("Equips");
+        mEquips.setText("Teams");
 
         miAddEquips.setText("Add");
         miAddEquips.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +102,7 @@ public class MainForm extends javax.swing.JFrame {
 
         mbMain.add(mEquips);
 
-        mCiclistes.setText("Ciclistes");
+        mCiclistes.setText("Cyclist");
 
         miAddCiclistes.setText("Add");
         miAddCiclistes.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +143,7 @@ public class MainForm extends javax.swing.JFrame {
 
         mbMain.add(mLlevar);
 
-        mMaillots.setText("Maillots");
+        mMaillots.setText("Shirt");
 
         miAddMaillots.setText("Add");
         mMaillots.add(miAddMaillots);
@@ -169,7 +169,7 @@ public class MainForm extends javax.swing.JFrame {
 
         mbMain.add(mPorts);
 
-        mEtapes.setText("Etapes");
+        mEtapes.setText("Stage");
 
         miAddEtapes.setText("Add");
         mEtapes.add(miAddEtapes);
