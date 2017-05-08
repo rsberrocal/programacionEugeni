@@ -72,9 +72,6 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("rsudario_gproductes?user=rsudario&password=rsudarioPU").createEntityManager();
-        ciclistesQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
-        ciclistesList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery.getResultList();
         tfAge = new javax.swing.JTextField();
         tfDorsal = new javax.swing.JTextField();
         btRight = new javax.swing.JButton();
@@ -627,9 +624,6 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
     private javax.swing.JButton btSearch;
     private javax.swing.JButton btTotalLeft;
     private javax.swing.JButton btTotalRight;
-    private java.util.List<cyclists.Entity.Cyclist> ciclistesList;
-    private javax.persistence.Query ciclistesQuery;
-    private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

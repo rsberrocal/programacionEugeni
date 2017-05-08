@@ -69,9 +69,6 @@ public class ModifyCiclyst extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("rsudario_gproductes?user=rsudario&password=rsudarioPU").createEntityManager();
-        ciclistesQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
-        ciclistesList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery.getResultList();
         tfAge = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         tfDorsal = new javax.swing.JTextField();
@@ -665,9 +662,6 @@ public class ModifyCiclyst extends javax.swing.JFrame {
     private javax.swing.JButton btTotalLeft;
     private javax.swing.JButton btTotalRight;
     private javax.swing.JComboBox<String> cbTeams;
-    private java.util.List<cyclists.Entity.Cyclist> ciclistesList;
-    private javax.persistence.Query ciclistesQuery;
-    private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
