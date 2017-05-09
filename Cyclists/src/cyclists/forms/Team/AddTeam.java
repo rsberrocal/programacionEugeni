@@ -54,7 +54,7 @@ public class AddTeam extends javax.swing.JFrame {
         tfName = new javax.swing.JTextField();
         pTableCyclist = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        tfDirector = new javax.swing.JTextField();
+        tfManager = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -88,7 +88,7 @@ public class AddTeam extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jLabel6.setText("Director");
+        jLabel6.setText("Manager");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,8 +108,8 @@ public class AddTeam extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btInsert)
                             .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                            .addComponent(tfDirector))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                            .addComponent(tfManager))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(pTableCyclist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
@@ -125,7 +125,7 @@ public class AddTeam extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(tfDirector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addComponent(btInsert)
                 .addContainerGap(89, Short.MAX_VALUE))
@@ -142,7 +142,7 @@ public class AddTeam extends javax.swing.JFrame {
     private void btInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsertActionPerformed
         // TODO add your handling code here:
         // tfAlerts
-        if (tfDirector.getText().isEmpty() && tfName.getText().isEmpty()) {
+        if (tfManager.getText().isEmpty() && tfName.getText().isEmpty()) {
             MainForm.alertsWarning(this, "", "Name and Director are missing");
             // putting focus on tfName
             tfName.requestFocus();
@@ -150,14 +150,14 @@ public class AddTeam extends javax.swing.JFrame {
             MainForm.alertsWarning(this, "", "Name missing");
             // putting focus on tfName
             tfName.requestFocus();
-        } else if (tfDirector.getText().isEmpty()) {
+        } else if (tfManager.getText().isEmpty()) {
             MainForm.alertsWarning(this, "", "Director missing");
             // putting focus on tfDorsal
-            tfDirector.requestFocus();
+            tfManager.requestFocus();
         } else {
 
             String name = tfName.getText();
-            String director = tfDirector.getText();
+            String director = tfManager.getText();
             Database db = new Database();
             try {
                 if (db.searchID("nomeq", "Equips", name)) {
@@ -241,7 +241,7 @@ public class AddTeam extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel pTableCyclist;
-    private javax.swing.JTextField tfDirector;
+    private javax.swing.JTextField tfManager;
     private javax.swing.JTextField tfName;
     // End of variables declaration//GEN-END:variables
 }

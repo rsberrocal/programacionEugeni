@@ -36,11 +36,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modify"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miModifyEquipsActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miDeleteEquips">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miDeleteEquipsActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

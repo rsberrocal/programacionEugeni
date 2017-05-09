@@ -7,6 +7,7 @@ package cyclists.forms.Team;
 
 import cyclists.Database;
 import cyclists.Entity.Cyclist;
+import cyclists.Entity.Team;
 import cyclists.forms.MainForm;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
@@ -38,10 +39,9 @@ public class ModifyTeam extends javax.swing.JFrame {
         btLeft.setEnabled(false);
         //Filling up the list with all the data from cyclist
         try {
-            cyclistData = cyclist();
-            addItemsCombo();
-            Cyclist c = new Cyclist();
-            c.loadTable(pTableCyclist);
+            teamData = team();
+            Team t = new Team();
+            t.loadTable(pTableCyclist);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -53,7 +53,7 @@ public class ModifyTeam extends javax.swing.JFrame {
     //Index to move the buttons
     public int index;
     //list with all the data from cyclist
-    public List<Cyclist> cyclistData;
+    public List<Team> teamData;
     //Booleans for movement buttons
     public boolean btRightPressed = false;
     public boolean btLeftPressed = false;
@@ -69,16 +69,9 @@ public class ModifyTeam extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("rsudario_gproductes?user=rsudario&password=rsudarioPU").createEntityManager();
-        ciclistesQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
-        ciclistesList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery.getResultList();
-        tfAge = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tfDorsal = new javax.swing.JTextField();
         btRight = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         btTotalRight = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         btLeft = new javax.swing.JButton();
         btTotalLeft = new javax.swing.JButton();
         btModify = new javax.swing.JButton();
@@ -86,8 +79,8 @@ public class ModifyTeam extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tfName = new javax.swing.JTextField();
         btSearch = new javax.swing.JButton();
-        cbTeams = new javax.swing.JComboBox<>();
         pTableCyclist = new javax.swing.JPanel();
+        tfManager = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -97,7 +90,7 @@ public class ModifyTeam extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Team");
+        jLabel3.setText("Manager");
 
         btRight.setText(">");
         btRight.addActionListener(new java.awt.event.ActionListener() {
@@ -106,16 +99,12 @@ public class ModifyTeam extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Dorsal");
-
         btTotalRight.setText(">>");
         btTotalRight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btTotalRightActionPerformed(evt);
             }
         });
-
-        jLabel5.setText("Age");
 
         btLeft.setText("<");
         btLeft.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +127,7 @@ public class ModifyTeam extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Modify Cyclist");
+        jLabel1.setText("Modify Team");
 
         jLabel2.setText("Name");
 
@@ -148,8 +137,6 @@ public class ModifyTeam extends javax.swing.JFrame {
                 btSearchActionPerformed(evt);
             }
         });
-
-        cbTeams.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {""}));
 
         pTableCyclist.setMaximumSize(new java.awt.Dimension(32767, 234));
 
@@ -161,7 +148,7 @@ public class ModifyTeam extends javax.swing.JFrame {
         );
         pTableCyclistLayout.setVerticalGroup(
             pTableCyclistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 234, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -172,45 +159,39 @@ public class ModifyTeam extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGap(16, 16, 16)
-                                                .addComponent(cbTeams, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btSearch)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(tfAge, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(btSearch))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btTotalLeft)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btLeft)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btRight))
-                                    .addComponent(btModify))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btTotalRight))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btRight)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btTotalRight)
+                                        .addGap(9, 9, 9))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(49, 49, 49)
+                                        .addComponent(btModify)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(87, 87, 87)
-                        .addComponent(jLabel1)))
-                .addGap(18, 18, 18)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfManager, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pTableCyclist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,21 +206,11 @@ public class ModifyTeam extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(cbTeams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel3)
+                            .addComponent(tfManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btRight)
                             .addComponent(btLeft)
@@ -254,10 +225,10 @@ public class ModifyTeam extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Functions to fill the list of cyclist
-    public List cyclist() throws SQLException {
-        List<Cyclist> l = new ArrayList<Cyclist>();
+    public List team() throws SQLException {
+        List<Team> l = new ArrayList<Team>();
         //Query
-        String query = "select dorsal,nom,edad,nomeq from Ciclistes;";
+        String query = "select nomeq,director from Equips;";
         Database db = new Database();
         //Connect
         db.makeConnection();
@@ -265,38 +236,15 @@ public class ModifyTeam extends javax.swing.JFrame {
         Statement st = db.getConnection().createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {//loop rs
-            Cyclist c = new Cyclist();
-            c.setDorsal(rs.getInt(1));
-            c.setNom(rs.getString(2));
-            c.setEdad(rs.getInt(3));
-            c.setNomeq(rs.getString(4));
-            l.add(c);
+            Team t = new Team();
+            t.setNameEq(rs.getString(1));
+            t.setManager(rs.getString(2));
+            l.add(t);
         }//end loop rs
         //Disconnect
         db.closeConnection();
         return l;
     }
-
-    //Function for set items on ComboBox
-    public void addItemsCombo() throws SQLException {
-        //Query
-        String query = "select nomeq from Equips;";
-        Database db = new Database();
-        //Connect
-        db.makeConnection();
-        try (
-                Statement st = db.getConnection().createStatement();
-                ResultSet rs = st.executeQuery(query);) {
-            while (rs.next()) {
-                cbTeams.addItem(rs.getString(1));
-            }
-        } catch (SQLException e) {
-            System.out.println("Error " + e.getMessage());
-        }
-        //Disconnect
-        db.closeConnection();
-    }
-
 
     private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
         // TODO add your handling code here:
@@ -312,11 +260,9 @@ public class ModifyTeam extends javax.swing.JFrame {
             index = 0;
         }
         //Set the TextField with the data of cyclist(index)
-        tfName.setText(cyclistData.get(index).getNom());
-        tfDorsal.setText(String.valueOf(cyclistData.get(index).getDorsal()));
-        tfAge.setText(String.valueOf(cyclistData.get(index).getEdad()));
-        cbTeams.setSelectedItem(cyclistData.get(index).getNomeq());
-        //tfTeam.setText(cyclistData.get(index).getNomeq());
+        tfName.setText(teamData.get(index).getNameEq());
+        tfManager.setText(teamData.get(index).getManager());
+        //tfTeam.setText(teamData.get(index).getNameEq());
         //Index increase
         index++;
         //If this button boolean wasn't pressed
@@ -329,7 +275,7 @@ public class ModifyTeam extends javax.swing.JFrame {
             btLeft.setEnabled(true);
         }
         //Disable right buttons if index is equals to last position from the list
-        if (index == cyclistData.size()) {
+        if (index == teamData.size()) {
             btTotalRight.setEnabled(false);
             btRight.setEnabled(false);
         }
@@ -337,13 +283,11 @@ public class ModifyTeam extends javax.swing.JFrame {
 
     private void btTotalRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalRightActionPerformed
         //Set the TextFields with all the data from the last cyclist
-        tfName.setText(cyclistData.get(cyclistData.size() - 1).getNom());
-        tfDorsal.setText(String.valueOf(cyclistData.get(cyclistData.size() - 1).getDorsal()));
-        tfAge.setText(String.valueOf(cyclistData.get(cyclistData.size() - 1).getEdad()));
-        cbTeams.setSelectedItem(cyclistData.get(cyclistData.size() - 1).getNomeq());
-//        tfTeam.setText(cyclistData.get(cyclistData.size() - 1).getNomeq());
+        tfName.setText(teamData.get(teamData.size() - 1).getNameEq());
+        tfManager.setText(String.valueOf(teamData.get(teamData.size() - 1).getManager()));
+//        tfTeam.setText(teamData.get(teamData.size() - 1).getNameEq());
         //Set index to last position from the list
-        index = cyclistData.size() - 1;
+        index = teamData.size() - 1;
         //Disable right buttons because is the last cyclist
         btTotalRight.setEnabled(false);
         btRight.setEnabled(false);
@@ -356,7 +300,7 @@ public class ModifyTeam extends javax.swing.JFrame {
 
     private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
         //If any other button was pressed before set index--
-        if ((btRightPressed) && index != 1 && index != cyclistData.size() - 1) {
+        if ((btRightPressed) && index != 1 && index != teamData.size() - 1) {
             index--;
             btRightPressed = false;
         }
@@ -372,11 +316,9 @@ public class ModifyTeam extends javax.swing.JFrame {
             index--;
         }
         //Set the TextField with the data of cyclist(index)
-        tfName.setText(cyclistData.get(index).getNom());
-        tfDorsal.setText(String.valueOf(cyclistData.get(index).getDorsal()));
-        tfAge.setText(String.valueOf(cyclistData.get(index).getEdad()));
-        cbTeams.setSelectedItem(cyclistData.get(index).getNomeq());
-        // tfTeam.setText(cyclistData.get(index).getNomeq());
+        tfName.setText(teamData.get(index).getNameEq());
+        tfManager.setText(String.valueOf(teamData.get(index).getManager()));
+        // tfTeam.setText(teamData.get(index).getNameEq());
 
         //Enable right buttons if they are disabled
         if (!btTotalRight.isEnabled() && !btRight.isEnabled()) {
@@ -396,11 +338,9 @@ public class ModifyTeam extends javax.swing.JFrame {
             btTotalLeftPressed = true;
         }
         //Set the TextFields with all the data from the first cyclist
-        tfName.setText(cyclistData.get(0).getNom());
-        tfDorsal.setText(String.valueOf(cyclistData.get(0).getDorsal()));
-        tfAge.setText(String.valueOf(cyclistData.get(0).getEdad()));
-        //tfTeam.setText(cyclistData.get(0).getNomeq());
-        cbTeams.setSelectedItem(cyclistData.get(0).getNomeq());
+        tfName.setText(teamData.get(0).getNameEq());
+        tfManager.setText(String.valueOf(teamData.get(0).getManager()));
+
         //Set index to 0 because is the first cyclist
         index = 0;
         //Disable left buttons because is the first cyclist
@@ -414,67 +354,43 @@ public class ModifyTeam extends javax.swing.JFrame {
     }//GEN-LAST:event_btTotalLeftActionPerformed
 
     private void btModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyActionPerformed
-        int oldDorsal = 0;
+        String oldnameq = "";
         // tfAlerts
-        if (tfDorsal.getText().isEmpty() && tfName.getText().isEmpty() && tfAge.getText().isEmpty()) {
-            MainForm.alertsWarning(this, "", "Name, Dorsal and Age are missing");
-            // putting focus on tfName
-            tfName.requestFocus();
-        } else if (tfDorsal.getText().isEmpty() && tfName.getText().isEmpty()) {
-            MainForm.alertsWarning(this, "", "Name and Dorsal are missing");
-            // putting focus on tfName
-            tfName.requestFocus();
-        } else if (tfAge.getText().isEmpty() && tfDorsal.getText().isEmpty()) {
-            MainForm.alertsWarning(this, "", "Age and Dorsal are missing");
-            // putting focus on tfDorsal
-            tfDorsal.requestFocus();
-        } else if (tfAge.getText().isEmpty() && tfName.getText().isEmpty()) {
-            MainForm.alertsWarning(this, "", "Age and Name are missing");
+        if (tfManager.getText().isEmpty() && tfName.getText().isEmpty()) {
+            MainForm.alertsWarning(this, "", "Name and Director are missing");
             // putting focus on tfName
             tfName.requestFocus();
         } else if (tfName.getText().isEmpty()) {
             MainForm.alertsWarning(this, "", "Name missing");
             // putting focus on tfName
             tfName.requestFocus();
-        } else if (tfDorsal.getText().isEmpty()) {
-            MainForm.alertsWarning(this, "", "Dorsal missing");
+        } else if (tfManager.getText().isEmpty()) {
+            MainForm.alertsWarning(this, "", "Director missing");
             // putting focus on tfDorsal
-            tfDorsal.requestFocus();
-        } else if (tfAge.getText().isEmpty()) {
-            MainForm.alertsWarning(this, "", "Age missing");
-
-            // putting focus on tfAge
-            tfAge.requestFocus();
-            // End of tfAlerts
+            tfManager.requestFocus();
         } else {
-            StringBuilder sqlUpdate = new StringBuilder();;
-            StringBuilder sqlSearchDorsal = new StringBuilder();;
-            sqlUpdate.append("update Ciclistes set ");
-            sqlUpdate.append("dorsal = ? ,");
-            sqlUpdate.append("nom = ? ,");
-            sqlUpdate.append("edad = ? ,");
-            sqlUpdate.append("nomeq = ? ");
-            sqlUpdate.append("where dorsal = ? ;");
+            StringBuilder sqlUpdate = new StringBuilder();
+            sqlUpdate.append("update Equips set ");
+            sqlUpdate.append("nomeq = ? ,");
+            sqlUpdate.append("director = ? ");
+            sqlUpdate.append("where nomeq = ? ;");
 
             Database db = new Database();
             try {
                 //Connect
                 db.makeConnection();
 
-                String query = "select * from Ciclistes where nom like '" + tfName.getText() + "' and edad = " + tfAge.getText() + " and nomeq = '"
-                        + cbTeams.getSelectedItem().toString() + "';";
+                String query = "select nomeq from Equips where director like '" + teamData.get(index).getManager()+ "' ;";
                 Statement st = db.getConnection().createStatement();
                 ResultSet rs = st.executeQuery(query);
                 if (rs.next()) {
-                    oldDorsal = rs.getInt(1);
+                    oldnameq = rs.getString(1);
                 }
                 PreparedStatement pst = db.getConnection().prepareStatement(sqlUpdate.toString());
-                pst.setInt(1, Integer.parseInt(tfDorsal.getText()));
-                pst.setString(2, tfName.getText());
-                pst.setInt(3, Integer.parseInt(tfAge.getText()));
-                pst.setString(4, cbTeams.getSelectedItem().toString());
-                pst.setInt(5, oldDorsal);
-                String n = pst.toString();
+                pst.setString(1, tfName.getText());
+                pst.setString(2, tfManager.getText());
+                pst.setString(3, oldnameq);
+                String dw=pst.toString();
                 pst.execute();
 
                 //Disconnect
@@ -487,19 +403,19 @@ public class ModifyTeam extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btModifyActionPerformed
 
-    private void searchCyclist(String name) {
+    private void searchTeam(String name) {
         //Adding % to search any cyclist with this text
         name = name + "%";
         //Querys
         //Query to know how many cyclist we got with the same name
-        String queryCount = "select count(*) from Ciclistes where nom like '" + name + "';";
+        String queryCount = "select count(*) from Equips where nomeq like '" + name + "';";
         //Query to know these names if we got more than 1 cyclist with the same name
-        String queryNames = "select nom from Ciclistes where nom like '" + name + "';";
+        String queryNames = "select nomeq from Equips where nomeq like '" + name + "';";
 
         Database db = new Database();
         //If the TextField name is empty, it opens a dialog that inform the user
         if (tfName.getText().isEmpty()) {
-            MainForm.alertsWarning(this, "Name Missing", "Name Missing");
+            MainForm.alertsWarning(this, "Team name Missing", "Team name Missing");
         } else {
             try {
                 //Connect
@@ -509,7 +425,7 @@ public class ModifyTeam extends javax.swing.JFrame {
                 ResultSet rsCount = stCount.executeQuery(queryCount);
                 //See if we can put IF and not WHILE
                 while (rsCount.next()) {//Loop Count
-                    //If we got more than 1 cyclist with the same name
+                    //If we got more than 1 team with the same name
                     if (rsCount.getInt(1) > 1) {
                         //Start the query to get these names
                         Statement stName = db.getConnection().createStatement();
@@ -523,53 +439,48 @@ public class ModifyTeam extends javax.swing.JFrame {
                             i++;
                         }//End loop names
                         //Create a new dialog to make the user chose one of the names below
-                        String input = (String) JOptionPane.showInputDialog(null, "Choose Cyclist Team",
+                        String input = (String) JOptionPane.showInputDialog(null, "Choose a Team",
                                 "Select a Team", JOptionPane.INFORMATION_MESSAGE, null,
                                 names, // Array with names
                                 names[0]); // Default choise
                         ;//End dialog
                         //Query to get the data of cyclist choosed
-                        String queryFinal = "select dorsal,edad,nomeq from Ciclistes where nom like '" + input + "';";
+                        String queryFinal = "select director from Equips where nomeq like '" + input + "';";
                         //Start the query
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
                         //Setting up the TextFields with all the data of this cyclist
                         while (rsFinal.next()) {//Loop
-                            tfDorsal.setText(String.valueOf(rsFinal.getInt(1)));
-                            tfAge.setText(String.valueOf(rsFinal.getInt(2)));
-                            cbTeams.setSelectedItem(rsFinal.getString(3));
+                            tfManager.setText(rsFinal.getString(1));
                         }//End loop
                         //Finally set the name of this cyclist
                         tfName.setText(input);
                         //If this cyclist doesn't exists
                     } else if (rsCount.getInt(1) == 0) {
                         //Create a new dialog informing the use that this Cyclist doesnt exist
-                        MainForm.alertsInformation(this, "Cyclist doesn't exists", "Cyclist doesn't exists");
+                        MainForm.alertsInformation(this, "Team doesn't exists", "Team doesn't exists");
                         //If there is only 1 cyclist with this name
                     } else {
                         //Query to know all the data about this cyclist
-                        String queryFinal = "select dorsal,edad,nomeq,nom from Ciclistes where nom like '" + name + "';";
+                        String queryFinal = "select nomeq,director from Equips where nomeq like '" + name + "';";
                         //Start the query
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
                         //Setting up the TextFields with all the data of this cyclist
                         while (rsFinal.next()) {
-                            tfDorsal.setText(String.valueOf(rsFinal.getInt(1)));
-                            tfAge.setText(String.valueOf(rsFinal.getInt(2)));
-                            // tfTeam.setText(rsFinal.getString(3));
-                            cbTeams.setSelectedItem(rsFinal.getString(3));
-                            tfName.setText(rsFinal.getString(4));
+                            tfName.setText(rsFinal.getString(1));
+                            tfManager.setText(rsFinal.getString(2));
                         }
                     }
                 }
                 //Set the index == 0 to search exactly the index of this cyclist
                 index = 0;
-                //index = cyclistData.indexOf(tfDorsal.getText());
-                for (int j = 0; j < cyclistData.size(); j++) {//Loop index
+                //index = teamData.indexOf(tfDorsal.getText());
+                for (int j = 0; j < teamData.size(); j++) {//Loop index
                     //If dorsal of cyclist(j) is equals to the text of dorsal TextField
-                    if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
+                    if (teamData.get(j).getNameEq().equals(tfName.getText())) {
                         //If is the last position, set index to the last position
-                        if (j == cyclistData.size()) {
+                        if (j == teamData.size()) {
                             index = j - 1;
                         } else {
                             //else set index to j
@@ -590,12 +501,12 @@ public class ModifyTeam extends javax.swing.JFrame {
                 btTotalRight.setEnabled(true);
                 btRight.setEnabled(true);
                 //If index == 0 disable the right buttons and enable the left buttons
-            } else if (index == cyclistData.size() - 1) {
+            } else if (index == teamData.size() - 1) {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
                 btTotalRight.setEnabled(false);
                 btRight.setEnabled(false);
-                //If index is between 0 and cyclistData.size enable all the buttons
+                //If index is between 0 and teamData.size enable all the buttons
             } else {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
@@ -613,7 +524,7 @@ public class ModifyTeam extends javax.swing.JFrame {
 
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         //Calling the function search to search the cyclist that the user put on the TextField name
-        searchCyclist(tfName.getText());
+        searchTeam(tfName.getText());
     }//GEN-LAST:event_btSearchActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -670,18 +581,11 @@ public class ModifyTeam extends javax.swing.JFrame {
     private javax.swing.JButton btSearch;
     private javax.swing.JButton btTotalLeft;
     private javax.swing.JButton btTotalRight;
-    private javax.swing.JComboBox<String> cbTeams;
-    private java.util.List<cyclists.Entity.Cyclist> ciclistesList;
-    private javax.persistence.Query ciclistesQuery;
-    private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel pTableCyclist;
-    private javax.swing.JTextField tfAge;
-    private javax.swing.JTextField tfDorsal;
+    private javax.swing.JTextField tfManager;
     private javax.swing.JTextField tfName;
     // End of variables declaration//GEN-END:variables
 }

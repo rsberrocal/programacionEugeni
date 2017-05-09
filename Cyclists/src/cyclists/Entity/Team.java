@@ -25,10 +25,26 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class Team {
 
     private String nameEq;
-    private String director;
+    private String manager;
 
     public Team() {
 
+    }
+
+    public String getNameEq() {
+        return nameEq;
+    }
+
+    public void setNameEq(String nameEq) {
+        this.nameEq = nameEq;
+    }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 
     //Function to set the width of cells
@@ -42,7 +58,7 @@ public class Team {
     //Function to align cells
     private void alignCells(JTable table) {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);        
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
     }
 
     public void loadTable(JPanel pane) throws SQLException {
@@ -71,7 +87,7 @@ public class Team {
         JTable tbTeam = new JTable(data, column);
         JScrollPane jsp = new JScrollPane(tbTeam);
         tbTeam.getColumnModel().getColumn(0).setHeaderValue("Name");
-        tbTeam.getColumnModel().getColumn(1).setHeaderValue("Director");
+        tbTeam.getColumnModel().getColumn(1).setHeaderValue("Manager");
         cellWidth(tbTeam);
         alignCells(tbTeam);
         pane.setLayout(new BorderLayout());

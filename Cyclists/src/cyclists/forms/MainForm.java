@@ -9,6 +9,8 @@ import cyclists.forms.Ciclyst.AddCiclyst;
 import cyclists.forms.Ciclyst.DeleteCiclyst;
 import cyclists.forms.Ciclyst.ModifyCiclyst;
 import cyclists.forms.Team.AddTeam;
+import cyclists.forms.Team.DeleteTeam;
+import cyclists.forms.Team.ModifyTeam;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -95,9 +97,19 @@ public class MainForm extends javax.swing.JFrame {
         mEquips.add(miAddEquips);
 
         miModifyEquips.setText("Modify");
+        miModifyEquips.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miModifyEquipsActionPerformed(evt);
+            }
+        });
         mEquips.add(miModifyEquips);
 
         miDeleteEquips.setText("Delete");
+        miDeleteEquips.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miDeleteEquipsActionPerformed(evt);
+            }
+        });
         mEquips.add(miDeleteEquips);
 
         mbMain.add(mEquips);
@@ -269,6 +281,22 @@ public class MainForm extends javax.swing.JFrame {
         at.setLocationRelativeTo(null);
         at.setVisible(true);
     }//GEN-LAST:event_miAddEquipsActionPerformed
+
+    private void miModifyEquipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miModifyEquipsActionPerformed
+        // TODO add your handling code here:
+        ModifyTeam mt = new ModifyTeam();
+        mt.setTitle("Modify Team");
+        mt.setLocationRelativeTo(null);
+        mt.setVisible(true);
+    }//GEN-LAST:event_miModifyEquipsActionPerformed
+
+    private void miDeleteEquipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDeleteEquipsActionPerformed
+        // TODO add your handling code here:
+        DeleteTeam dt = new DeleteTeam();
+        dt.setTitle("Delete  Team");
+        dt.setLocationRelativeTo(null);
+        dt.setVisible(true);
+    }//GEN-LAST:event_miDeleteEquipsActionPerformed
 
     /**
      * @param args the command line arguments
