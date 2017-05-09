@@ -7,6 +7,7 @@ package cyclists.forms.Team;
 
 import cyclists.Database;
 import cyclists.Entity.Cyclist;
+import cyclists.Entity.Team;
 import cyclists.forms.MainForm;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
@@ -32,10 +33,8 @@ public final class DeleteTeam extends javax.swing.JFrame {
         initComponents();
         //Setting the global index for movement buttons
         index = 0;
-        //Setting TextField not enable so the user can't edit the cyclist
-        tfDorsal.setEnabled(false);
-        tfAge.setEnabled(false);
-        tfTeam.setEnabled(false);
+        //Setting TextField not enable so the user can't edit the cyclist        
+        tfManager.setEnabled(false);
         //Putting up the icon image
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../../images/icon.png")));
         //Setting the Left buttons because we start with index ==0
@@ -43,9 +42,9 @@ public final class DeleteTeam extends javax.swing.JFrame {
         btLeft.setEnabled(false);
         //Filling up the list with all the data from cyclist
         try {
-            cyclistData = cyclist();
-            Cyclist c = new Cyclist();
-            c.loadTable(pTableCyclist);
+            Team t = new Team();
+            teamData = t.team();
+            t.loadTable(pTableCyclist);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -54,7 +53,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
     //Index to move the buttons
     public int index;
     //list with all the data from cyclist
-    public List<Cyclist> cyclistData;
+    public List<Team> teamData;
     //Booleans for movement buttons
     public boolean btRightPressed = false;
     public boolean btLeftPressed = false;
@@ -70,11 +69,6 @@ public final class DeleteTeam extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("rsudario_gproductes?user=rsudario&password=rsudarioPU").createEntityManager();
-        ciclistesQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Ciclistes c");
-        ciclistesList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ciclistesQuery.getResultList();
-        tfAge = new javax.swing.JTextField();
-        tfDorsal = new javax.swing.JTextField();
         btRight = new javax.swing.JButton();
         btTotalRight = new javax.swing.JButton();
         btLeft = new javax.swing.JButton();
@@ -85,9 +79,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
         tfName = new javax.swing.JTextField();
         btSearch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        tfTeam = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        tfManager = new javax.swing.JTextField();
         pTableCyclist = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -144,11 +136,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Team");
-
-        jLabel4.setText("Dorsal");
-
-        jLabel5.setText("Age");
+        jLabel3.setText("Manager");
 
         pTableCyclist.setMaximumSize(new java.awt.Dimension(32767, 234));
 
@@ -177,35 +165,29 @@ public final class DeleteTeam extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(18, 18, 18)
-                                        .addComponent(tfTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tfManager, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btTotalLeft)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(btLeft)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btRight))
-                                            .addComponent(btDelete))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btTotalRight)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btRight)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btTotalRight))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(32, 32, 32)
+                                                .addComponent(btDelete)
+                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(18, 18, 18))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4))
-                                        .addGap(13, 154, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                        .addGap(12, 12, 12)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btSearch)
-                                    .addComponent(jLabel5)
-                                    .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btSearch)
+                                .addGap(6, 6, 6))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jLabel1)
@@ -226,19 +208,11 @@ public final class DeleteTeam extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(tfTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(tfManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btRight)
                             .addComponent(btLeft)
@@ -253,44 +227,19 @@ public final class DeleteTeam extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Functions to fill the list of cyclist
-    public List cyclist() throws SQLException {
-        List<Cyclist> l = new ArrayList<Cyclist>();
-        //Query
-        String query = "select dorsal,nom,edad,nomeq from Ciclistes;";
-        Database db = new Database();
-        //Connect
-        db.makeConnection();
-
-        Statement st = db.getConnection().createStatement();
-        ResultSet rs = st.executeQuery(query);
-        while (rs.next()) {//loop rs
-            Cyclist c = new Cyclist();
-            c.setDorsal(rs.getInt(1));
-            c.setNom(rs.getString(2));
-            c.setEdad(rs.getInt(3));
-            c.setNomeq(rs.getString(4));
-            l.add(c);
-        }//end loop rs
-        //Disconnect
-        db.closeConnection();
-        return l;
-    }
-
-    //Function to search a cyclist
-    private void searchCyclist(String name) {
+    private void searchTeam(String name) {
         //Adding % to search any cyclist with this text
         name = name + "%";
         //Querys
         //Query to know how many cyclist we got with the same name
-        String queryCount = "select count(*) from Ciclistes where nom like '" + name + "';";
+        String queryCount = "select count(*) from Equips where nomeq like '" + name + "';";
         //Query to know these names if we got more than 1 cyclist with the same name
-        String queryNames = "select nom from Ciclistes where nom like '" + name + "';";
+        String queryNames = "select nomeq from Equips where nomeq like '" + name + "';";
 
         Database db = new Database();
         //If the TextField name is empty, it opens a dialog that inform the user
         if (tfName.getText().isEmpty()) {
-            MainForm.alertsWarning(this, "Name Missing", "Name Missing");
+            MainForm.alertsWarning(this, "Team name Missing", "Team name Missing");
         } else {
             try {
                 //Connect
@@ -300,7 +249,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
                 ResultSet rsCount = stCount.executeQuery(queryCount);
                 //See if we can put IF and not WHILE
                 while (rsCount.next()) {//Loop Count
-                    //If we got more than 1 cyclist with the same name
+                    //If we got more than 1 team with the same name
                     if (rsCount.getInt(1) > 1) {
                         //Start the query to get these names
                         Statement stName = db.getConnection().createStatement();
@@ -314,52 +263,48 @@ public final class DeleteTeam extends javax.swing.JFrame {
                             i++;
                         }//End loop names
                         //Create a new dialog to make the user chose one of the names below
-                        String input = (String) JOptionPane.showInputDialog(null, "Choose Cyclist Team",
+                        String input = (String) JOptionPane.showInputDialog(null, "Choose a Team",
                                 "Select a Team", JOptionPane.INFORMATION_MESSAGE, null,
                                 names, // Array with names
                                 names[0]); // Default choise
                         ;//End dialog
                         //Query to get the data of cyclist choosed
-                        String queryFinal = "select dorsal,edad,nomeq from Ciclistes where nom like '" + input + "';";
+                        String queryFinal = "select director from Equips where nomeq like '" + input + "';";
                         //Start the query
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
                         //Setting up the TextFields with all the data of this cyclist
                         while (rsFinal.next()) {//Loop
-                            tfDorsal.setText(String.valueOf(rsFinal.getInt(1)));
-                            tfAge.setText(String.valueOf(rsFinal.getInt(2)));
-                            tfTeam.setText(rsFinal.getString(3));
+                            tfManager.setText(rsFinal.getString(1));
                         }//End loop
                         //Finally set the name of this cyclist
                         tfName.setText(input);
                         //If this cyclist doesn't exists
                     } else if (rsCount.getInt(1) == 0) {
                         //Create a new dialog informing the use that this Cyclist doesnt exist
-                        MainForm.alertsInformation(this, "Cyclist doesn't exists", "Cyclist doesn't exists");
+                        MainForm.alertsInformation(this, "Team doesn't exists", "Team doesn't exists");
                         //If there is only 1 cyclist with this name
                     } else {
                         //Query to know all the data about this cyclist
-                        String queryFinal = "select dorsal,edad,nomeq,nom from Ciclistes where nom like '" + name + "';";
+                        String queryFinal = "select nomeq,director from Equips where nomeq like '" + name + "';";
                         //Start the query
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
                         //Setting up the TextFields with all the data of this cyclist
                         while (rsFinal.next()) {
-                            tfDorsal.setText(String.valueOf(rsFinal.getInt(1)));
-                            tfAge.setText(String.valueOf(rsFinal.getInt(2)));
-                            tfTeam.setText(rsFinal.getString(3));
-                            tfName.setText(rsFinal.getString(4));
+                            tfName.setText(rsFinal.getString(1));
+                            tfManager.setText(rsFinal.getString(2));
                         }
                     }
                 }
                 //Set the index == 0 to search exactly the index of this cyclist
                 index = 0;
-                //index = cyclistData.indexOf(tfDorsal.getText());
-                for (int j = 0; j < cyclistData.size(); j++) {//Loop index
+                //index = teamData.indexOf(tfDorsal.getText());
+                for (int j = 0; j < teamData.size(); j++) {//Loop index
                     //If dorsal of cyclist(j) is equals to the text of dorsal TextField
-                    if (cyclistData.get(j).getDorsal() == Integer.parseInt(tfDorsal.getText())) {
+                    if (teamData.get(j).getNameEq().equals(tfName.getText())) {
                         //If is the last position, set index to the last position
-                        if (j == cyclistData.size()) {
+                        if (j == teamData.size()) {
                             index = j - 1;
                         } else {
                             //else set index to j
@@ -367,6 +312,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
                         }
                     }
                 }//End loop
+
                 //Disconnect
                 db.closeConnection();
             } catch (SQLException ex) {
@@ -379,12 +325,12 @@ public final class DeleteTeam extends javax.swing.JFrame {
                 btTotalRight.setEnabled(true);
                 btRight.setEnabled(true);
                 //If index == 0 disable the right buttons and enable the left buttons
-            } else if (index == cyclistData.size() - 1) {
+            } else if (index == teamData.size() - 1) {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
                 btTotalRight.setEnabled(false);
                 btRight.setEnabled(false);
-                //If index is between 0 and cyclistData.size enable all the buttons
+                //If index is between 0 and teamData.size enable all the buttons
             } else {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
@@ -403,7 +349,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
     //Button search action
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         //Calling the function search to search the cyclist that the user put on the TextField name
-        searchCyclist(tfName.getText());
+        searchTeam(tfName.getText());
     }//GEN-LAST:event_btSearchActionPerformed
 
     //Closing window action
@@ -417,7 +363,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
     //Button delete action
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         //Statement to delete the cyclist
-        String sqlDelete = "delete from Ciclistes where nom like '" + tfName.getText() + "';";
+        String sqlDelete = "delete from Equips where nomeq like '" + tfName.getText() + "';";
         Database db = new Database();
         int i = 0;
         //If TextField name is empty
@@ -427,8 +373,8 @@ public final class DeleteTeam extends javax.swing.JFrame {
         } else {
             //If not is empty create a dialog to know if the user really wants to delete this cyclist
             try {
-                if (db.searchID("dorsal", "Llevar", Integer.parseInt(tfDorsal.getText())) || db.searchID("dorsal", "Ports", Integer.parseInt(tfDorsal.getText())) || db.searchID("dorsal", "Etapes", Integer.parseInt(tfDorsal.getText()))) {
-                    MainForm.alertsWarning(this, "Error", "Error you cant delete this cyclist because depends with other table");
+                if (db.searchID("nomeq", "Ciclistes", tfName.getText())) {
+                    MainForm.alertsWarning(this, "Error", "Error you cant delete this Team because depends with other table");
                 } else if (JOptionPane.showConfirmDialog(this,
                         "Are you sure to delete " + tfName.getText() + "?", "Delete",
                         JOptionPane.YES_NO_OPTION,
@@ -471,10 +417,9 @@ public final class DeleteTeam extends javax.swing.JFrame {
             index = 0;
         }
         //Set the TextField with the data of cyclist(index)
-        tfName.setText(cyclistData.get(index).getNom());
-        tfDorsal.setText(String.valueOf(cyclistData.get(index).getDorsal()));
-        tfAge.setText(String.valueOf(cyclistData.get(index).getEdad()));
-        tfTeam.setText(cyclistData.get(index).getNomeq());
+        tfName.setText(teamData.get(index).getNameEq());
+        tfManager.setText(teamData.get(index).getManager());
+        //tfTeam.setText(teamData.get(index).getNameEq());
         //Index increase
         index++;
         //If this button boolean wasn't pressed
@@ -487,7 +432,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
             btLeft.setEnabled(true);
         }
         //Disable right buttons if index is equals to last position from the list
-        if (index == cyclistData.size()) {
+        if (index == teamData.size()) {
             btTotalRight.setEnabled(false);
             btRight.setEnabled(false);
         }
@@ -497,12 +442,11 @@ public final class DeleteTeam extends javax.swing.JFrame {
     //Button right action >>
     private void btTotalRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalRightActionPerformed
         //Set the TextFields with all the data from the last cyclist
-        tfName.setText(cyclistData.get(cyclistData.size() - 1).getNom());
-        tfDorsal.setText(String.valueOf(cyclistData.get(cyclistData.size() - 1).getDorsal()));
-        tfAge.setText(String.valueOf(cyclistData.get(cyclistData.size() - 1).getEdad()));
-        tfTeam.setText(cyclistData.get(cyclistData.size() - 1).getNomeq());
+        tfName.setText(teamData.get(teamData.size() - 1).getNameEq());
+        tfManager.setText(String.valueOf(teamData.get(teamData.size() - 1).getManager()));
+//        tfTeam.setText(teamData.get(teamData.size() - 1).getNameEq());
         //Set index to last position from the list
-        index = cyclistData.size() - 1;
+        index = teamData.size() - 1;
         //Disable right buttons because is the last cyclist
         btTotalRight.setEnabled(false);
         btRight.setEnabled(false);
@@ -517,7 +461,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
     //Button left action <
     private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
         //If any other button was pressed before set index--
-        if ((btRightPressed) && index != 1 && index != cyclistData.size() - 1) {
+        if ((btRightPressed) && index != 1 && index != teamData.size() - 1) {
             index--;
             btRightPressed = false;
         }
@@ -533,10 +477,9 @@ public final class DeleteTeam extends javax.swing.JFrame {
             index--;
         }
         //Set the TextField with the data of cyclist(index)
-        tfName.setText(cyclistData.get(index).getNom());
-        tfDorsal.setText(String.valueOf(cyclistData.get(index).getDorsal()));
-        tfAge.setText(String.valueOf(cyclistData.get(index).getEdad()));
-        tfTeam.setText(cyclistData.get(index).getNomeq());
+        tfName.setText(teamData.get(index).getNameEq());
+        tfManager.setText(String.valueOf(teamData.get(index).getManager()));
+        // tfTeam.setText(teamData.get(index).getNameEq());
 
         //Enable right buttons if they are disabled
         if (!btTotalRight.isEnabled() && !btRight.isEnabled()) {
@@ -558,10 +501,9 @@ public final class DeleteTeam extends javax.swing.JFrame {
             btTotalLeftPressed = true;
         }
         //Set the TextFields with all the data from the first cyclist
-        tfName.setText(cyclistData.get(0).getNom());
-        tfDorsal.setText(String.valueOf(cyclistData.get(0).getDorsal()));
-        tfAge.setText(String.valueOf(cyclistData.get(0).getEdad()));
-        tfTeam.setText(cyclistData.get(0).getNomeq());
+        tfName.setText(teamData.get(0).getNameEq());
+        tfManager.setText(String.valueOf(teamData.get(0).getManager()));
+
         //Set index to 0 because is the first cyclist
         index = 0;
         //Disable left buttons because is the first cyclist
@@ -631,18 +573,11 @@ public final class DeleteTeam extends javax.swing.JFrame {
     private javax.swing.JButton btSearch;
     private javax.swing.JButton btTotalLeft;
     private javax.swing.JButton btTotalRight;
-    private java.util.List<cyclists.Entity.Cyclist> ciclistesList;
-    private javax.persistence.Query ciclistesQuery;
-    private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel pTableCyclist;
-    private javax.swing.JTextField tfAge;
-    private javax.swing.JTextField tfDorsal;
+    private javax.swing.JTextField tfManager;
     private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfTeam;
     // End of variables declaration//GEN-END:variables
 }

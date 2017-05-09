@@ -39,8 +39,8 @@ public class ModifyTeam extends javax.swing.JFrame {
         btLeft.setEnabled(false);
         //Filling up the list with all the data from cyclist
         try {
-            teamData = team();
             Team t = new Team();
+            teamData = t.team();
             t.loadTable(pTableCyclist);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
@@ -223,29 +223,7 @@ public class ModifyTeam extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //Functions to fill the list of cyclist
-    public List team() throws SQLException {
-        List<Team> l = new ArrayList<Team>();
-        //Query
-        String query = "select nomeq,director from Equips;";
-        Database db = new Database();
-        //Connect
-        db.makeConnection();
-
-        Statement st = db.getConnection().createStatement();
-        ResultSet rs = st.executeQuery(query);
-        while (rs.next()) {//loop rs
-            Team t = new Team();
-            t.setNameEq(rs.getString(1));
-            t.setManager(rs.getString(2));
-            l.add(t);
-        }//end loop rs
-        //Disconnect
-        db.closeConnection();
-        return l;
-    }
-
+   
     private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
         // TODO add your handling code here:
         //If any other button was pressed before set index++

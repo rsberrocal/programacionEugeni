@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -59,6 +61,28 @@ public class Team {
     private void alignCells(JTable table) {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+    }
+
+    //Functions to fill the list of cyclist
+    public List team() throws SQLException {
+        List<Team> l = new ArrayList<Team>();
+        //Query
+        String query = "select nomeq,director from Equips;";
+        Database db = new Database();
+        //Connect
+        db.makeConnection();
+
+        Statement st = db.getConnection().createStatement();
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()) {//loop rs
+            Team t = new Team();
+            t.setNameEq(rs.getString(1));
+            t.setManager(rs.getString(2));
+            l.add(t);
+        }//end loop rs
+        //Disconnect
+        db.closeConnection();
+        return l;
     }
 
     public void loadTable(JPanel pane) throws SQLException {
