@@ -8,6 +8,9 @@ package cyclists.forms;
 import cyclists.forms.Ciclyst.AddCiclyst;
 import cyclists.forms.Ciclyst.DeleteCiclyst;
 import cyclists.forms.Ciclyst.ModifyCiclyst;
+import cyclists.forms.Shirt.AddShirt;
+import cyclists.forms.Shirt.DeleteShirt;
+import cyclists.forms.Shirt.ModifyShirt;
 import cyclists.forms.Team.AddTeam;
 import cyclists.forms.Team.DeleteTeam;
 import cyclists.forms.Team.ModifyTeam;
@@ -158,12 +161,27 @@ public class MainForm extends javax.swing.JFrame {
         mMaillots.setText("Shirt");
 
         miAddMaillots.setText("Add");
+        miAddMaillots.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddMaillotsActionPerformed(evt);
+            }
+        });
         mMaillots.add(miAddMaillots);
 
         miModifyMaillots.setText("Modify");
+        miModifyMaillots.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miModifyMaillotsActionPerformed(evt);
+            }
+        });
         mMaillots.add(miModifyMaillots);
 
         miDeleteMaillots.setText("Delete");
+        miDeleteMaillots.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miDeleteMaillotsActionPerformed(evt);
+            }
+        });
         mMaillots.add(miDeleteMaillots);
 
         mbMain.add(mMaillots);
@@ -234,8 +252,7 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         AddCiclyst ac = new AddCiclyst();
         ac.setTitle("Add Cyclist");
-        ac.setLocationRelativeTo(null);
-        ac.setVisible(true);
+        addFrame(ac, "Add Cyclist");
 
         //this.setEnabled(false);
     }//GEN-LAST:event_miAddCiclistesActionPerformed
@@ -247,9 +264,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void miDeleteCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDeleteCiclistesActionPerformed
         DeleteCiclyst dc = new DeleteCiclyst();
-        dc.setTitle("Delete Cyclist");
-        dc.setLocationRelativeTo(null);
-        dc.setVisible(true);
+        addFrame(dc, "Delete Cyclist");
         //this.setEnabled(false);
     }//GEN-LAST:event_miDeleteCiclistesActionPerformed
 
@@ -262,6 +277,12 @@ public class MainForm extends javax.swing.JFrame {
         }
     }
 
+    public static void addFrame(JFrame jf, String text) {
+        jf.setTitle(text);
+        jf.setLocationRelativeTo(null);
+        jf.setVisible(true);
+    }
+
     private void mExitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mExitMousePressed
         // TODO add your handling code here:
         exitDialog();
@@ -269,34 +290,45 @@ public class MainForm extends javax.swing.JFrame {
 
     private void miModifyCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miModifyCiclistesActionPerformed
         ModifyCiclyst mc = new ModifyCiclyst();
-        mc.setTitle("Modify Cyclist");
-        mc.setLocationRelativeTo(null);
-        mc.setVisible(true);
+        addFrame(mc, "Modify Cyclist");
     }//GEN-LAST:event_miModifyCiclistesActionPerformed
 
     private void miAddEquipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddEquipsActionPerformed
         // TODO add your handling code here:
         AddTeam at = new AddTeam();
-        at.setTitle("Add Team");
-        at.setLocationRelativeTo(null);
-        at.setVisible(true);
+        addFrame(at, "Add Team");
     }//GEN-LAST:event_miAddEquipsActionPerformed
 
     private void miModifyEquipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miModifyEquipsActionPerformed
         // TODO add your handling code here:
         ModifyTeam mt = new ModifyTeam();
-        mt.setTitle("Modify Team");
-        mt.setLocationRelativeTo(null);
-        mt.setVisible(true);
+        addFrame(mt, "Modify Team");
     }//GEN-LAST:event_miModifyEquipsActionPerformed
 
     private void miDeleteEquipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDeleteEquipsActionPerformed
         // TODO add your handling code here:
         DeleteTeam dt = new DeleteTeam();
         dt.setTitle("Delete  Team");
-        dt.setLocationRelativeTo(null);
-        dt.setVisible(true);
+        addFrame(dt, "Delete Team");
     }//GEN-LAST:event_miDeleteEquipsActionPerformed
+
+    private void miAddMaillotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddMaillotsActionPerformed
+        // TODO add your handling code here:
+        AddShirt as = new AddShirt();        
+        addFrame(as,"Add Shirt");
+    }//GEN-LAST:event_miAddMaillotsActionPerformed
+
+    private void miModifyMaillotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miModifyMaillotsActionPerformed
+        // TODO add your handling code here:
+        ModifyShirt ms = new ModifyShirt();
+        addFrame(ms,"Modify Shirt");
+    }//GEN-LAST:event_miModifyMaillotsActionPerformed
+
+    private void miDeleteMaillotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDeleteMaillotsActionPerformed
+        // TODO add your handling code here:
+        DeleteShirt ds = new DeleteShirt();
+        addFrame(ds,"Delete Shirt");
+    }//GEN-LAST:event_miDeleteMaillotsActionPerformed
 
     /**
      * @param args the command line arguments
