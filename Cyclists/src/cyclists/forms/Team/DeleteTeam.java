@@ -43,7 +43,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
         //Filling up the list with all the data from cyclist
         try {
             Team t = new Team();
-            teamData = t.team();
+            teamData = t.listTeam();
             t.loadTable(pTableCyclist);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,7 +125,7 @@ public final class DeleteTeam extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Delete Ciclyst");
+        jLabel1.setText("Delete Team");
 
         jLabel2.setText("Name");
 

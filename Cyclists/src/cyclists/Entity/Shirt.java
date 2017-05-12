@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,9 +27,33 @@ public class Shirt {
     private String id;
     private String type;
     private String color;
-    private double reward;
+    private int reward;
 
     public Shirt() {
+    }
+
+    //Function to fill the list of cyclist
+    public List listShirt() throws SQLException {
+        List<Shirt> l = new ArrayList<Shirt>();
+        //Query
+        String query = "select * from Maillots;";
+        Database db = new Database();
+        //Connect
+        db.makeConnection();
+
+        Statement st = db.getConnection().createStatement();
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()) {//loop rs
+            Shirt s = new Shirt();
+            s.setId(rs.getString(1));
+            s.setType(rs.getString(2));
+            s.setColor(rs.getString(3));
+            s.setReward(rs.getInt(4));
+            l.add(s);
+        }//end loop rs
+        //Disconnect
+        db.closeConnection();
+        return l;
     }
 
     public void loadTable(JPanel pane) throws SQLException {
@@ -93,11 +119,11 @@ public class Shirt {
         this.color = color;
     }
 
-    public double getReward() {
+    public int getReward() {
         return reward;
     }
 
-    public void setReward(double reward) {
+    public void setReward(int reward) {
         this.reward = reward;
     }
 

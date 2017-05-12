@@ -36,11 +36,14 @@ public class ModifyCiclyst extends javax.swing.JFrame {
         //Setting the Left buttons because we start with index ==0
         btTotalLeft.setEnabled(false);
         btLeft.setEnabled(false);
+        cbTeams.setEnabled(false);
+        tfDorsal.setEnabled(false);
+        tfAge.setEnabled(false);
         //Filling up the list with all the data from cyclist
         try {
-            cyclistData = cyclist();
             addItemsCombo();
             Cyclist c = new Cyclist();
+            cyclistData = c.cyclistData();
             c.loadTable(pTableCyclist);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
@@ -250,28 +253,12 @@ public class ModifyCiclyst extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Functions to fill the list of cyclist
-    public List cyclist() throws SQLException {
-        List<Cyclist> l = new ArrayList<Cyclist>();
-        //Query
-        String query = "select dorsal,nom,edad,nomeq from Ciclistes;";
-        Database db = new Database();
-        //Connect
-        db.makeConnection();
-
-        Statement st = db.getConnection().createStatement();
-        ResultSet rs = st.executeQuery(query);
-        while (rs.next()) {//loop rs
-            Cyclist c = new Cyclist();
-            c.setDorsal(rs.getInt(1));
-            c.setNom(rs.getString(2));
-            c.setEdad(rs.getInt(3));
-            c.setNomeq(rs.getString(4));
-            l.add(c);
-        }//end loop rs
-        //Disconnect
-        db.closeConnection();
-        return l;
+    public void enableFields() {
+        if (!cbTeams.isEnabled() && !tfDorsal.isEnabled() && !tfAge.isEnabled()) {
+            cbTeams.setEnabled(true);
+            tfDorsal.setEnabled(true);
+            tfAge.setEnabled(true);
+        }
     }
 
     //Function for set items on ComboBox
@@ -330,6 +317,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
             btTotalRight.setEnabled(false);
             btRight.setEnabled(false);
         }
+        enableFields();
     }//GEN-LAST:event_btRightActionPerformed
 
     private void btTotalRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalRightActionPerformed
@@ -349,6 +337,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
             btTotalLeft.setEnabled(true);
             btLeft.setEnabled(true);
         }
+        enableFields();
     }//GEN-LAST:event_btTotalRightActionPerformed
 
     private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
@@ -385,6 +374,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
             btTotalLeft.setEnabled(false);
             btLeft.setEnabled(false);
         }
+        enableFields();
     }//GEN-LAST:event_btLeftActionPerformed
 
     private void btTotalLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalLeftActionPerformed
@@ -408,10 +398,11 @@ public class ModifyCiclyst extends javax.swing.JFrame {
             btTotalRight.setEnabled(true);
             btRight.setEnabled(true);
         }
+        enableFields();
     }//GEN-LAST:event_btTotalLeftActionPerformed
 
     private void btModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyActionPerformed
-        int oldDorsal = 0;
+        int oldDorsal = cyclistData.get(index).getDorsal();
         // tfAlerts
         if (tfDorsal.getText().isEmpty() && tfName.getText().isEmpty() && tfAge.getText().isEmpty()) {
             MainForm.alertsWarning(this, "", "Name, Dorsal and Age are missing");
@@ -458,13 +449,6 @@ public class ModifyCiclyst extends javax.swing.JFrame {
                 //Connect
                 db.makeConnection();
 
-                String query = "select * from Ciclistes where nom like '" + tfName.getText() + "' and edad = " + tfAge.getText() + " and nomeq = '"
-                        + cbTeams.getSelectedItem().toString() + "';";
-                Statement st = db.getConnection().createStatement();
-                ResultSet rs = st.executeQuery(query);
-                if (rs.next()) {
-                    oldDorsal = rs.getInt(1);
-                }
                 PreparedStatement pst = db.getConnection().prepareStatement(sqlUpdate.toString());
                 pst.setInt(1, Integer.parseInt(tfDorsal.getText()));
                 pst.setString(2, tfName.getText());
@@ -605,6 +589,7 @@ public class ModifyCiclyst extends javax.swing.JFrame {
             btLeftPressed = false;
             btRightPressed = false;
             btTotalLeftPressed = false;
+            enableFields();
         }
     }//End function
 

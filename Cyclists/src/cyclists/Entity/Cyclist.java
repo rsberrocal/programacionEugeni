@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,29 +35,15 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Richard
  */
-@Entity
-@Table(name = "Ciclistes", catalog = "rsudario_gproductes", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Ciclistes.findAll", query = "SELECT c FROM Ciclistes c"),
-    @NamedQuery(name = "Ciclistes.findByDorsal", query = "SELECT c FROM Ciclistes c WHERE c.dorsal = :dorsal"),
-    @NamedQuery(name = "Ciclistes.findByNom", query = "SELECT c FROM Ciclistes c WHERE c.nom = :nom"),
-    @NamedQuery(name = "Ciclistes.findByEdad", query = "SELECT c FROM Ciclistes c WHERE c.edad = :edad"),
-    @NamedQuery(name = "Ciclistes.findByNomeq", query = "SELECT c FROM Ciclistes c WHERE c.nomeq = :nomeq")})
 public class Cyclist implements Serializable {
 
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "dorsal")
+    
     private Integer dorsal;
-    @Column(name = "nom")
+
     private String nom;
-    @Column(name = "edad")
+
     private Integer edad;
-    @Column(name = "nomeq")
+
     private String nomeq;
 
     public Cyclist() {
@@ -70,9 +58,7 @@ public class Cyclist implements Serializable {
     }
 
     public void setDorsal(Integer dorsal) {
-        Integer oldDorsal = this.dorsal;
         this.dorsal = dorsal;
-        changeSupport.firePropertyChange("dorsal", oldDorsal, dorsal);
     }
 
     public String getNom() {
@@ -80,9 +66,8 @@ public class Cyclist implements Serializable {
     }
 
     public void setNom(String nom) {
-        String oldNom = this.nom;
+
         this.nom = nom;
-        changeSupport.firePropertyChange("nom", oldNom, nom);
     }
 
     public Integer getEdad() {
@@ -90,9 +75,9 @@ public class Cyclist implements Serializable {
     }
 
     public void setEdad(Integer edad) {
-        Integer oldEdad = this.edad;
+
         this.edad = edad;
-        changeSupport.firePropertyChange("edad", oldEdad, edad);
+;
     }
 
     public String getNomeq() {
@@ -100,16 +85,9 @@ public class Cyclist implements Serializable {
     }
 
     public void setNomeq(String nomeq) {
-        String oldNomeq = this.nomeq;
-        this.nomeq = nomeq;
-        changeSupport.firePropertyChange("nomeq", oldNomeq, nomeq);
-    }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (dorsal != null ? dorsal.hashCode() : 0);
-        return hash;
+        this.nomeq = nomeq;
+
     }
 
     @Override
@@ -141,6 +119,30 @@ public class Cyclist implements Serializable {
         table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
     }
 
+    //Functions to fill the list of cyclist
+    public List cyclistData() throws SQLException {
+        List<Cyclist> l = new ArrayList<Cyclist>();
+        //Query
+        String query = "select dorsal,nom,edad,nomeq from Ciclistes;";
+        Database db = new Database();
+        //Connect
+        db.makeConnection();
+
+        Statement st = db.getConnection().createStatement();
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()) {//loop rs
+            Cyclist c = new Cyclist();
+            c.setDorsal(rs.getInt(1));
+            c.setNom(rs.getString(2));
+            c.setEdad(rs.getInt(3));
+            c.setNomeq(rs.getString(4));
+            l.add(c);
+        }//end loop rs
+        //Disconnect
+        db.closeConnection();
+        return l;
+    }
+    
     public void loadTable(JPanel pane) throws SQLException {
         String query = "select * from Ciclistes;";
         Vector data = new Vector();
@@ -179,14 +181,6 @@ public class Cyclist implements Serializable {
     @Override
     public String toString() {
         return "cyclists.forms.Ciclyst.Ciclistes[ dorsal=" + dorsal + " ]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
     }
 
 }

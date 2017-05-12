@@ -64,7 +64,7 @@ public class Team {
     }
 
     //Functions to fill the list of cyclist
-    public List team() throws SQLException {
+    public List listTeam() throws SQLException {
         List<Team> l = new ArrayList<Team>();
         //Query
         String query = "select nomeq,director from Equips;";

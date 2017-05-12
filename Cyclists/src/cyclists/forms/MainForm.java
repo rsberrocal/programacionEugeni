@@ -250,8 +250,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void miAddCiclistesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddCiclistesActionPerformed
         // TODO add your handling code here:
-        AddCiclyst ac = new AddCiclyst();
-        ac.setTitle("Add Cyclist");
+        AddCiclyst ac = new AddCiclyst();        
         addFrame(ac, "Add Cyclist");
 
         //this.setEnabled(false);

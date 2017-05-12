@@ -216,7 +216,7 @@ public class AddShirt extends javax.swing.JFrame {
         } else {
             String color =tfColor.getText();
             String id = tfId.getText();
-            double  reward = Double.parseDouble(tfReward.getText());
+            int  reward = Integer.parseInt(tfReward.getText());
             String type = tfType.getText();
             
             Database db = new Database();
@@ -235,7 +235,7 @@ public class AddShirt extends javax.swing.JFrame {
                     pst.setString(1, id);
                     pst.setString(2, type);
                     pst.setString(3, color);
-                    pst.setDouble(4, reward);
+                    pst.setInt(4, reward);
 
                     pst.execute();
                     //Disconnect

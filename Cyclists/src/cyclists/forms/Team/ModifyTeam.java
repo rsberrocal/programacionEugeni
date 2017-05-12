@@ -37,10 +37,11 @@ public class ModifyTeam extends javax.swing.JFrame {
         //Setting the Left buttons because we start with index ==0
         btTotalLeft.setEnabled(false);
         btLeft.setEnabled(false);
+        tfManager.setEnabled(false);
         //Filling up the list with all the data from cyclist
         try {
             Team t = new Team();
-            teamData = t.team();
+            teamData = t.listTeam();
             t.loadTable(pTableCyclist);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteTeam.class.getName()).log(Level.SEVERE, null, ex);
@@ -223,7 +224,13 @@ public class ModifyTeam extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
+
+    public void enableFields() {
+        if (!tfManager.isEnabled()) {
+            tfManager.setEnabled(true);
+        }
+    }
+
     private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
         // TODO add your handling code here:
         //If any other button was pressed before set index++
@@ -257,6 +264,7 @@ public class ModifyTeam extends javax.swing.JFrame {
             btTotalRight.setEnabled(false);
             btRight.setEnabled(false);
         }
+        enableFields();
     }//GEN-LAST:event_btRightActionPerformed
 
     private void btTotalRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalRightActionPerformed
@@ -274,6 +282,7 @@ public class ModifyTeam extends javax.swing.JFrame {
             btTotalLeft.setEnabled(true);
             btLeft.setEnabled(true);
         }
+        enableFields();
     }//GEN-LAST:event_btTotalRightActionPerformed
 
     private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
@@ -308,6 +317,7 @@ public class ModifyTeam extends javax.swing.JFrame {
             btTotalLeft.setEnabled(false);
             btLeft.setEnabled(false);
         }
+        enableFields();
     }//GEN-LAST:event_btLeftActionPerformed
 
     private void btTotalLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalLeftActionPerformed
@@ -329,10 +339,11 @@ public class ModifyTeam extends javax.swing.JFrame {
             btTotalRight.setEnabled(true);
             btRight.setEnabled(true);
         }
+        enableFields();
     }//GEN-LAST:event_btTotalLeftActionPerformed
 
     private void btModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyActionPerformed
-        String oldnameq = "";
+        String oldnameq = teamData.get(index).getNameEq();
         // tfAlerts
         if (tfManager.getText().isEmpty() && tfName.getText().isEmpty()) {
             MainForm.alertsWarning(this, "", "Name and Director are missing");
@@ -358,17 +369,11 @@ public class ModifyTeam extends javax.swing.JFrame {
                 //Connect
                 db.makeConnection();
 
-                String query = "select nomeq from Equips where director like '" + teamData.get(index).getManager()+ "' ;";
-                Statement st = db.getConnection().createStatement();
-                ResultSet rs = st.executeQuery(query);
-                if (rs.next()) {
-                    oldnameq = rs.getString(1);
-                }
                 PreparedStatement pst = db.getConnection().prepareStatement(sqlUpdate.toString());
                 pst.setString(1, tfName.getText());
                 pst.setString(2, tfManager.getText());
                 pst.setString(3, oldnameq);
-                String dw=pst.toString();
+                String dw = pst.toString();
                 pst.execute();
 
                 //Disconnect
@@ -491,6 +496,7 @@ public class ModifyTeam extends javax.swing.JFrame {
                 btTotalRight.setEnabled(true);
                 btRight.setEnabled(true);
             }
+            enableFields();
             //Finally set true the boolean btSearchPressed to know that this buttons has been pressed
             btSearchPressed = true;
             //And set false the rest of booleans
