@@ -28,13 +28,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class Cyclist implements Serializable {
 
     
-    private Integer dorsal;
+    private Integer dorsal;//PK
 
     private String nom;
 
     private Integer edad;
 
-    private String nomeq;
+    private String nomeq;//FK
 
     public Cyclist() {
     }
