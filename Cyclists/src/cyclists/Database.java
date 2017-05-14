@@ -16,9 +16,9 @@ import java.sql.Statement;
  * @author infot
  */
 public class Database {
-
+    //Connection variable to connect to the server
     private Connection c;
-
+    //Constructor
     public Database() {
         this.c = null;
     }
@@ -26,7 +26,7 @@ public class Database {
     public Connection getConnection() {
         return c;
     }
-
+    //Function that returns true if exist one field with the same ID else return false
     public boolean searchID(String search, String table, int id) throws SQLException {
         String query = "select " + search + " from " + table + ";";
         this.makeConnection();
@@ -44,7 +44,7 @@ public class Database {
         this.closeConnection();
         return false;
     }
-
+    //Same function but with a String variable
     public boolean searchID(String search, String table, String id) throws SQLException {
         String query = "select " + search + " from " + table + ";";
         this.makeConnection();
@@ -62,7 +62,7 @@ public class Database {
         this.closeConnection();
         return false;
     }
-
+    //Function to make a connectio to the server
     public void makeConnection() throws SQLException {
         //MySQL
         //this.c = makeConnectMySQL();        
