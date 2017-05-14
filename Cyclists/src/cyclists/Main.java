@@ -25,9 +25,10 @@ public class Main {
     
     
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        //MariaDB driver
         Class.forName("org.mariadb.jdbc.Driver");
         MainForm mf = new MainForm();
-        //mf.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+        //Set the title to the main frame
         mf.setTitle("Ciclysts");
         // Center the Main Frame               
         mf.setLocationRelativeTo(null);
