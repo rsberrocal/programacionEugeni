@@ -21,7 +21,7 @@ public class Manager {
         this.p = new Person();
         this.l = new ArrayList<>();
     }
-
+    //Function that returns total salary for all person
     public double getTotalSalary() {
         double total = 0;
         for (int i = 0; i < this.l.size(); i++) {
@@ -29,7 +29,7 @@ public class Manager {
         }
         return total;
     }
-
+    //Function to add a Person in to the list
     public void addPerson(Person p) {
         this.l.add(p);
     }
