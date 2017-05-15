@@ -101,7 +101,7 @@ public class personprojectController implements Initializable {
         } else {
             Person p = new Person(tfName.getText(), Double.parseDouble(tfSalary.getText()), Integer.parseInt(tfDNINumber.getText()));
             this.m.addPerson(p);
-            taPrintPerson.appendText("\nName: " + p.getName() + "\nSalary: " + p.getSalary() + "€\nDNI: " + p.getDni() + p.getLetter() + " \nTotal: " + m.getTotalSalary());
+            taPrintPerson.appendText("\n\nName: " + p.getName() + "\nSalary: " + p.getSalary() + "€\nDNI: " + p.getDni() + p.getLetter() + " \nTotal: " + m.getTotalSalary());
         }
 
     }

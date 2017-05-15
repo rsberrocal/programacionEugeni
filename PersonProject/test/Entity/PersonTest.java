@@ -16,15 +16,22 @@ import static org.junit.Assert.*;
  */
 public class PersonTest {
 
+    private Person p;
+    private Manager m;
+
     public PersonTest() {
     }
 
     @Before
     public void setUp() {
+        p = new Person("Richard", 544.23, 49502368);
+        m = new Manager();
     }
 
     @After
     public void tearDown() {
+        p = null;
+        m = null;
     }
 
     /**
@@ -33,12 +40,12 @@ public class PersonTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        Person instance = new Person();
-        String expResult = "";
+        Person instance = p;
+        String expResult = "Richard";
         String result = instance.getName();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -47,13 +54,12 @@ public class PersonTest {
     @Test
     public void testGetLetter() {
         System.out.println("getLetter");
-        int dniUser = 0;
-        Person instance = new Person();
-        char expResult = ' ';
+        Person instance = p;
+        char expResult = 'C';
         char result = instance.getLetter();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -62,11 +68,11 @@ public class PersonTest {
     @Test
     public void testSetName() {
         System.out.println("setName");
-        String name = "";
-        Person instance = new Person();
+        String name = "Richard2";
+        Person instance = p;
         instance.setName(name);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -75,12 +81,12 @@ public class PersonTest {
     @Test
     public void testGetSalary() {
         System.out.println("getSalary");
-        Person instance = new Person();
-        double expResult = 0.0;
+        Person instance = p;
+        double expResult = 544.23;
         double result = instance.getSalary();
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -89,11 +95,11 @@ public class PersonTest {
     @Test
     public void testSetSalary() {
         System.out.println("setSalary");
-        double salary = 0.0;
-        Person instance = new Person();
+        double salary = 554.20;
+        Person instance = p;
         instance.setSalary(salary);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -102,12 +108,12 @@ public class PersonTest {
     @Test
     public void testGetDni() {
         System.out.println("getDni");
-        Person instance = new Person();
-        int expResult = 0;
+        Person instance = p;
+        int expResult = 49502368;
         int result = instance.getDni();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -117,10 +123,10 @@ public class PersonTest {
     public void testSetDni() {
         System.out.println("setDni");
         int dni = 0;
-        Person instance = new Person();
+        Person instance = p;
         instance.setDni(dni);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
 }

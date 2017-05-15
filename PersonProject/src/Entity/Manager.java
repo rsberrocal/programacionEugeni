@@ -14,11 +14,9 @@ import java.util.List;
  */
 public class Manager {
 
-    private Person p;
     private List<Person> l;
 
     public Manager() {
-        this.p = new Person();
         this.l = new ArrayList<>();
     }
 
@@ -34,12 +32,18 @@ public class Manager {
         this.l.add(p);
     }
 
-    public Person getP() {
-        return p;
+    public void deletePerson(Person p) {
+        this.l.remove(p);
     }
 
-    public void setP(Person p) {
-        this.p = p;
+    public int manyPerson() {
+        return this.l.size();
+    }
+
+    public void dropList() {
+        for (int i = 0; i < this.l.size(); i++) {
+            this.l.remove(i);
+        }
     }
 
     public List<Person> getL() {

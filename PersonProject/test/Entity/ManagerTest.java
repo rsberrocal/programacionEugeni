@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
@@ -16,16 +17,27 @@ import static org.junit.Assert.*;
  * @author infot
  */
 public class ManagerTest {
-    
+
+    private Person p;
+    private Manager m;
+    private List<Person> l;
+
     public ManagerTest() {
     }
-    
+
     @Before
     public void setUp() {
+        p = new Person("Richard", 544.23, 49502368);
+        m = new Manager();
+        m.addPerson(p);
+        l = new ArrayList<>();
+        l.add(p);
     }
-    
+
     @After
     public void tearDown() {
+        p = null;
+        m = null;
     }
 
     /**
@@ -34,12 +46,12 @@ public class ManagerTest {
     @Test
     public void testGetTotalSalary() {
         System.out.println("getTotalSalary");
-        Manager instance = new Manager();
-        double expResult = 0.0;
+        Manager instance = m;
+        double expResult = 544.23;
         double result = instance.getTotalSalary();
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -48,38 +60,49 @@ public class ManagerTest {
     @Test
     public void testAddPerson() {
         System.out.println("addPerson");
-        Person p = null;
-        Manager instance = new Manager();
+        Person p = new Person("Richard2", 544.23, 49502368);
+        Manager instance = m;
         instance.addPerson(p);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getP method, of class Manager.
+     * Test of deletePerson method, of class Manager.
      */
     @Test
-    public void testGetP() {
-        System.out.println("getP");
+    public void testDeletePerson() {
+        System.out.println("deletePerson");
         Manager instance = new Manager();
-        Person expResult = null;
-        Person result = instance.getP();
+        instance.deletePerson(p);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of manyPerson method, of class Manager.
+     */
+    @Test
+    public void testManyPerson() {
+        System.out.println("manyPerson");
+        Manager instance = m;
+        int expResult = 1;
+        int result = instance.manyPerson();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setP method, of class Manager.
+     * Test of dropList method, of class Manager.
      */
     @Test
-    public void testSetP() {
-        System.out.println("setP");
-        Person p = null;
-        Manager instance = new Manager();
-        instance.setP(p);
+    public void testDropList() {
+        System.out.println("dropList");
+        Manager instance = m;
+        instance.dropList();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -88,12 +111,12 @@ public class ManagerTest {
     @Test
     public void testGetL() {
         System.out.println("getL");
-        Manager instance = new Manager();
-        List<Person> expResult = null;
+        Manager instance = m;
+        List<Person> expResult = l;
         List<Person> result = instance.getL();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -102,11 +125,10 @@ public class ManagerTest {
     @Test
     public void testSetL() {
         System.out.println("setL");
-        List<Person> l = null;
         Manager instance = new Manager();
         instance.setL(l);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
-    
+
 }
