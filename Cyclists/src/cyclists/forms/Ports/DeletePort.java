@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cyclists.forms.Ciclyst;
+package cyclists.forms.Ports;
 
 import cyclists.Database;
 import cyclists.Entity.Cyclist;
@@ -25,12 +25,12 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Richard
  */
-public final class DeleteCiclyst extends javax.swing.JFrame {
+public final class DeletePort extends javax.swing.JFrame {
 
     /**
      * Creates new form AddCiclyst
      */
-    public DeleteCiclyst() {
+    public DeletePort() {
         initComponents();
         //Setting the global index for movement buttons
         index = 0;
@@ -49,7 +49,7 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
             Cyclist c = new Cyclist();
             c.loadTable(pTableCyclist);
         } catch (SQLException ex) {
-            Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeletePort.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     //Own variables
@@ -369,7 +369,7 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
                 //Disconnect
                 db.closeConnection();
             } catch (SQLException ex) {
-                Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DeletePort.class.getName()).log(Level.SEVERE, null, ex);
             }
             //If index == 0 disable the left buttons and enable the right buttons
             if (index == 0) {
@@ -448,7 +448,7 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(DeleteCiclyst.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DeletePort.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -591,28 +591,34 @@ public final class DeleteCiclyst extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclyst.class
+            java.util.logging.Logger.getLogger(DeletePort.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclyst.class
+            java.util.logging.Logger.getLogger(DeletePort.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclyst.class
+            java.util.logging.Logger.getLogger(DeletePort.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteCiclyst.class
+            java.util.logging.Logger.getLogger(DeletePort.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeleteCiclyst().setVisible(true);
+                new DeletePort().setVisible(true);
             }
         });
     }
