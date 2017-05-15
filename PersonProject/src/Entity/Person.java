@@ -27,7 +27,7 @@ public class Person {
     public String getName() {
         return name;
     }
-
+    //Function to get the letter from dni
     public char getLetter() {
         char l[] = new char[23];
         l[0] = 'T';
@@ -55,7 +55,7 @@ public class Person {
         l[22] = 'E';
         return l[this.dniN % 23];
     }
-
+    //Getters and Setters
     public void setName(String name) {
         this.name = name;
     }
