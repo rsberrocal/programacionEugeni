@@ -30,16 +30,15 @@ public class personprojectController implements Initializable {
     private TextArea taPrintPerson;
     @FXML
     private TextField tfDNINumber;
-
     @FXML
     private TextField tfDNILetter;
     @FXML
     private TextField tfName;
     @FXML
     private TextField tfSalary;
-
+    //Initialize list
     private Manager m = new Manager();
-
+    //Function to create Alerts
     private void alerts(String header, String text) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
@@ -48,7 +47,7 @@ public class personprojectController implements Initializable {
 
         alert.showAndWait();
     }
-
+    //Action to calculate the letter from dni
     @FXML
     private void btLetterOnAction(ActionEvent event) {
         Person p = new Person();
@@ -61,7 +60,7 @@ public class personprojectController implements Initializable {
             tfDNILetter.setText(String.valueOf(c));
         }
     }
-
+    //Function that controls the DNINumber textfield 
     @FXML
     private void tfDNINumberTyped(KeyEvent event) {
         Pattern pattern = Pattern.compile("\\d");
@@ -74,7 +73,7 @@ public class personprojectController implements Initializable {
             event.consume();
         }
     }
-
+    //Action to add a Person in to manager class
     @FXML
     private void btAddOnAction(ActionEvent event) {
         if (tfName.getText().isEmpty() && tfSalary.getText().isEmpty() && tfDNINumber.getText().isEmpty() && tfDNILetter.getText().isEmpty()) {
@@ -105,7 +104,7 @@ public class personprojectController implements Initializable {
         }
 
     }
-
+    //Action to exit the program
     @FXML
     private void btExit(ActionEvent event) {
         System.exit(0);
