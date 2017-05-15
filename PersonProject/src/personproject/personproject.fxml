@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="personproject.personprojectController">
+   <children>
+      <Label layoutX="130.0" layoutY="14.0" text="Add Person">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="62.0" text="Name" />
+      <Label layoutX="47.0" layoutY="127.0" text="DNI" />
+      <Label layoutX="38.0" layoutY="100.0" text="Salary" />
+      <TextField fx:id="tfName" layoutX="96.0" layoutY="57.0" />
+      <TextField fx:id="tfSalary" layoutX="96.0" layoutY="95.0" />
+      <TextField fx:id="tfDNINumber" layoutX="96.0" layoutY="130.0" onKeyTyped="#tfDNINumberTyped" prefHeight="26.0" prefWidth="103.0" />
+      <TextArea fx:id="taPrintPerson" editable="false" layoutX="38.0" layoutY="230.0" prefHeight="200.0" prefWidth="273.0" />
+      <TextField fx:id="tfDNILetter" editable="false" layoutX="214.0" layoutY="130.0" prefHeight="26.0" prefWidth="44.0" />
+      <Button fx:id="btLetter" layoutX="268.0" layoutY="130.0" mnemonicParsing="false" onAction="#btLetterOnAction" text="Calculate letter" />
+      <Button fx:id="btExit" layoutX="311.0" layoutY="452.0" mnemonicParsing="false" onAction="#btExit" text="Exit" />
+      <Button fx:id="btAdd" layoutX="93.0" layoutY="186.0" mnemonicParsing="false" onAction="#btAddOnAction" prefHeight="26.0" prefWidth="171.0" text="Add" />
+   </children>
+</AnchorPane>
