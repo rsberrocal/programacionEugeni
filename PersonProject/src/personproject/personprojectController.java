@@ -22,7 +22,7 @@ import javafx.scene.input.KeyEvent;
 
 /**
  *
- * @author infot
+ * @author Richard
  */
 public class personprojectController implements Initializable {
 
