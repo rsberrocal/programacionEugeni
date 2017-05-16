@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cyclists.forms.Ports;
+package cyclists.forms.Llevar;
 
 import cyclists.Database;
 import cyclists.Entity.Ports;
@@ -11,9 +11,7 @@ import cyclists.forms.MainForm;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -49,21 +47,15 @@ public class AddPort extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tfCategory = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         btInsert = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        tfName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         cbStage = new javax.swing.JComboBox<>();
-        tfHeight = new javax.swing.JTextField();
         pTablePort = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         cbDorsal = new javax.swing.JComboBox<>();
-        tfSlope = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        cbStage1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -72,14 +64,6 @@ public class AddPort extends javax.swing.JFrame {
                 formWindowClosing(evt);
             }
         });
-
-        tfCategory.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfCategoryKeyTyped(evt);
-            }
-        });
-
-        jLabel1.setText("Name");
 
         btInsert.setText("Insert");
         btInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -90,22 +74,12 @@ public class AddPort extends javax.swing.JFrame {
 
         jLabel2.setText("New Port");
 
-        jLabel3.setText("Stage Num");
-
-        jLabel4.setText("Height");
-
-        jLabel5.setText("Category");
+        jLabel3.setText("Shirt ID");
 
         cbStage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         cbStage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbStageActionPerformed(evt);
-            }
-        });
-
-        tfHeight.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfHeightKeyTyped(evt);
             }
         });
 
@@ -119,14 +93,21 @@ public class AddPort extends javax.swing.JFrame {
         );
         pTablePortLayout.setVerticalGroup(
             pTablePortLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        jLabel6.setText("Slope");
 
         jLabel7.setText("Cyclist Dorsal");
 
         cbDorsal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
+
+        jLabel8.setText("Stage Num");
+
+        cbStage1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        cbStage1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStage1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,36 +119,26 @@ public class AddPort extends javax.swing.JFrame {
                         .addGap(92, 92, 92)
                         .addComponent(btInsert))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(71, 71, 71)
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(cbStage, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(cbDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfSlope, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel3))
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbStage, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbStage1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addComponent(pTablePort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,32 +149,24 @@ public class AddPort extends javax.swing.JFrame {
                         .addComponent(pTablePort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbStage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(tfHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(tfCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(10, 10, 10))
                             .addComponent(cbDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(tfSlope, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btInsert)))
-                .addContainerGap())
+                            .addComponent(jLabel8)
+                            .addComponent(cbStage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(cbStage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
+                        .addComponent(btInsert)
+                        .addContainerGap())))
         );
 
         pack();
@@ -330,6 +293,10 @@ public class AddPort extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbStageActionPerformed
 
+    private void cbStage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStage1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStage1ActionPerformed
+
     private void consumeEvente(KeyEvent evt, JTextField tf, int max) {
         char c = evt.getKeyChar();
         if (tf.getText().length() > max) {
@@ -339,16 +306,6 @@ public class AddPort extends javax.swing.JFrame {
             evt.consume();
         }
     }
-
-    private void tfCategoryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCategoryKeyTyped
-        // TODO add your handling code here:
-        consumeEvente(evt, tfCategory, 2);
-    }//GEN-LAST:event_tfCategoryKeyTyped
-
-    private void tfHeightKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfHeightKeyTyped
-        // TODO add your handling code here:
-        consumeEvente(evt, tfHeight, 11);
-    }//GEN-LAST:event_tfHeightKeyTyped
 
     /**
      * @param args the command line arguments
@@ -379,6 +336,10 @@ public class AddPort extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -392,17 +353,11 @@ public class AddPort extends javax.swing.JFrame {
     private javax.swing.JButton btInsert;
     private javax.swing.JComboBox<String> cbDorsal;
     private javax.swing.JComboBox<String> cbStage;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> cbStage1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel pTablePort;
-    private javax.swing.JTextField tfCategory;
-    private javax.swing.JTextField tfHeight;
-    private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfSlope;
     // End of variables declaration//GEN-END:variables
 }

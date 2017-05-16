@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cyclists.forms.Ports;
+package cyclists.forms.Stage;
 
 import cyclists.Database;
-import cyclists.Entity.Cyclist;
-import cyclists.Entity.Ports;
+import cyclists.Entity.Stage;
 import cyclists.forms.Cyclist.DeleteCiclyst;
 import cyclists.forms.MainForm;
 import java.awt.Toolkit;
@@ -26,12 +25,12 @@ import javax.swing.JTextField;
  *
  * @author Richard
  */
-public class DeletePort extends javax.swing.JFrame {
+public class DeleteStage extends javax.swing.JFrame {
 
     /**
      * Creates new form AddCiclyst
      */
-    public DeletePort() {
+    public DeleteStage() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../../images/icon.png")));
         //Setting the global index for movement buttons
@@ -40,19 +39,24 @@ public class DeletePort extends javax.swing.JFrame {
         btTotalLeft.setEnabled(false);
         btLeft.setEnabled(false);
         cbDorsal.setEnabled(false);
-        cbStage.setEnabled(false);
-        tfHeight.setEnabled(false);
-        tfCategory.setEnabled(false);
-        tfSlope.setEnabled(false);
+        tfKM.setEnabled(false);
+        tfStart.setEnabled(false);
+        tfFinish.setEnabled(false);
         //Filling up the list with all the data from cyclist
         try {
-            Ports p = new Ports();
-            portsData = p.listPorts();
-            p.addItemsCombo(cbStage, cbDorsal);
-            p.loadTable(pTablePorts);
+            Stage s = new Stage();
+            stageData = s.listStage();
+            s.addItemsCombo(cbDorsal);
+            s.loadTable(pTableStage);
         } catch (SQLException ex) {
-            Logger.getLogger(DeletePort.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteStage.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Setting up the width and aligning the cell of the table
+//        cellWidth();
+//        alignCells();
+        //Setting up the width and aligning the cell of the table
+//        cellWidth();
+//        alignCells();
         //Setting up the width and aligning the cell of the table
 //        cellWidth();
 //        alignCells();
@@ -64,7 +68,7 @@ public class DeletePort extends javax.swing.JFrame {
     //Index to move the buttons
     public int index;
     //list with all the data from cyclist
-    public List<Ports> portsData;
+    public List<Stage> stageData;
     //Booleans for movement buttons
     public boolean btRightPressed = false;
     public boolean btLeftPressed = false;
@@ -87,19 +91,17 @@ public class DeletePort extends javax.swing.JFrame {
         btDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btSearch = new javax.swing.JButton();
-        pTablePorts = new javax.swing.JPanel();
-        tfHeight = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        pTableStage = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         cbDorsal = new javax.swing.JComboBox<>();
-        tfSlope = new javax.swing.JTextField();
-        tfCategory = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        tfName = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        cbStage = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        tfFinish = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        tfKM = new javax.swing.JTextField();
+        tfStart = new javax.swing.JTextField();
+        tfNum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -144,7 +146,7 @@ public class DeletePort extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Modify Cyclist");
+        jLabel1.setText("Delete Stage");
 
         btSearch.setText("Search");
         btSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -153,171 +155,128 @@ public class DeletePort extends javax.swing.JFrame {
             }
         });
 
-        pTablePorts.setMaximumSize(new java.awt.Dimension(32767, 234));
+        pTableStage.setMaximumSize(new java.awt.Dimension(32767, 234));
 
-        javax.swing.GroupLayout pTablePortsLayout = new javax.swing.GroupLayout(pTablePorts);
-        pTablePorts.setLayout(pTablePortsLayout);
-        pTablePortsLayout.setHorizontalGroup(
-            pTablePortsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pTableStageLayout = new javax.swing.GroupLayout(pTableStage);
+        pTableStage.setLayout(pTableStageLayout);
+        pTableStageLayout.setHorizontalGroup(
+            pTableStageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 413, Short.MAX_VALUE)
         );
-        pTablePortsLayout.setVerticalGroup(
-            pTablePortsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pTableStageLayout.setVerticalGroup(
+            pTableStageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        tfHeight.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfHeightKeyTyped(evt);
-            }
-        });
+        jLabel9.setText("Finish");
 
-        jLabel6.setText("Slope");
+        jLabel2.setText("Num Stage");
 
-        jLabel7.setText("Cyclist Dorsal");
+        jLabel10.setText("Cyclist Dorsal");
 
         cbDorsal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
 
-        tfCategory.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfCategoryKeyTyped(evt);
-            }
-        });
+        jLabel11.setText("Km");
 
-        jLabel8.setText("Name");
-
-        jLabel4.setText("Height");
-
-        jLabel5.setText("Category");
-
-        cbStage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
-        cbStage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbStageActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Stage Num");
+        jLabel12.setText("Start");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel9)
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfFinish, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                            .addComponent(tfStart)))
+                    .addComponent(jLabel12)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btSearch))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel3))))
+                                .addComponent(tfNum, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btSearch))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfKM, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfSlope, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel7)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbStage, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(cbDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(btTotalLeft)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btDelete)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(btTotalLeft)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btDelete)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btLeft)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btRight)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btTotalRight)))))
-                        .addGap(29, 29, 29)
-                        .addComponent(pTablePorts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                                .addComponent(btLeft)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btRight)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btTotalRight))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(114, 114, 114)))
+                .addGap(18, 18, 18)
+                .addComponent(pTableStage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(17, 17, 17)
-                            .addComponent(pTablePorts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(80, 80, 80))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(19, 19, 19)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel4)
-                                .addComponent(tfHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5)
-                                .addComponent(tfCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(tfSlope, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btRight)
-                                .addComponent(btLeft)
-                                .addComponent(btTotalRight)
-                                .addComponent(btTotalLeft))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btDelete)
-                            .addContainerGap(15, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tfNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(tfKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(tfStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addGap(35, 35, 35))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(25, 25, 25)
+                                    .addComponent(cbDorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(cbStage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27))))
+                            .addComponent(jLabel9)
+                            .addComponent(tfFinish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btRight)
+                            .addComponent(btLeft)
+                            .addComponent(btTotalRight)
+                            .addComponent(btTotalLeft)))
+                    .addComponent(pTableStage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btDelete)
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void consumeEvente(KeyEvent evt, JTextField tf, int max) {
-        char c = evt.getKeyChar();
-        if (tf.getText().length() > max) {
-            evt.consume();
-        }
-        if (((c < '0') || (c > '9')) && (c != '\b')) {
-            evt.consume();
-        }
-    }
 
     private void btRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRightActionPerformed
         // TODO add your handling code here:
@@ -333,13 +292,12 @@ public class DeletePort extends javax.swing.JFrame {
             index = 0;
         }
         //Set the TextField with the data of cyclist(index)
-        tfName.setText(portsData.get(index).getPortName());
-        tfHeight.setText(String.valueOf(portsData.get(index).getHeight()));
-        tfCategory.setText(portsData.get(index).getCategory());
-        tfSlope.setText(String.valueOf(portsData.get(index).getSlope()));
-        cbStage.setSelectedItem(portsData.get(index).getNetapa());
-        cbDorsal.setSelectedItem(portsData.get(index).getDorsal());
-        //tfTeam.setText(portsData.get(index).getNomeq());
+        tfNum.setText(String.valueOf(stageData.get(index).getnStage()));
+        tfKM.setText(String.valueOf(stageData.get(index).getKm()));
+        tfStart.setText(stageData.get(index).getStart());
+        tfFinish.setText(stageData.get(index).getStart());
+        cbDorsal.setSelectedItem(stageData.get(index).getDorsal());
+        //tfTeam.setText(stageData.get(index).getNomeq());
         //Index increase
         index++;
         //If this button boolean wasn't pressed
@@ -352,24 +310,23 @@ public class DeletePort extends javax.swing.JFrame {
             btLeft.setEnabled(true);
         }
         //Disable right buttons if index is equals to last position from the list
-        if (index == portsData.size()) {
+        if (index == stageData.size()) {
             btTotalRight.setEnabled(false);
             btRight.setEnabled(false);
         }
     }//GEN-LAST:event_btRightActionPerformed
 
     private void btTotalRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTotalRightActionPerformed
-        //Set the TextFields with all the data from the last cyclist        
-        tfName.setText(portsData.get(portsData.size() - 1).getPortName());
-        tfHeight.setText(String.valueOf(portsData.get(portsData.size() - 1).getHeight()));
-        tfCategory.setText(portsData.get(portsData.size() - 1).getCategory());
-        tfSlope.setText(String.valueOf(portsData.get(portsData.size() - 1).getSlope()));
-        cbStage.setSelectedItem(portsData.get(portsData.size() - 1).getNetapa());
-        cbDorsal.setSelectedItem(portsData.get(portsData.size() - 1).getDorsal());
+        //Set the TextFields with all the data from the last cyclist                
+        tfNum.setText(String.valueOf(stageData.get(stageData.size() - 1).getnStage()));
+        tfKM.setText(String.valueOf(stageData.get(stageData.size() - 1).getKm()));
+        tfStart.setText(stageData.get(stageData.size() - 1).getStart());
+        tfFinish.setText(stageData.get(stageData.size() - 1).getStart());
+        cbDorsal.setSelectedItem(stageData.get(stageData.size() - 1).getDorsal());
 
-//        tfTeam.setText(portsData.get(portsData.size() - 1).getNomeq());
+//        tfTeam.setText(stageData.get(stageData.size() - 1).getNomeq());
         //Set index to last position from the list
-        index = portsData.size() - 1;
+        index = stageData.size() - 1;
         //Disable right buttons because is the last cyclist
         btTotalRight.setEnabled(false);
         btRight.setEnabled(false);
@@ -382,7 +339,7 @@ public class DeletePort extends javax.swing.JFrame {
 
     private void btLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLeftActionPerformed
         //If any other button was pressed before set index--
-        if ((btRightPressed) && index != 1 && index != portsData.size() - 1) {
+        if ((btRightPressed) && index != 1 && index != stageData.size() - 1) {
             index--;
             btRightPressed = false;
         }
@@ -398,13 +355,12 @@ public class DeletePort extends javax.swing.JFrame {
             index--;
         }
         //Set the TextField with the data of cyclist(index)             
-        tfName.setText(portsData.get(index).getPortName());
-        tfHeight.setText(String.valueOf(portsData.get(index).getHeight()));
-        tfCategory.setText(portsData.get(index).getCategory());
-        tfSlope.setText(String.valueOf(portsData.get(index).getSlope()));
-        cbStage.setSelectedItem(portsData.get(index).getNetapa());
-        cbDorsal.setSelectedItem(portsData.get(index).getDorsal());
-        // tfTeam.setText(portsData.get(index).getNomeq());
+        tfNum.setText(String.valueOf(stageData.get(index).getnStage()));
+        tfKM.setText(String.valueOf(stageData.get(index).getKm()));
+        tfStart.setText(stageData.get(index).getStart());
+        tfFinish.setText(stageData.get(index).getStart());
+        cbDorsal.setSelectedItem(stageData.get(index).getDorsal());
+        // tfTeam.setText(stageData.get(index).getNomeq());
 
         //Enable right buttons if they are disabled
         if (!btTotalRight.isEnabled() && !btRight.isEnabled()) {
@@ -424,12 +380,11 @@ public class DeletePort extends javax.swing.JFrame {
             btTotalLeftPressed = true;
         }
         //Set the TextFields with all the data from the first cyclist
-        tfName.setText(portsData.get(0).getPortName());
-        tfHeight.setText(String.valueOf(portsData.get(0).getHeight()));
-        tfCategory.setText(portsData.get(0).getCategory());
-        tfSlope.setText(String.valueOf(portsData.get(0).getSlope()));
-        cbStage.setSelectedItem(portsData.get(0).getNetapa());
-        cbDorsal.setSelectedItem(portsData.get(0).getDorsal());
+        tfNum.setText(String.valueOf(stageData.get(0).getnStage()));
+        tfKM.setText(String.valueOf(stageData.get(0).getKm()));
+        tfStart.setText(stageData.get(0).getStart());
+        tfFinish.setText(stageData.get(0).getStart());
+        cbDorsal.setSelectedItem(stageData.get(0).getDorsal());
         //Set index to 0 because is the first cyclist
         index = 0;
         //Disable left buttons because is the first cyclist
@@ -440,23 +395,24 @@ public class DeletePort extends javax.swing.JFrame {
             btTotalRight.setEnabled(true);
             btRight.setEnabled(true);
         }
-
     }//GEN-LAST:event_btTotalLeftActionPerformed
 
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         //Statement to delete the cyclist
-        String sqlDelete = "delete from Ports where nomport like '" + tfName.getText() + "';";
+        String sqlDelete = "delete from Etapes where netapa like '" + tfNum.getText() + "';";
         Database db = new Database();
         int i = 0;
         //If TextField name is empty
-        if (tfName.getText().isEmpty()) {
+        if (tfNum.getText().isEmpty()) {
             //Create a dialog informing the user that this field is empty
-            MainForm.alertsWarning(this, "Name missing", "Name missing");
+            MainForm.alertsWarning(this, "Number missing", "Number missing");
         } else {
             //If not is empty create a dialog to know if the user really wants to delete this cyclist
             try {
-                if (JOptionPane.showConfirmDialog(this,
-                        "Are you sure to delete " + tfName.getText() + "?", "Delete",
+                if (db.searchID("netapa", "Llevar", Integer.parseInt(tfNum.getText()))) {
+                    MainForm.alertsWarning(this, "Error", "Error you cant delete this stage because depends with other table");
+                } else if (JOptionPane.showConfirmDialog(this,
+                        "Are you sure to delete " + tfNum.getText() + "?", "Delete",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     //If the result is yes delete this cyclist
@@ -480,19 +436,19 @@ public class DeletePort extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btDeleteActionPerformed
 
-    private void searchPort(String name) {
+    private void searchStage(String name) {
         //Adding % to search any cyclist with this text
         name = name + "%";
         //Querys
         //Query to know how many cyclist we got with the same name
-        String queryCount = "select count(*) from Ports where nomport like '" + name + "';";
+        String queryCount = "select count(*) from Etapes where netapa like '" + name + "';";
         //Query to know these names if we got more than 1 cyclist with the same name
-        String queryNames = "select nom from Ports where nomport like '" + name + "';";
+        String queryNames = "select netapa from Etapes where netapa like '" + name + "';";
 
         Database db = new Database();
         //If the TextField name is empty, it opens a dialog that inform the user
-        if (tfName.getText().isEmpty()) {
-            MainForm.alertsWarning(this, "Name Missing", "Name Missing");
+        if (tfNum.getText().isEmpty()) {
+            MainForm.alertsWarning(this, "Number Missing", "Number Missing");
         } else {
             try {
                 //Connect
@@ -516,56 +472,54 @@ public class DeletePort extends javax.swing.JFrame {
                             i++;
                         }//End loop names
                         //Create a new dialog to make the user chose one of the names below
-                        String input = (String) JOptionPane.showInputDialog(null, "Choose Port",
-                                "Select a Port", JOptionPane.INFORMATION_MESSAGE, null,
+                        String input = (String) JOptionPane.showInputDialog(null, "Choose Stage",
+                                "Select a Stage", JOptionPane.INFORMATION_MESSAGE, null,
                                 names, // Array with names
                                 names[0]); // Default choise
                         ;//End dialog
                         //Query to get the data of cyclist choosed
-                        String queryFinal = "select alcada,categoria,pendent,netapa,dorsal from Ports where nomport like '" + input + "';";
+                        String queryFinal = "select km,sortida,arribada,dorsal from Etapes where netapa like '" + input + "';";
                         //Start the query
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
                         //Setting up the TextFields with all the data of this cyclist
                         while (rsFinal.next()) {//Loop
-                            tfHeight.setText(String.valueOf(rsFinal.getInt(1)));
-                            tfCategory.setText(rsFinal.getString(2));
-                            tfSlope.setText(String.valueOf(rsFinal.getFloat(3)));
-                            cbStage.setSelectedItem(String.valueOf(rsFinal.getInt(4)));
-                            cbDorsal.setSelectedItem(String.valueOf(rsFinal.getInt(5)));
+                            tfKM.setText(String.valueOf(rsFinal.getInt(1)));
+                            tfStart.setText(rsFinal.getString(2));
+                            tfFinish.setText(rsFinal.getString(3));
+                            cbDorsal.setSelectedItem(String.valueOf(rsFinal.getInt(4)));
                         }//End loop
                         //Finally set the name of this cyclist
-                        tfName.setText(input);
+                        tfNum.setText(input);
                         //If this cyclist doesn't exists
                     } else if (rsCount.getInt(1) == 0) {
                         //Create a new dialog informing the use that this Cyclist doesnt exist
-                        MainForm.alertsInformation(this, "Port doesn't exists", "Port doesn't exists");
+                        MainForm.alertsInformation(this, "Stage doesn't exists", "Stage doesn't exists");
                         //If there is only 1 cyclist with this name
                     } else {
                         //Query to know all the data about this cyclist
-                        String queryFinal = "select nomport,alcada,categoria,pendent,netapa,dorsal from Ports where nomport like '" + name + "';";
+                        String queryFinal = "select netapa,km,sortida,arribada,dorsal from Etapes where netapa like '" + name + "';";
                         //Start the query
                         Statement stFinal = db.getConnection().createStatement();
                         ResultSet rsFinal = stFinal.executeQuery(queryFinal);
                         //Setting up the TextFields with all the data of this cyclist
                         while (rsFinal.next()) {
-                            tfName.setText(rsFinal.getString(1));
-                            tfHeight.setText(String.valueOf(rsFinal.getInt(2)));
-                            tfCategory.setText(rsFinal.getString(3));
-                            tfSlope.setText(String.valueOf(rsFinal.getFloat(4)));
-                            cbStage.setSelectedItem(String.valueOf(rsFinal.getInt(5)));
-                            cbDorsal.setSelectedItem(String.valueOf(rsFinal.getInt(6)));
+                            tfNum.setText(rsFinal.getString(1));
+                            tfKM.setText(String.valueOf(rsFinal.getInt(2)));
+                            tfStart.setText(rsFinal.getString(3));
+                            tfFinish.setText(rsFinal.getString(4));
+                            cbDorsal.setSelectedItem(String.valueOf(rsFinal.getInt(5)));
                         }
                     }
                 }
                 //Set the index == 0 to search exactly the index of this cyclist
                 index = 0;
-                //index = portsData.indexOf(tfDorsal.getText());
-                for (int j = 0; j < portsData.size(); j++) {//Loop index
+                //index = stageData.indexOf(tfDorsal.getText());
+                for (int j = 0; j < stageData.size(); j++) {//Loop index
                     //If dorsal of cyclist(j) is equals to the text of dorsal TextField
-                    if (portsData.get(j).getPortName().equals(String.valueOf(tfName.getText()))) {
+                    if (stageData.get(j).getnStage() == Integer.parseInt(tfNum.getText())) {
                         //If is the last position, set index to the last position
-                        if (j == portsData.size()) {
+                        if (j == stageData.size()) {
                             index = j - 1;
                         } else {
                             //else set index to j
@@ -577,7 +531,7 @@ public class DeletePort extends javax.swing.JFrame {
                 //Disconnect
                 db.closeConnection();
             } catch (SQLException ex) {
-                Logger.getLogger(DeletePort.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DeleteStage.class.getName()).log(Level.SEVERE, null, ex);
             }
             //If index == 0 disable the left buttons and enable the right buttons
             if (index == 0) {
@@ -586,12 +540,12 @@ public class DeletePort extends javax.swing.JFrame {
                 btTotalRight.setEnabled(true);
                 btRight.setEnabled(true);
                 //If index == 0 disable the right buttons and enable the left buttons
-            } else if (index == portsData.size() - 1) {
+            } else if (index == stageData.size() - 1) {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
                 btTotalRight.setEnabled(false);
                 btRight.setEnabled(false);
-                //If index is between 0 and portsData.size enable all the buttons
+                //If index is between 0 and stageData.size enable all the buttons
             } else {
                 btTotalLeft.setEnabled(true);
                 btLeft.setEnabled(true);
@@ -603,34 +557,19 @@ public class DeletePort extends javax.swing.JFrame {
             //And set false the rest of booleans
             btLeftPressed = false;
             btRightPressed = false;
-            btTotalLeftPressed = false;
-
+            btTotalLeftPressed = false;            
         }
     }//End function
 
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         //Calling the function search to search the cyclist that the user put on the TextField name
-        searchPort(tfName.getText());
+        searchStage(tfNum.getText());
     }//GEN-LAST:event_btSearchActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
-
-    private void tfHeightKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfHeightKeyTyped
-        // TODO add your handling code here:
-        consumeEvente(evt, tfHeight, 11);
-    }//GEN-LAST:event_tfHeightKeyTyped
-
-    private void tfCategoryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCategoryKeyTyped
-        // TODO add your handling code here:
-        consumeEvente(evt, tfCategory, 2);
-    }//GEN-LAST:event_tfCategoryKeyTyped
-
-    private void cbStageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStageActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbStageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -649,14 +588,30 @@ public class DeletePort extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeletePort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteStage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeletePort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteStage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeletePort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteStage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeletePort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteStage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -677,7 +632,7 @@ public class DeletePort extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeletePort().setVisible(true);
+                new DeleteStage().setVisible(true);
             }
         });
     }
@@ -690,18 +645,16 @@ public class DeletePort extends javax.swing.JFrame {
     private javax.swing.JButton btTotalLeft;
     private javax.swing.JButton btTotalRight;
     private javax.swing.JComboBox<String> cbDorsal;
-    private javax.swing.JComboBox<String> cbStage;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel pTablePorts;
-    private javax.swing.JTextField tfCategory;
-    private javax.swing.JTextField tfHeight;
-    private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfSlope;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel pTableStage;
+    private javax.swing.JTextField tfFinish;
+    private javax.swing.JTextField tfKM;
+    private javax.swing.JTextField tfNum;
+    private javax.swing.JTextField tfStart;
     // End of variables declaration//GEN-END:variables
 }

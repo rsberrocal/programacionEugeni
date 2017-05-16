@@ -19,64 +19,64 @@
     </Component>
     <Menu class="javax.swing.JMenuBar" name="mbMain">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="mEquips">
+        <Menu class="javax.swing.JMenu" name="mTeams">
           <Properties>
             <Property name="text" type="java.lang.String" value="Teams"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="miAddEquips">
+            <MenuItem class="javax.swing.JMenuItem" name="miAddTeams">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAddEquipsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAddTeamsActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miModifyEquips">
+            <MenuItem class="javax.swing.JMenuItem" name="miModifyTeams">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modify"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miModifyEquipsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miModifyTeamsActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miDeleteEquips">
+            <MenuItem class="javax.swing.JMenuItem" name="miDeleteTeams">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miDeleteEquipsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miDeleteTeamsActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mCiclistes">
+        <Menu class="javax.swing.JMenu" name="mCyclist">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cyclist"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="miAddCiclistes">
+            <MenuItem class="javax.swing.JMenuItem" name="miAddCyclist">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAddCiclistesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAddCyclistActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miModifyCiclistes">
+            <MenuItem class="javax.swing.JMenuItem" name="miModifyCyclist">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modify"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miModifyCiclistesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miModifyCyclistActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miDeleteCiclistes">
+            <MenuItem class="javax.swing.JMenuItem" name="miDeleteCyclist">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miDeleteCiclistesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miDeleteCyclistActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -103,33 +103,33 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMaillots">
+        <Menu class="javax.swing.JMenu" name="mShirt">
           <Properties>
             <Property name="text" type="java.lang.String" value="Shirt"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="miAddMaillots">
+            <MenuItem class="javax.swing.JMenuItem" name="miAddShirt">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAddMaillotsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAddShirtActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miModifyMaillots">
+            <MenuItem class="javax.swing.JMenuItem" name="miModifyShirt">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modify"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miModifyMaillotsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miModifyShirtActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miDeleteMaillots">
+            <MenuItem class="javax.swing.JMenuItem" name="miDeleteShirt">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miDeleteMaillotsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miDeleteShirtActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -165,25 +165,34 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mEtapes">
+        <Menu class="javax.swing.JMenu" name="mStages">
           <Properties>
             <Property name="text" type="java.lang.String" value="Stage"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="miAddEtapes">
+            <MenuItem class="javax.swing.JMenuItem" name="miAddStage">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAddStageActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miModifyEtapes">
+            <MenuItem class="javax.swing.JMenuItem" name="miModifyStage">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modify"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miModifyStageActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miDeleteEtapes">
+            <MenuItem class="javax.swing.JMenuItem" name="miDeleteStage">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miDeleteStageActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -23,23 +23,21 @@ import javax.swing.JTable;
  *
  * @author infot
  */
-public class Ports {
+public class Llevar {
 
-    private String portName;
-    private int height;
-    private String category;
-    private double slope;
-    private int netapa;
-    private int dorsal;
+    private int dorsal;//PK i FK
+    private int nStage;//PK i FK
+    private String id;//PK i FK
 
-    public Ports() {
+    public Llevar() {
     }
 
     //Function for set items on ComboBox
-    public void addItemsCombo(JComboBox cb1, JComboBox cb2) throws SQLException {
+    public void addItemsCombo(JComboBox cb1, JComboBox cb2, JComboBox cb3) throws SQLException {
         //Query
         String queryStage = "select netapa from Etapes order by netapa;";
         String queryDorsal = "select dorsal from Ciclistes order by dorsal;";
+        String queryID = "select codi from Maillots order by codi;";
         Database db = new Database();
         //Connect
         db.makeConnection();
@@ -56,6 +54,11 @@ public class Ports {
             while (rsDorsal.next()) {
                 cb2.addItem(String.valueOf(rsDorsal.getInt(1)));
             }
+            Statement stID = db.getConnection().createStatement();
+            ResultSet rsID = stID.executeQuery(queryID);
+            while (rsID.next()) {
+                cb3.addItem(String.valueOf(rsID.getString(1)));
+            }
         } catch (SQLException e) {
             System.out.println("Error " + e.getMessage());
         }
@@ -64,10 +67,10 @@ public class Ports {
     }
 
     //Function to fill the list of cyclist
-    public List listPorts() throws SQLException {
-        List<Ports> l = new ArrayList<Ports>();
+    public List listLlevar() throws SQLException {
+        List<Llevar> l = new ArrayList<Llevar>();
         //Query
-        String query = "select * from Ports;";
+        String query = "select * from Llevar;";
         Database db = new Database();
         //Connect
         db.makeConnection();
@@ -75,14 +78,11 @@ public class Ports {
         Statement st = db.getConnection().createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {//loop rs
-            Ports p = new Ports();
-            p.setPortName(rs.getString(1));
-            p.setHeight(rs.getInt(2));
-            p.setCategory(rs.getString(3));
-            p.setSlope(rs.getDouble(4));
-            p.setNetapa(rs.getInt(5));
-            p.setDorsal(rs.getInt(6));
-            l.add(p);
+            Llevar ll = new Llevar();
+            ll.setDorsal(rs.getInt(1));
+            ll.setnStage(rs.getInt(2));
+            ll.setId(rs.getString(3));            
+            l.add(ll);
         }//end loop rs
         //Disconnect
         db.closeConnection();
@@ -90,7 +90,7 @@ public class Ports {
     }
 
     public void loadTable(JPanel pane) throws SQLException {
-        String query = "select * from Ports;";
+        String query = "select * from Llevar;";
         Vector data = new Vector();
         Vector row = new Vector();
         int i;
@@ -113,54 +113,11 @@ public class Ports {
         }
         JTable tbPorts = new JTable(data, column);
         JScrollPane jsp = new JScrollPane(tbPorts);
-        tbPorts.getColumnModel().getColumn(0).setHeaderValue("Name");
-        tbPorts.getColumnModel().getColumn(1).setHeaderValue("Height");
-        tbPorts.getColumnModel().getColumn(2).setHeaderValue("Category");
-        tbPorts.getColumnModel().getColumn(3).setHeaderValue("Slope");
-        tbPorts.getColumnModel().getColumn(4).setHeaderValue("Stage num");
-        tbPorts.getColumnModel().getColumn(5).setHeaderValue("Cyclist dorsal");
+        tbPorts.getColumnModel().getColumn(0).setHeaderValue("Dorsal Cyclist");
+        tbPorts.getColumnModel().getColumn(1).setHeaderValue("Stage Num");
+        tbPorts.getColumnModel().getColumn(2).setHeaderValue("Shirt ID");
         pane.setLayout(new BorderLayout());
         pane.add(jsp, BorderLayout.CENTER);
-    }
-
-    public String getPortName() {
-        return portName;
-    }
-
-    public void setPortName(String portName) {
-        this.portName = portName;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public double getSlope() {
-        return slope;
-    }
-
-    public void setSlope(double slope) {
-        this.slope = slope;
-    }
-
-    public int getNetapa() {
-        return netapa;
-    }
-
-    public void setNetapa(int netapa) {
-        this.netapa = netapa;
     }
 
     public int getDorsal() {
@@ -170,4 +127,21 @@ public class Ports {
     public void setDorsal(int dorsal) {
         this.dorsal = dorsal;
     }
+
+    public int getnStage() {
+        return nStage;
+    }
+
+    public void setnStage(int nStage) {
+        this.nStage = nStage;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }
