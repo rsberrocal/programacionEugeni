@@ -8,6 +8,9 @@ package cyclists.forms;
 import cyclists.forms.Cyclist.AddCiclyst;
 import cyclists.forms.Cyclist.DeleteCiclyst;
 import cyclists.forms.Cyclist.ModifyCiclyst;
+import cyclists.forms.Llevar.AddLlevar;
+import cyclists.forms.Llevar.DeleteLlevar;
+import cyclists.forms.Llevar.ModifyLlevar;
 import cyclists.forms.Ports.AddPort;
 import cyclists.forms.Ports.DeletePort;
 import cyclists.forms.Ports.ModifyPort;
@@ -61,7 +64,7 @@ public class MainForm extends javax.swing.JFrame {
         miModifyCyclist = new javax.swing.JMenuItem();
         miDeleteCyclist = new javax.swing.JMenuItem();
         mLlevar = new javax.swing.JMenu();
-        miAdd2Lllevar = new javax.swing.JMenuItem();
+        miAddLllevar = new javax.swing.JMenuItem();
         miModifyLllevar = new javax.swing.JMenuItem();
         miDeleteLllevar = new javax.swing.JMenuItem();
         mShirt = new javax.swing.JMenu();
@@ -153,13 +156,28 @@ public class MainForm extends javax.swing.JFrame {
 
         mLlevar.setText("Llevar");
 
-        miAdd2Lllevar.setText("Add");
-        mLlevar.add(miAdd2Lllevar);
+        miAddLllevar.setText("Add");
+        miAddLllevar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddLllevarActionPerformed(evt);
+            }
+        });
+        mLlevar.add(miAddLllevar);
 
         miModifyLllevar.setText("Modify");
+        miModifyLllevar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miModifyLllevarActionPerformed(evt);
+            }
+        });
         mLlevar.add(miModifyLllevar);
 
         miDeleteLllevar.setText("Delete");
+        miDeleteLllevar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miDeleteLllevarActionPerformed(evt);
+            }
+        });
         mLlevar.add(miDeleteLllevar);
 
         mbMain.add(mLlevar);
@@ -401,6 +419,24 @@ public class MainForm extends javax.swing.JFrame {
         addFrame(ds, "Delete Stage");
     }//GEN-LAST:event_miDeleteStageActionPerformed
 
+    private void miAddLllevarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddLllevarActionPerformed
+        // TODO add your handling code here:
+        AddLlevar al = new AddLlevar();
+        addFrame(al, "Add Llevar");
+    }//GEN-LAST:event_miAddLllevarActionPerformed
+
+    private void miModifyLllevarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miModifyLllevarActionPerformed
+        // TODO add your handling code here:
+        ModifyLlevar ml = new ModifyLlevar();
+        addFrame(ml, "Modify Llevar");
+    }//GEN-LAST:event_miModifyLllevarActionPerformed
+
+    private void miDeleteLllevarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDeleteLllevarActionPerformed
+        // TODO add your handling code here:
+        DeleteLlevar dl = new DeleteLlevar();
+        addFrame(dl, "Delete Llevar");
+    }//GEN-LAST:event_miDeleteLllevarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -450,8 +486,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu mStages;
     private javax.swing.JMenu mTeams;
     private javax.swing.JMenuBar mbMain;
-    private javax.swing.JMenuItem miAdd2Lllevar;
     private javax.swing.JMenuItem miAddCyclist;
+    private javax.swing.JMenuItem miAddLllevar;
     private javax.swing.JMenuItem miAddPorts;
     private javax.swing.JMenuItem miAddShirt;
     private javax.swing.JMenuItem miAddStage;
