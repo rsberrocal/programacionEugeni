@@ -32,9 +32,9 @@ public class Llevar {
     public Llevar() {
     }
 
-    //Function for set items on ComboBox
+    //Function for set items on 3 ComboBox
     public void addItemsCombo(JComboBox cb1, JComboBox cb2, JComboBox cb3) throws SQLException {
-        //Query
+        //Querys
         String queryStage = "select netapa from Etapes order by netapa;";
         String queryDorsal = "select dorsal from Ciclistes order by dorsal;";
         String queryID = "select codi from Maillots order by codi;";
@@ -44,29 +44,31 @@ public class Llevar {
         try (
                 Statement stStage = db.getConnection().createStatement();
                 ResultSet rsStage = stStage.executeQuery(queryStage);) {
+            //Fill Stage comboBox
             while (rsStage.next()) {
                 int n = rsStage.getInt(1);
                 cb1.addItem(String.valueOf(rsStage.getInt(1)));
             }
-
             Statement stDorsal = db.getConnection().createStatement();
             ResultSet rsDorsal = stDorsal.executeQuery(queryDorsal);
+            //Fill Dorsal ComboBox
             while (rsDorsal.next()) {
                 cb2.addItem(String.valueOf(rsDorsal.getInt(1)));
             }
             Statement stID = db.getConnection().createStatement();
             ResultSet rsID = stID.executeQuery(queryID);
+            //Fill ID ComboBox
             while (rsID.next()) {
                 cb3.addItem(String.valueOf(rsID.getString(1)));
             }
+            //Disconnect
+            db.closeConnection();
         } catch (SQLException e) {
             System.out.println("Error " + e.getMessage());
         }
-        //Disconnect
-        db.closeConnection();
     }
 
-    //Function to fill the list of cyclist
+    //Function to fill the list of llevar
     public List listLlevar() throws SQLException {
         List<Llevar> l = new ArrayList<Llevar>();
         //Query
@@ -81,14 +83,14 @@ public class Llevar {
             Llevar ll = new Llevar();
             ll.setDorsal(rs.getInt(1));
             ll.setnStage(rs.getInt(2));
-            ll.setId(rs.getString(3));            
+            ll.setId(rs.getString(3));
             l.add(ll);
         }//end loop rs
         //Disconnect
         db.closeConnection();
         return l;
     }
-
+    //Function that fill the table from Llevar
     public void loadTable(JPanel pane) throws SQLException {
         String query = "select * from Llevar;";
         Vector data = new Vector();

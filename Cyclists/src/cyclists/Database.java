@@ -88,11 +88,12 @@ public class Database {
 
     //Function to make a connectio to the server
     public void makeConnection() throws SQLException {
-        //MySQL
-        //this.c = makeConnectMySQL();        
         //MariaDB
+        //Host
         String pc = "mestral.ddns.net";
+        //Bd name
         String bd = "rsudario_gproductes";
+        //Login
         String user = "rsudario";
         String pass = "rsudario";
         this.c = makeConnectMariaDB(pc, bd, user, pass);

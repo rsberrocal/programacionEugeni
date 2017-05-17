@@ -27,7 +27,6 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class Cyclist implements Serializable {
 
-    
     private Integer dorsal;//PK
 
     private String nom;
@@ -65,9 +64,7 @@ public class Cyclist implements Serializable {
     }
 
     public void setEdad(Integer edad) {
-
         this.edad = edad;
-;
     }
 
     public String getNomeq() {
@@ -75,9 +72,7 @@ public class Cyclist implements Serializable {
     }
 
     public void setNomeq(String nomeq) {
-
         this.nomeq = nomeq;
-
     }
 
     @Override
@@ -132,39 +127,54 @@ public class Cyclist implements Serializable {
         db.closeConnection();
         return l;
     }
-    
+    //Function that fill the table from Cyclist
     public void loadTable(JPanel pane) throws SQLException {
+        //Query
         String query = "select * from Ciclistes;";
+        //Array that contains all the data
         Vector data = new Vector();
+        //Array for each row
         Vector row = new Vector();
+        //Cont
         int i;
+
         Database db = new Database();
+        //Connect
         db.makeConnection();
+        //Execute Query
         Statement st = db.getConnection().createStatement();
         ResultSet rs = st.executeQuery(query);
         ResultSetMetaData rsmt = rs.getMetaData();
+        //This give you the number of columns from Ciclistes
         int c = rsmt.getColumnCount();
-        Vector column = new Vector(c);        
-        for (i = 1; i <= c; i++) {
+        //New Array for each column
+        Vector column = new Vector(c);
+        for (i = 1; i <= c; i++) {//Loop to add all columns
             column.add(rsmt.getColumnName(i));
-
-        }
+        }//End loop
+        //Loop to fill data on row and late add this row in data
         while (rs.next()) {
             row = new Vector(c);
             for (i = 1; i <= c; i++) {
                 row.add(rs.getString(i));
             }
             data.add(row);
-        }
+        }//End loop
+        //Create new Table
         JTable tbCiclyst = new JTable(data, column);
-        JScrollPane jsp = new JScrollPane(tbCiclyst);        
+        //Create pane that contains our table
+        JScrollPane jsp = new JScrollPane(tbCiclyst);
+        //Set headers name
         tbCiclyst.getColumnModel().getColumn(0).setHeaderValue("Dorsal");
         tbCiclyst.getColumnModel().getColumn(1).setHeaderValue("Name");
         tbCiclyst.getColumnModel().getColumn(2).setHeaderValue("Age");
         tbCiclyst.getColumnModel().getColumn(3).setHeaderValue("Team");
+        //Set widht
         cellWidth(tbCiclyst);
+        //Align cells
         alignCells(tbCiclyst);
         pane.setLayout(new BorderLayout());
+        //Finally add the pane with table to our pane
         pane.add(jsp, BorderLayout.CENTER);
     }
 

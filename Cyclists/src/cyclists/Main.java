@@ -6,11 +6,7 @@
 package cyclists;
 
 import cyclists.forms.MainForm;
-import java.awt.Toolkit;
-import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,9 +17,6 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    
-    
-    
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         //MariaDB driver
         Class.forName("org.mariadb.jdbc.Driver");
