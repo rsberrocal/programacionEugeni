@@ -7,9 +7,7 @@ package examenrichard;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
@@ -28,63 +26,7 @@ public class Database {
     public Connection getConnection() {
         return c;
     }
-
-//    //Function that returns true if exist one field with the same ID else return false
-//    public boolean searchID(String search, String table, int id) throws SQLException {
-//        String query = "select " + search + " from " + table + ";";
-//        this.makeConnection();
-//        try (
-//                Statement st = this.getConnection().createStatement();
-//                ResultSet rs = st.executeQuery(query);) {
-//            while (rs.next()) {
-//                if (rs.getInt(1) == id) {
-//                    return true;
-//                }
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Error " + e.getMessage());
-//        }
-//        this.closeConnection();
-//        return false;
-//    }
-//
-//    //Function only for Llevar table 
-//    public boolean searchID(String search, String table, int dorsal, int nstage, String id) throws SQLException {
-//        String query = "select " + search + " from " + table + ";";
-//        this.makeConnection();
-//        try (
-//                Statement st = this.getConnection().createStatement();
-//                ResultSet rs = st.executeQuery(query);) {
-//            while (rs.next()) {
-//                if (rs.getInt(1) == dorsal && rs.getInt(2) == nstage && rs.getString(3).equals(id)) {
-//                    return true;
-//                }
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Error " + e.getMessage());
-//        }
-//        this.closeConnection();
-//        return false;
-//    }
-//
-//    //Same function but with a String variable
-//    public boolean searchID(String search, String table, String id) throws SQLException {
-//        String query = "select " + search + " from " + table + ";";
-//        this.makeConnection();
-//        try (
-//                Statement st = this.getConnection().createStatement();
-//                ResultSet rs = st.executeQuery(query);) {
-//            while (rs.next()) {
-//                if (rs.getString(1).equals(id)) {
-//                    return true;
-//                }
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Error " + e.getMessage());
-//        }
-//        this.closeConnection();
-//        return false;
-//    }
+   
     //Function to make a connectio to the server
     public void makeConnection() throws SQLException {
         //MariaDB
