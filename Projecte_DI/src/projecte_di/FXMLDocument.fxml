@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projecte_di.FXMLDocumentController">
+   <children>
+      <Label fx:id="lTitol" layoutX="117.0" layoutY="29.0" text="Alta Persones">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lNom" layoutX="38.0" layoutY="95.0" text="Nom" />
+      <Label fx:id="lSou" layoutX="41.0" layoutY="132.0" text="Sou" />
+      <Label fx:id="lDNI" layoutX="41.0" layoutY="167.0" text="DNI" />
+      <Label fx:id="lNIF" layoutX="42.0" layoutY="205.0" text="NIF" />
+      <TextField fx:id="tfNom" layoutX="83.0" layoutY="91.0" />
+      <TextField fx:id="tSou" layoutX="83.0" layoutY="128.0" onKeyTyped="#souNumeroKeyTyped" />
+      <TextField fx:id="tfDNI" layoutX="83.0" layoutY="163.0" onKeyTyped="#txtNumeroKeyTyped" />
+      <TextField fx:id="tfNIF" editable="false" layoutX="83.0" layoutY="201.0" />
+      <Button fx:id="bCalcularNIF" layoutX="256.0" layoutY="163.0" mnemonicParsing="false" onAction="#calcularlletra" prefHeight="25.0" prefWidth="85.0" text="Calcular NIF" />
+      <Button fx:id="bafegir" layoutX="256.0" layoutY="201.0" mnemonicParsing="false" onAction="#bAfegir" prefHeight="25.0" prefWidth="71.0" text="Afegir +" />
+      <TextArea fx:id="taLlistat" layoutX="36.0" layoutY="276.0" prefHeight="118.0" prefWidth="317.0" />
+      <Label fx:id="lLlistat" layoutX="163.0" layoutY="241.0" text="Llistat">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="bSortir" layoutX="292.0" layoutY="411.0" mnemonicParsing="false" onAction="#bSortir" prefHeight="25.0" prefWidth="71.0" text="Surt" />
+   </children>
+</AnchorPane>
